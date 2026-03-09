@@ -25,6 +25,8 @@ export interface AgentState {
   metaSent: boolean;
   /** Agent creation timestamp (ms) */
   createdAt: number;
+  /** Whether the last turn had errors (for completion animation) */
+  lastTurnHadError: boolean;
   /** Accumulated token usage */
   tokenUsage: {
     inputTokens: number;

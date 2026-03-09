@@ -84,6 +84,7 @@ export async function launchNewTerminal(
     lastThoughtText: '',
     thoughtRepeatCount: 0,
     metaSent: false,
+    lastTurnHadError: false,
     createdAt: Date.now(),
     tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
   };
@@ -244,6 +245,7 @@ export function restoreAgents(
       lastThoughtText: '',
       thoughtRepeatCount: 0,
       metaSent: false,
+      lastTurnHadError: false,
       createdAt: Date.now(),
       tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
     };

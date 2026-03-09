@@ -320,10 +320,11 @@ export class OfficeState {
     this.characters.set(id, ch);
   }
 
-  removeAgent(id: number): void {
+  removeAgent(id: number, success?: boolean): void {
     const ch = this.characters.get(id);
     if (!ch) return;
     if (ch.matrixEffect === 'despawn') return; // already despawning
+    if (ch.pendingDespawn) return; // already showing pose
     // Free seat and clear selection immediately
     if (ch.seatId) {
       const seat = this.seats.get(ch.seatId);
@@ -335,11 +336,23 @@ export class OfficeState {
     this.agentZoneStates.delete(id);
     this.agentIdleTimers.delete(id);
     this.agentErrors.delete(id);
-    // Start despawn animation instead of immediate delete
-    ch.matrixEffect = 'despawn';
-    ch.matrixEffectTimer = 0;
-    ch.matrixEffectSeeds = matrixEffectSeeds();
     ch.bubbleType = null;
+    ch.isActive = false;
+
+    // Show COMPLETE/FAILED pose before despawn (if success info provided)
+    if (success !== undefined) {
+      ch.state = success ? CharacterState.COMPLETE : CharacterState.FAILED;
+      ch.frame = 0;
+      ch.frameTimer = 0;
+      ch.pendingDespawn = true;
+      ch.path = [];
+      ch.moveProgress = 0;
+    } else {
+      // Immediate despawn (no pose)
+      ch.matrixEffect = 'despawn';
+      ch.matrixEffectTimer = 0;
+      ch.matrixEffectSeeds = matrixEffectSeeds();
+    }
   }
 
   /** Find seat uid at a given tile position, or null */
@@ -725,6 +738,14 @@ export class OfficeState {
       this.withOwnSeatUnblocked(ch, () =>
         updateCharacter(ch, dt, this.walkableTiles, this.seats, this.tileMap, this.blockedTiles),
       );
+
+      // If pending despawn and pose just finished (transitioned to IDLE), start despawn
+      if (ch.pendingDespawn && ch.state === CharacterState.IDLE) {
+        ch.matrixEffect = 'despawn';
+        ch.matrixEffectTimer = 0;
+        ch.matrixEffectSeeds = matrixEffectSeeds();
+        continue;
+      }
 
       // Tick bubble timer for waiting bubbles
       if (ch.bubbleType === 'waiting') {

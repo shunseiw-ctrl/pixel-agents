@@ -52,10 +52,16 @@ export const GLOBAL_KEY_NOTIFY_LOOP = 'pixel-agents.notifyLoop';
 export const GLOBAL_KEY_NOTIFY_COMPLETE = 'pixel-agents.notifyComplete';
 export const GLOBAL_KEY_NOTIFY_INPUT_WAIT = 'pixel-agents.notifyInputWait';
 
+// ── Mock Mode ────────────────────────────────────────────────
+export const MOCK_EVENT_INTERVAL_MS = 2000;
+export const MOCK_TOOL_DURATION_MS = 4000;
+
 // ── VS Code Identifiers ─────────────────────────────────────
 export const VIEW_ID = 'pixel-agents.panelView';
 export const COMMAND_SHOW_PANEL = 'pixel-agents.showPanel';
 export const COMMAND_EXPORT_DEFAULT_LAYOUT = 'pixel-agents.exportDefaultLayout';
+export const COMMAND_START_MOCK = 'pixel-agents.startMockMode';
+export const COMMAND_STOP_MOCK = 'pixel-agents.stopMockMode';
 export const WORKSPACE_KEY_AGENTS = 'pixel-agents.agents';
 export const WORKSPACE_KEY_AGENT_SEATS = 'pixel-agents.agentSeats';
 export const WORKSPACE_KEY_LAYOUT = 'pixel-agents.layout';

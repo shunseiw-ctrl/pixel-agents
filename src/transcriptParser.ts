@@ -252,9 +252,18 @@ export function processTranscriptLine(
     } else if (record.type === 'user') {
       const content = record.message?.content;
       if (Array.isArray(content)) {
-        const blocks = content as Array<{ type: string; tool_use_id?: string }>;
+        const blocks = content as Array<{
+          type: string;
+          tool_use_id?: string;
+          is_error?: boolean;
+        }>;
         const hasToolResult = blocks.some((b) => b.type === 'tool_result');
         if (hasToolResult) {
+          // Track errors from tool results
+          const hasError = blocks.some((b) => b.type === 'tool_result' && b.is_error);
+          if (hasError) {
+            agent.lastTurnHadError = true;
+          }
           for (const block of blocks) {
             if (block.type === 'tool_result' && block.tool_use_id) {
               console.log(`[Pixel Agents] Agent ${agentId} tool done: ${block.tool_use_id}`);
@@ -292,6 +301,7 @@ export function processTranscriptLine(
           cancelWaitingTimer(agentId, waitingTimers);
           clearAgentActivity(agent, agentId, permissionTimers, webview);
           agent.hadToolsInTurn = false;
+          agent.lastTurnHadError = false;
           // Extract agent meta from first user text
           if (!agent.metaSent) {
             const textBlocks = content.filter(

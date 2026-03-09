@@ -72,6 +72,10 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     return this.webviewView?.webview;
   }
 
+  getWebview(): vscode.Webview | undefined {
+    return this.webview;
+  }
+
   private persistAgents = (): void => {
     persistAgents(this.agents, this.context);
   };
@@ -370,6 +374,7 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           if (this.activeAgentId.current === id) {
             this.activeAgentId.current = null;
           }
+          const success = !agent.lastTurnHadError;
           clearAgentCooldowns(id);
           removeAgent(
             id,
@@ -381,7 +386,7 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
             this.jsonlPollTimers,
             this.persistAgents,
           );
-          webviewView.webview.postMessage({ type: 'agentClosed', id });
+          webviewView.webview.postMessage({ type: 'agentClosed', id, success });
           // Check if all agents are now done
           if (this.agents.size === 0) {
             sendNotification(0, 'complete', 'すべてのエージェントが作業を完了しました');

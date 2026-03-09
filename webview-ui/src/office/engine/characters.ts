@@ -1,4 +1,6 @@
 import {
+  COMPLETE_POSE_DURATION_SEC,
+  FAILED_POSE_DURATION_SEC,
   SEAT_REST_MAX_SEC,
   SEAT_REST_MIN_SEC,
   TYPE_FRAME_DURATION_SEC,
@@ -83,6 +85,7 @@ export function createCharacter(
     matrixEffect: null,
     matrixEffectTimer: 0,
     matrixEffectSeeds: [],
+    pendingDespawn: false,
   };
 }
 
@@ -310,6 +313,23 @@ export function updateCharacter(
       }
       break;
     }
+    case CharacterState.COMPLETE:
+    case CharacterState.FAILED: {
+      // Show pose for duration, then transition to IDLE
+      const poseDuration =
+        ch.state === CharacterState.COMPLETE
+          ? COMPLETE_POSE_DURATION_SEC
+          : FAILED_POSE_DURATION_SEC;
+      if (ch.frameTimer >= poseDuration) {
+        ch.state = CharacterState.IDLE;
+        ch.frame = 0;
+        ch.frameTimer = 0;
+        ch.wanderTimer = 0;
+        ch.wanderCount = 0;
+        ch.wanderLimit = 0;
+      }
+      break;
+    }
   }
 }
 
@@ -324,6 +344,8 @@ export function getCharacterSprite(ch: Character, sprites: CharacterSprites): Sp
     case CharacterState.WALK:
       return sprites.walk[ch.dir][ch.frame % 4];
     case CharacterState.IDLE:
+    case CharacterState.COMPLETE:
+    case CharacterState.FAILED:
       return sprites.walk[ch.dir][1];
     default:
       return sprites.walk[ch.dir][1];

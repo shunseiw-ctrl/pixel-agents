@@ -27,6 +27,14 @@
       {
         "command": "pixel-agents.exportDefaultLayout",
         "title": "Pixel Agents: デフォルトレイアウトとしてエクスポート"
+      },
+      {
+        "command": "pixel-agents.startMockMode",
+        "title": "Pixel Agents: モックモード開始"
+      },
+      {
+        "command": "pixel-agents.stopMockMode",
+        "title": "Pixel Agents: モックモード終了"
       }
     ],
     "viewsContainers": {

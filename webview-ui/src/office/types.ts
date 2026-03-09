@@ -38,6 +38,8 @@ export const CharacterState = {
   IDLE: 'idle',
   WALK: 'walk',
   TYPE: 'type',
+  COMPLETE: 'complete',
+  FAILED: 'failed',
 } as const;
 export type CharacterState = (typeof CharacterState)[keyof typeof CharacterState];
 
@@ -218,4 +220,6 @@ export interface Character {
   matrixEffectSeeds: number[];
   /** Workspace folder name (only set for multi-root workspaces) */
   folderName?: string;
+  /** When true, character will despawn after COMPLETE/FAILED pose ends */
+  pendingDespawn: boolean;
 }

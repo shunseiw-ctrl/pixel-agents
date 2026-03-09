@@ -159,6 +159,7 @@ export function useExtensionMessages(
         saveAgentSeats(os);
       } else if (msg.type === 'agentClosed') {
         const id = msg.id as number;
+        const success = (msg.success as boolean | undefined) ?? true;
         // Record in history before removing
         setAgentMetas((prevMetas) => {
           const meta = prevMetas[id];
@@ -169,7 +170,7 @@ export function useExtensionMessages(
               taskName: meta.taskName,
               completedAt: Date.now(),
               elapsedMs: Date.now() - meta.createdAt,
-              success: true, // Default to success; could be refined later
+              success,
             };
             setAgentHistory((prev) => [...prev, entry]);
           }
@@ -206,7 +207,7 @@ export function useExtensionMessages(
         // Remove all sub-agent characters belonging to this agent
         os.removeAllSubagents(id);
         setSubagentCharacters((prev) => prev.filter((s) => s.parentAgentId !== id));
-        os.removeAgent(id);
+        os.removeAgent(id, success);
       } else if (msg.type === 'existingAgents') {
         const incoming = msg.agents as number[];
         const meta = (msg.agentMeta || {}) as Record<
@@ -312,6 +313,10 @@ export function useExtensionMessages(
         const text = msg.text as string;
         const isAnomalous = msg.isAnomalous as boolean;
         setAgentThoughts((prev) => ({ ...prev, [id]: { text, isAnomalous } }));
+      } else if (msg.type === 'agentError') {
+        const id = msg.id as number;
+        const hasError = msg.hasError as boolean;
+        os.setAgentError(id, hasError);
       } else if (msg.type === 'agentMeta') {
         const id = msg.id as number;
         setAgentMetas((prev) => ({
