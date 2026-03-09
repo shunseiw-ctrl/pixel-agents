@@ -502,9 +502,13 @@ export function useExtensionMessages(
         try {
           const catalog = msg.catalog as FurnitureAsset[];
           const sprites = msg.sprites as Record<string, string[][]>;
-          console.log(`📦 Webview: Loaded ${catalog.length} furniture assets`);
+          const spriteCount = sprites ? Object.keys(sprites).length : 0;
+          console.log(
+            `📦 Webview: Received furnitureAssetsLoaded — ${catalog?.length ?? 0} catalog entries, ${spriteCount} sprites`,
+          );
           // Build dynamic catalog immediately so getCatalogEntry() works when layoutLoaded arrives next
-          buildDynamicCatalog({ catalog, sprites });
+          const success = buildDynamicCatalog({ catalog, sprites });
+          console.log(`📦 Webview: buildDynamicCatalog result: ${success}`);
           setLoadedAssets({ catalog, sprites });
         } catch (err) {
           console.error(`❌ Webview: Error processing furnitureAssetsLoaded:`, err);

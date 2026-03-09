@@ -133,6 +133,11 @@ const TYPE_MIGRATION_MAP: Record<string, string> = {
   lamp: 'DESK_LAMP',
 };
 
+// Reverse map: new LimeZu types → old hand-drawn types (for fallback when dynamic catalog unavailable)
+const REVERSE_MIGRATION_MAP: Record<string, string> = Object.fromEntries(
+  Object.entries(TYPE_MIGRATION_MAP).map(([old, newType]) => [newType, old]),
+);
+
 /** Migrate a legacy furniture type to its new LimeZu equivalent. Returns input if no mapping exists. */
 export function migrateFurnitureType(type: string): string {
   return TYPE_MIGRATION_MAP[type] ?? type;
@@ -181,14 +186,31 @@ let dynamicCategories: FurnitureCategory[] | null = null;
  * Uses ONLY custom assets (excludes hardcoded furniture when assets are loaded).
  */
 export function buildDynamicCatalog(assets: LoadedAssetData): boolean {
-  if (!assets?.catalog || !assets?.sprites) return false;
+  if (!assets?.catalog || !assets?.sprites) {
+    console.error(
+      `[FurnitureCatalog] buildDynamicCatalog FAILED: catalog=${!!assets?.catalog}, sprites=${!!assets?.sprites}`,
+    );
+    return false;
+  }
+
+  const spriteKeys = Object.keys(assets.sprites);
+  console.log(
+    `[FurnitureCatalog] buildDynamicCatalog: ${assets.catalog.length} catalog entries, ${spriteKeys.length} sprites`,
+  );
+  if (spriteKeys.length > 0) {
+    console.log(`[FurnitureCatalog] First 3 sprite keys: ${spriteKeys.slice(0, 3).join(', ')}`);
+  }
 
   // Build all entries (including non-front variants)
+  let missingSprites = 0;
   const allEntries = assets.catalog
     .map((asset) => {
       const sprite = assets.sprites[asset.id];
       if (!sprite) {
-        console.warn(`No sprite data for asset ${asset.id}`);
+        missingSprites++;
+        if (missingSprites <= 3) {
+          console.warn(`[FurnitureCatalog] No sprite data for asset ${asset.id}`);
+        }
         return null;
       }
       return {
@@ -207,7 +229,17 @@ export function buildDynamicCatalog(assets: LoadedAssetData): boolean {
     })
     .filter((e): e is CatalogEntryWithCategory => e !== null);
 
-  if (allEntries.length === 0) return false;
+  if (missingSprites > 0) {
+    console.warn(`[FurnitureCatalog] ${missingSprites} assets had no sprite data`);
+  }
+  console.log(
+    `[FurnitureCatalog] Built ${allEntries.length} entries from ${assets.catalog.length} catalog items`,
+  );
+
+  if (allEntries.length === 0) {
+    console.error(`[FurnitureCatalog] buildDynamicCatalog FAILED: 0 valid entries`);
+    return false;
+  }
 
   // Build rotation groups from groupId + orientation metadata
   rotationGroups.clear();
@@ -360,7 +392,13 @@ export function getCatalogEntry(type: string): CatalogEntryWithCategory | undefi
   // 4. Try migration on fallback catalog too
   const migrated = TYPE_MIGRATION_MAP[type];
   if (migrated) {
-    return catalog.find((e) => e.type === migrated);
+    const migratedEntry = catalog.find((e) => e.type === migrated);
+    if (migratedEntry) return migratedEntry;
+  }
+  // 5. Reverse migration: new LimeZu type → old hand-drawn type (safety net when dynamic catalog unavailable)
+  const reverseMigrated = REVERSE_MIGRATION_MAP[type];
+  if (reverseMigrated) {
+    return catalog.find((e) => e.type === reverseMigrated);
   }
   return undefined;
 }

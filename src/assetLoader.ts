@@ -426,7 +426,10 @@ export function sendCharacterSpritesToWebview(
 /**
  * Send loaded assets to webview
  */
-export function sendAssetsToWebview(webview: vscode.Webview, assets: LoadedAssets): void {
+export async function sendAssetsToWebview(
+  webview: vscode.Webview,
+  assets: LoadedAssets,
+): Promise<void> {
   if (!assets) {
     console.log('[AssetLoader] ⚠️  No assets to send');
     return;
@@ -439,14 +442,25 @@ export function sendAssetsToWebview(webview: vscode.Webview, assets: LoadedAsset
     spritesObj[id] = spriteData;
   }
 
+  const spriteKeys = Object.keys(spritesObj);
   console.log(
-    `[AssetLoader] Posting furnitureAssetsLoaded message with ${assets.catalog.length} assets`,
+    `[AssetLoader] Posting furnitureAssetsLoaded: ${assets.catalog.length} catalog, ${spriteKeys.length} sprites`,
   );
-  webview.postMessage({
+  if (spriteKeys.length > 0) {
+    console.log(`[AssetLoader] First sprite keys: ${spriteKeys.slice(0, 3).join(', ')}`);
+  }
+
+  const delivered = await webview.postMessage({
     type: 'furnitureAssetsLoaded',
     catalog: assets.catalog,
     sprites: spritesObj,
   });
 
-  console.log(`📤 Sent ${assets.catalog.length} furniture assets to webview`);
+  if (delivered) {
+    console.log(`📤 Sent ${assets.catalog.length} furniture assets to webview (delivered: true)`);
+  } else {
+    console.error(
+      `[AssetLoader] ❌ postMessage returned false — message NOT delivered to webview!`,
+    );
+  }
 }
