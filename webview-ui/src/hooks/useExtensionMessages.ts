@@ -37,11 +37,6 @@ export interface FurnitureAsset {
   backgroundTiles?: number;
 }
 
-export interface WorkspaceFolder {
-  name: string;
-  path: string;
-}
-
 export interface AgentThought {
   text: string;
   isAnomalous: boolean;
@@ -69,7 +64,6 @@ export interface ExtensionMessageState {
   subagentCharacters: SubagentCharacter[];
   layoutReady: boolean;
   loadedAssets?: { catalog: FurnitureAsset[]; sprites: Record<string, string[][]> };
-  workspaceFolders: WorkspaceFolder[];
 }
 
 function saveAgentSeats(os: OfficeState): void {
@@ -104,8 +98,6 @@ export function useExtensionMessages(
   const [loadedAssets, setLoadedAssets] = useState<
     { catalog: FurnitureAsset[]; sprites: Record<string, string[][]> } | undefined
   >();
-  const [workspaceFolders, setWorkspaceFolders] = useState<WorkspaceFolder[]>([]);
-
   // Track whether initial layout has been loaded (ref to avoid re-render)
   const layoutReadyRef = useRef(false);
 
@@ -117,6 +109,7 @@ export function useExtensionMessages(
       hueShift?: number;
       seatId?: string;
       folderName?: string;
+      displayName?: string;
     }> = [];
 
     const handler = (e: MessageEvent) => {
@@ -142,7 +135,7 @@ export function useExtensionMessages(
         }
         // Add buffered agents now that layout (and seats) are correct
         for (const p of pendingAgents) {
-          os.addAgent(p.id, p.palette, p.hueShift, p.seatId, true, p.folderName);
+          os.addAgent(p.id, p.palette, p.hueShift, p.seatId, true, p.folderName, p.displayName);
         }
         pendingAgents = [];
         layoutReadyRef.current = true;
@@ -153,9 +146,10 @@ export function useExtensionMessages(
       } else if (msg.type === 'agentCreated') {
         const id = msg.id as number;
         const folderName = msg.folderName as string | undefined;
+        const displayName = msg.displayName as string | undefined;
         setAgents((prev) => (prev.includes(id) ? prev : [...prev, id]));
         setSelectedAgent(id);
-        os.addAgent(id, undefined, undefined, undefined, undefined, folderName);
+        os.addAgent(id, undefined, undefined, undefined, undefined, folderName, displayName);
         saveAgentSeats(os);
       } else if (msg.type === 'agentClosed') {
         const id = msg.id as number;
@@ -215,6 +209,7 @@ export function useExtensionMessages(
           { palette?: number; hueShift?: number; seatId?: string }
         >;
         const folderNames = (msg.folderNames || {}) as Record<number, string>;
+        const displayNames = (msg.displayNames || {}) as Record<number, string>;
         // Buffer agents — they'll be added in layoutLoaded after seats are built
         for (const id of incoming) {
           const m = meta[id];
@@ -224,6 +219,7 @@ export function useExtensionMessages(
             hueShift: m?.hueShift,
             seatId: m?.seatId,
             folderName: folderNames[id],
+            displayName: displayNames[id],
           });
         }
         setAgents((prev) => {
@@ -249,10 +245,21 @@ export function useExtensionMessages(
         os.setAgentTool(id, toolName);
         os.setAgentActive(id, true);
         os.clearPermissionBubble(id);
-        // Create sub-agent character for Task tool subtasks
-        if (status.startsWith('Subtask:')) {
-          const label = status.slice('Subtask:'.length).trim();
-          const subId = os.addSubagent(id, toolId);
+        // Create sub-agent character for Task/Agent tool subtasks
+        if (status.startsWith('Subagent:') || status.startsWith('Subtask:')) {
+          let label: string;
+          let agentDisplayName: string | undefined;
+          if (status.startsWith('Subagent:')) {
+            // Format: "Subagent:{subagent_type}:{description}"
+            const parts = status.slice('Subagent:'.length);
+            const colonIdx = parts.indexOf(':');
+            const subagentType = colonIdx >= 0 ? parts.slice(0, colonIdx) : parts;
+            label = colonIdx >= 0 ? parts.slice(colonIdx + 1).trim() : subagentType;
+            agentDisplayName = subagentType || undefined;
+          } else {
+            label = status.slice('Subtask:'.length).trim();
+          }
+          const subId = os.addSubagent(id, toolId, agentDisplayName);
           setSubagentCharacters((prev) => {
             if (prev.some((s) => s.id === subId)) return prev;
             return [...prev, { id: subId, parentAgentId: id, parentToolId: toolId, label }];
@@ -288,6 +295,29 @@ export function useExtensionMessages(
         setSubagentCharacters((prev) => prev.filter((s) => s.parentAgentId !== id));
         os.setAgentTool(id, null);
         os.clearPermissionBubble(id);
+      } else if (msg.type === 'agentIdle') {
+        // Terminal closed but agent stays visible — mark as inactive
+        // Zone system will move character to rest zone automatically
+        const id = msg.id as number;
+        os.setAgentActive(id, false);
+        os.setAgentTool(id, null);
+        os.clearPermissionBubble(id);
+        // Remove all sub-agents
+        os.removeAllSubagents(id);
+        setSubagentCharacters((prev) => prev.filter((s) => s.parentAgentId !== id));
+        // Clear tools but keep agent in the list
+        setAgentTools((prev) => {
+          if (!(id in prev)) return prev;
+          const next = { ...prev };
+          delete next[id];
+          return next;
+        });
+        setSubagentTools((prev) => {
+          if (!(id in prev)) return prev;
+          const next = { ...prev };
+          delete next[id];
+          return next;
+        });
       } else if (msg.type === 'agentSelected') {
         const id = msg.id as number;
         setSelectedAgent(id);
@@ -383,6 +413,10 @@ export function useExtensionMessages(
             os.clearPermissionBubble(subId);
           }
         }
+      } else if (msg.type === 'agentBoss') {
+        const id = msg.id as number;
+        const ch = os.characters.get(id);
+        if (ch) ch.isBoss = true;
       } else if (msg.type === 'subagentToolStart') {
         const id = msg.id as number;
         const parentToolId = msg.parentToolId as string;
@@ -457,9 +491,6 @@ export function useExtensionMessages(
         const sprites = msg.sprites as string[][][];
         console.log(`[Webview] Received ${sprites.length} wall tile sprites`);
         setWallSprites(sprites);
-      } else if (msg.type === 'workspaceFolders') {
-        const folders = msg.folders as WorkspaceFolder[];
-        setWorkspaceFolders(folders);
       } else if (msg.type === 'settingsLoaded') {
         const soundOn = msg.soundEnabled as boolean;
         setSoundEnabled(soundOn);
@@ -499,6 +530,5 @@ export function useExtensionMessages(
     subagentCharacters,
     layoutReady,
     loadedAssets,
-    workspaceFolders,
   };
 }

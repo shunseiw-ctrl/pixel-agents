@@ -23,7 +23,7 @@ import {
 } from './timerManager.js';
 import type { AgentState } from './types.js';
 
-export const PERMISSION_EXEMPT_TOOLS = new Set(['Task', 'AskUserQuestion']);
+export const PERMISSION_EXEMPT_TOOLS = new Set(['Task', 'Agent', 'AskUserQuestion']);
 
 /** Extract issue number and task name from a user message text */
 function extractAgentMeta(text: string): { issueNumber?: number; taskName?: string } {
@@ -62,6 +62,9 @@ function generateThoughtText(toolName: string, input: Record<string, unknown>): 
       break;
     case 'Task':
       text = 'サブタスクを実行中...';
+      break;
+    case 'Agent':
+      text = 'サブエージェントを実行中...';
       break;
     case 'AskUserQuestion':
       text = '入力を待っています';
@@ -131,8 +134,16 @@ export function formatToolStatus(toolName: string, input: Record<string, unknown
     case 'Task': {
       const desc = typeof input.description === 'string' ? input.description : '';
       return desc
-        ? `サブタスク: ${desc.length > TASK_DESCRIPTION_DISPLAY_MAX_LENGTH ? desc.slice(0, TASK_DESCRIPTION_DISPLAY_MAX_LENGTH) + '\u2026' : desc}`
+        ? `Subtask:${desc.length > TASK_DESCRIPTION_DISPLAY_MAX_LENGTH ? desc.slice(0, TASK_DESCRIPTION_DISPLAY_MAX_LENGTH) + '\u2026' : desc}`
         : 'サブタスク実行中';
+    }
+    case 'Agent': {
+      const subType = typeof input.subagent_type === 'string' ? input.subagent_type : '';
+      const desc = typeof input.description === 'string' ? input.description : '';
+      const label = subType || desc;
+      return label
+        ? `Subagent:${subType}:${label.length > TASK_DESCRIPTION_DISPLAY_MAX_LENGTH ? label.slice(0, TASK_DESCRIPTION_DISPLAY_MAX_LENGTH) + '\u2026' : label}`
+        : 'サブエージェント実行中';
     }
     case 'AskUserQuestion':
       return '入力待ち';
@@ -183,6 +194,10 @@ export function processTranscriptLine(
             agent.activeToolNames.set(block.id, toolName);
             if (!PERMISSION_EXEMPT_TOOLS.has(toolName)) {
               hasNonExemptTool = true;
+            }
+            // Agent tool detected → mark parent as boss
+            if (toolName === 'Agent') {
+              webview?.postMessage({ type: 'agentBoss', id: agentId });
             }
             webview?.postMessage({
               type: 'agentToolStart',
@@ -268,8 +283,9 @@ export function processTranscriptLine(
             if (block.type === 'tool_result' && block.tool_use_id) {
               console.log(`[Pixel Agents] Agent ${agentId} tool done: ${block.tool_use_id}`);
               const completedToolId = block.tool_use_id;
-              // If the completed tool was a Task, clear its subagent tools
-              if (agent.activeToolNames.get(completedToolId) === 'Task') {
+              // If the completed tool was a Task or Agent, clear its subagent tools
+              const completedToolName = agent.activeToolNames.get(completedToolId);
+              if (completedToolName === 'Task' || completedToolName === 'Agent') {
                 agent.activeSubagentToolIds.delete(completedToolId);
                 agent.activeSubagentToolNames.delete(completedToolId);
                 webview?.postMessage({
@@ -396,8 +412,9 @@ function processProgressRecord(
     return;
   }
 
-  // Verify parent is an active Task tool (agent_progress handling)
-  if (agent.activeToolNames.get(parentToolId) !== 'Task') return;
+  // Verify parent is an active Task or Agent tool (agent_progress handling)
+  const parentToolName = agent.activeToolNames.get(parentToolId);
+  if (parentToolName !== 'Task' && parentToolName !== 'Agent') return;
 
   const msg = data.message as Record<string, unknown> | undefined;
   if (!msg) return;

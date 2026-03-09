@@ -1,6 +1,7 @@
 import {
   IDLE_TO_REST_DELAY_MS,
   ZONE_ALERT_COLOR,
+  ZONE_BOSS_COLOR,
   ZONE_MOVE_DEBOUNCE_MS,
   ZONE_REST_COLOR,
   ZONE_WORK_COLOR,
@@ -100,6 +101,8 @@ export function getZoneColor(zoneType: ZoneTypeVal): string {
       return ZONE_REST_COLOR;
     case ZoneType.ALERT:
       return ZONE_ALERT_COLOR;
+    case ZoneType.BOSS:
+      return ZONE_BOSS_COLOR;
     default:
       return 'transparent';
   }
@@ -132,8 +135,10 @@ export function determineTargetZone(
   hasError: boolean,
   isWaiting: boolean,
   _idleMs: number,
+  isBoss: boolean,
 ): ZoneTypeVal | null {
   if (hasError) return ZoneType.ALERT;
+  if (isBoss) return ZoneType.BOSS;
   if (isActive) return ZoneType.WORK;
   if (isWaiting) return ZoneType.REST;
   return null;
@@ -150,8 +155,9 @@ export function updateAgentZoneState(
   isWaiting: boolean,
   idleMs: number,
   now: number,
+  isBoss: boolean = false,
 ): ZoneTypeVal | null {
-  const target = determineTargetZone(isActive, hasError, isWaiting, idleMs);
+  const target = determineTargetZone(isActive, hasError, isWaiting, idleMs, isBoss);
 
   // If waiting/idle, check if enough time has passed
   if (!isActive && !hasError && isWaiting) {

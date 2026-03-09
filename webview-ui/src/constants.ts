@@ -120,6 +120,7 @@ export const IDLE_TO_REST_DELAY_MS = 15000;
 export const ZONE_WORK_COLOR = 'rgba(74, 144, 217, 0.15)';
 export const ZONE_REST_COLOR = 'rgba(80, 200, 120, 0.15)';
 export const ZONE_ALERT_COLOR = 'rgba(217, 83, 79, 0.15)';
+export const ZONE_BOSS_COLOR = 'rgba(255, 215, 0, 0.15)';
 
 // ── Thought Bubbles ─────────────────────────────────────────
 export const THOUGHT_MAX_LENGTH = 30;

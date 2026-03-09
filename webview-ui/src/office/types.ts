@@ -140,6 +140,7 @@ export const ZoneType = {
   WORK: 'work',
   REST: 'rest',
   ALERT: 'alert',
+  BOSS: 'boss',
 } as const;
 export type ZoneType = (typeof ZoneType)[keyof typeof ZoneType];
 
@@ -220,6 +221,10 @@ export interface Character {
   matrixEffectSeeds: number[];
   /** Workspace folder name (only set for multi-root workspaces) */
   folderName?: string;
+  /** Display name for this agent (e.g. "Agent #1") */
+  displayName?: string;
+  /** Whether this character is the boss/main agent */
+  isBoss: boolean;
   /** When true, character will despawn after COMPLETE/FAILED pose ends */
   pendingDespawn: boolean;
 }

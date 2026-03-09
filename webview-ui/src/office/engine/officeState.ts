@@ -265,6 +265,7 @@ export class OfficeState {
     preferredSeatId?: string,
     skipSpawnEffect?: boolean,
     folderName?: string,
+    displayName?: string,
   ): void {
     if (this.characters.has(id)) return;
 
@@ -312,6 +313,7 @@ export class OfficeState {
     if (folderName) {
       ch.folderName = folderName;
     }
+    ch.displayName = displayName || `Agent #${id}`;
     if (!skipSpawnEffect) {
       ch.matrixEffect = 'spawn';
       ch.matrixEffectTimer = 0;
@@ -448,7 +450,7 @@ export class OfficeState {
   }
 
   /** Create a sub-agent character with the parent's palette. Returns the sub-agent ID. */
-  addSubagent(parentAgentId: number, parentToolId: string): number {
+  addSubagent(parentAgentId: number, parentToolId: string, displayName?: string): number {
     const key = `${parentAgentId}:${parentToolId}`;
     if (this.subagentIdMap.has(key)) return this.subagentIdMap.get(key)!;
 
@@ -502,6 +504,9 @@ export class OfficeState {
     }
     ch.isSubagent = true;
     ch.parentAgentId = parentAgentId;
+    if (displayName) {
+      ch.displayName = displayName;
+    }
     ch.matrixEffect = 'spawn';
     ch.matrixEffectTimer = 0;
     ch.matrixEffectSeeds = matrixEffectSeeds();
@@ -780,6 +785,7 @@ export class OfficeState {
           isWaiting,
           idleMs,
           now,
+          ch.isBoss,
         );
 
         if (targetZone) {
