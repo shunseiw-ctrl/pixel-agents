@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { BottomToolbar } from './components/BottomToolbar.js';
 import { DebugView } from './components/DebugView.js';
+import { StatusSummaryPanel } from './components/StatusSummaryPanel.js';
 import { ZoomControls } from './components/ZoomControls.js';
 import { PULSE_ANIMATION_DURATION_SEC } from './constants.js';
 import { useEditorActions } from './hooks/useEditorActions.js';
@@ -138,6 +139,8 @@ function App() {
     agentTools,
     agentStatuses,
     agentThoughts,
+    agentMetas,
+    agentHistory,
     subagentTools,
     subagentCharacters,
     layoutReady,
@@ -347,6 +350,15 @@ function App() {
         zoom={editor.zoom}
         panRef={editor.panRef}
         onCloseAgent={handleCloseAgent}
+      />
+
+      <StatusSummaryPanel
+        agents={agents}
+        agentStatuses={agentStatuses}
+        agentTools={agentTools}
+        agentMetas={agentMetas}
+        agentHistory={agentHistory}
+        onSelectAgent={handleSelectAgent}
       />
 
       {isDebugMode && (

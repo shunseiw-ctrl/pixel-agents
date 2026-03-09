@@ -247,6 +247,8 @@ function adoptTerminalForFile(
     hadToolsInTurn: false,
     lastThoughtText: '',
     thoughtRepeatCount: 0,
+    metaSent: false,
+    createdAt: Date.now(),
   };
 
   agents.set(id, agent);

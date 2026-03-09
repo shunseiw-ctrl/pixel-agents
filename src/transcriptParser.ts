@@ -20,6 +20,16 @@ import type { AgentState } from './types.js';
 
 export const PERMISSION_EXEMPT_TOOLS = new Set(['Task', 'AskUserQuestion']);
 
+/** Extract issue number and task name from a user message text */
+function extractAgentMeta(text: string): { issueNumber?: number; taskName?: string } {
+  const issueMatch = text.match(/#(\d+)/);
+  const issueNumber = issueMatch ? parseInt(issueMatch[1], 10) : undefined;
+  // Extract a brief task name: first line, trimmed, up to 20 chars
+  const firstLine = text.split(/\n/)[0]?.trim() || '';
+  const taskName = firstLine.length > 20 ? firstLine.slice(0, 20) + '…' : firstLine || undefined;
+  return { issueNumber, taskName };
+}
+
 /** Generate a concise thought text from tool usage for bubble display */
 function generateThoughtText(toolName: string, input: Record<string, unknown>): string {
   const base = (p: unknown) => (typeof p === 'string' ? path.basename(p) : '');
@@ -234,12 +244,42 @@ export function processTranscriptLine(
           cancelWaitingTimer(agentId, waitingTimers);
           clearAgentActivity(agent, agentId, permissionTimers, webview);
           agent.hadToolsInTurn = false;
+          // Extract agent meta from first user text
+          if (!agent.metaSent) {
+            const textBlocks = content.filter(
+              (b: { type: string; text?: string }) => b.type === 'text' && b.text,
+            );
+            const userText = textBlocks.map((b: { text: string }) => b.text).join(' ');
+            if (userText.trim()) {
+              const meta = extractAgentMeta(userText);
+              agent.metaSent = true;
+              webview?.postMessage({
+                type: 'agentMeta',
+                id: agentId,
+                issueNumber: meta.issueNumber,
+                taskName: meta.taskName,
+                createdAt: agent.createdAt,
+              });
+            }
+          }
         }
       } else if (typeof content === 'string' && content.trim()) {
         // New user text prompt — new turn starting
         cancelWaitingTimer(agentId, waitingTimers);
         clearAgentActivity(agent, agentId, permissionTimers, webview);
         agent.hadToolsInTurn = false;
+        // Extract agent meta from first user text
+        if (!agent.metaSent) {
+          const meta = extractAgentMeta(content);
+          agent.metaSent = true;
+          webview?.postMessage({
+            type: 'agentMeta',
+            id: agentId,
+            issueNumber: meta.issueNumber,
+            taskName: meta.taskName,
+            createdAt: agent.createdAt,
+          });
+        }
       }
     } else if (record.type === 'system' && record.subtype === 'turn_duration') {
       cancelWaitingTimer(agentId, waitingTimers);

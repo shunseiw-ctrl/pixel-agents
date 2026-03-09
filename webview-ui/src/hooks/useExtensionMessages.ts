@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import type { AgentHistoryEntry, AgentMeta } from '../components/StatusSummaryPanel.js';
 import { playDoneSound, setSoundEnabled } from '../notificationSound.js';
 import type { OfficeState } from '../office/engine/officeState.js';
 import { setFloorSprites } from '../office/floorTiles.js';
@@ -52,6 +53,8 @@ export interface ExtensionMessageState {
   agentTools: Record<number, ToolActivity[]>;
   agentStatuses: Record<number, string>;
   agentThoughts: Record<number, AgentThought>;
+  agentMetas: Record<number, AgentMeta>;
+  agentHistory: AgentHistoryEntry[];
   subagentTools: Record<number, Record<string, ToolActivity[]>>;
   subagentCharacters: SubagentCharacter[];
   layoutReady: boolean;
@@ -79,6 +82,8 @@ export function useExtensionMessages(
   const [agentTools, setAgentTools] = useState<Record<number, ToolActivity[]>>({});
   const [agentStatuses, setAgentStatuses] = useState<Record<number, string>>({});
   const [agentThoughts, setAgentThoughts] = useState<Record<number, AgentThought>>({});
+  const [agentMetas, setAgentMetas] = useState<Record<number, AgentMeta>>({});
+  const [agentHistory, setAgentHistory] = useState<AgentHistoryEntry[]>([]);
   const [subagentTools, setSubagentTools] = useState<
     Record<number, Record<string, ToolActivity[]>>
   >({});
@@ -142,6 +147,24 @@ export function useExtensionMessages(
         saveAgentSeats(os);
       } else if (msg.type === 'agentClosed') {
         const id = msg.id as number;
+        // Record in history before removing
+        setAgentMetas((prevMetas) => {
+          const meta = prevMetas[id];
+          if (meta) {
+            const entry: AgentHistoryEntry = {
+              id,
+              issueNumber: meta.issueNumber,
+              taskName: meta.taskName,
+              completedAt: Date.now(),
+              elapsedMs: Date.now() - meta.createdAt,
+              success: true, // Default to success; could be refined later
+            };
+            setAgentHistory((prev) => [...prev, entry]);
+          }
+          const next = { ...prevMetas };
+          delete next[id];
+          return next;
+        });
         setAgents((prev) => prev.filter((a) => a !== id));
         setSelectedAgent((prev) => (prev === id ? null : prev));
         setAgentTools((prev) => {
@@ -277,6 +300,16 @@ export function useExtensionMessages(
         const text = msg.text as string;
         const isAnomalous = msg.isAnomalous as boolean;
         setAgentThoughts((prev) => ({ ...prev, [id]: { text, isAnomalous } }));
+      } else if (msg.type === 'agentMeta') {
+        const id = msg.id as number;
+        setAgentMetas((prev) => ({
+          ...prev,
+          [id]: {
+            issueNumber: msg.issueNumber as number | undefined,
+            taskName: msg.taskName as string | undefined,
+            createdAt: (msg.createdAt as number) || Date.now(),
+          },
+        }));
       } else if (msg.type === 'agentToolPermission') {
         const id = msg.id as number;
         setAgentTools((prev) => {
@@ -422,6 +455,8 @@ export function useExtensionMessages(
     agentTools,
     agentStatuses,
     agentThoughts,
+    agentMetas,
+    agentHistory,
     subagentTools,
     subagentCharacters,
     layoutReady,

@@ -21,6 +21,10 @@ export interface AgentState {
   lastThoughtText: string;
   /** Consecutive count of same thought text */
   thoughtRepeatCount: number;
+  /** Whether agent meta (issue/task name) has been sent */
+  metaSent: boolean;
+  /** Agent creation timestamp (ms) */
+  createdAt: number;
 }
 
 export interface PersistedAgent {

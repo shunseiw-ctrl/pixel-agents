@@ -83,6 +83,8 @@ export async function launchNewTerminal(
     folderName,
     lastThoughtText: '',
     thoughtRepeatCount: 0,
+    metaSent: false,
+    createdAt: Date.now(),
   };
 
   agents.set(id, agent);
@@ -240,6 +242,8 @@ export function restoreAgents(
       folderName: p.folderName,
       lastThoughtText: '',
       thoughtRepeatCount: 0,
+      metaSent: false,
+      createdAt: Date.now(),
     };
 
     agents.set(p.id, agent);
