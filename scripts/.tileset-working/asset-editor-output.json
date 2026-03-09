@@ -1,3701 +1,3401 @@
 {
   "version": 1,
-  "timestamp": "2026-02-09T17:12:55.257Z",
-  "sourceFile": "assets/office_tileset_16x16.png",
-  "tileset": {
-    "width": 256,
-    "height": 512
-  },
+  "timestamp": "2026-03-09T11:57:13.838Z",
+  "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16",
+  "tileset": null,
   "backgroundColor": "#00000000",
-  "totalPixels": 131072,
-  "backgroundPixels": 63253,
+  "totalPixels": 0,
+  "backgroundPixels": 0,
   "assets": [
     {
-      "id": "ASSET_0",
-      "x": 20,
-      "y": 0,
-      "width": 40,
-      "height": 22,
-      "paddedX": 16,
-      "paddedY": -10,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_1",
-      "x": 68,
-      "y": 0,
-      "width": 40,
-      "height": 22,
-      "paddedX": 64,
-      "paddedY": -10,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_4",
-      "x": 112,
-      "y": 12,
-      "width": 112,
-      "height": 20,
-      "paddedX": 128,
-      "paddedY": 0,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_6",
-      "x": 4,
-      "y": 32,
-      "width": 40,
-      "height": 22,
+      "id": "ASSET_Modern_Office_Singles_1",
       "paddedX": 0,
-      "paddedY": 22,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_7",
-      "x": 48,
-      "y": 32,
-      "width": 176,
-      "height": 32,
-      "paddedX": 80,
-      "paddedY": 22,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_10",
-      "x": 0,
-      "y": 64,
-      "width": 32,
-      "height": 22,
-      "paddedX": 0,
-      "paddedY": 54,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_11",
-      "x": 0,
-      "y": 64,
-      "width": 128,
-      "height": 86,
-      "paddedX": 0,
-      "paddedY": 86,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_15",
-      "x": 128,
-      "y": 76,
-      "width": 48,
-      "height": 20,
-      "paddedX": 128,
-      "paddedY": 64,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_17",
-      "x": 182,
-      "y": 95,
-      "width": 20,
-      "height": 25,
-      "paddedX": 176,
-      "paddedY": 88,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_18",
-      "x": 214,
-      "y": 95,
-      "width": 20,
-      "height": 25,
-      "paddedX": 208,
-      "paddedY": 88,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_25",
-      "x": 132,
-      "y": 143,
-      "width": 40,
-      "height": 25,
-      "paddedX": 128,
-      "paddedY": 136,
-      "paddedWidth": 48,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_23",
-      "x": 177,
-      "y": 138,
-      "width": 30,
-      "height": 30,
-      "paddedX": 176,
-      "paddedY": 136,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_24",
-      "x": 209,
-      "y": 138,
-      "width": 30,
-      "height": 30,
-      "paddedX": 208,
-      "paddedY": 136,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_26",
-      "x": 246,
-      "y": 149,
-      "width": 4,
-      "height": 27,
-      "paddedX": 240,
-      "paddedY": 144,
+      "paddedY": 32,
       "paddedWidth": 16,
-      "paddedHeight": 32
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_1.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_27_A",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
+      "id": "ASSET_Modern_Office_Singles_2",
       "paddedX": 0,
-      "paddedY": 160,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_2.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_3",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_3.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_4",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_4.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_5",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_5.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_6",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_6.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_7",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_7.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_8",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_8.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_9",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_9.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_10",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_10.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_11",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_11.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_12",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_12.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_13",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_13.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_14",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_14.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_15",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_15.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_16",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_16.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_17",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_17.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_18",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_18.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_19",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_19.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_20",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_20.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_21",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_21.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_22",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_22.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_23",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_23.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_24",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_24.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_25",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_25.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_26",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_26.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_27",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_27.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_28",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_28.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_29",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_29.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_30",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_30.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_31",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_31.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_32",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_32.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_33",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_33.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_34",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_34.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_35",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_35.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_36",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_36.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_37",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_37.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_38",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_38.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_39",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_39.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_40",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_40.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_41",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_41.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_42",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_42.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_43",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_43.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_44",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_44.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_45",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_45.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_46",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_46.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_47",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_47.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_48",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_48.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_49",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_49.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_50",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_50.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_51",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_51.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_52",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_52.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_53",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_53.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_54",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_54.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_55",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_55.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_56",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_56.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_57",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_57.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_58",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_58.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_59",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_59.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_60",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_60.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_61",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_61.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_62",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_62.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_63",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_63.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_64",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_64.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_65",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_65.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_66",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_66.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_67",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_67.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_68",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_68.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_69",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_69.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_70",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_70.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_71",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_71.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_72",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_72.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_73",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_73.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_74",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_74.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_75",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_75.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_76",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_76.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_77",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_77.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_78",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_78.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_79",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_79.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_80",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_80.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_81",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_81.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_82",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_82.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_83",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_83.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_84",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_84.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_85",
+      "paddedX": 0,
+      "paddedY": 28,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_85.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_86",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_86.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_87",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_87.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_88",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_88.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_89",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_89.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_90",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_90.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_91",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_91.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_92",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_92.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_93",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_93.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_94",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_94.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_95",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_95.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_96",
+      "paddedX": 0,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_96.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_97",
+      "paddedX": 0,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_97.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_98",
+      "paddedX": 0,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_98.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_99",
+      "paddedX": 0,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_99.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_100",
+      "paddedX": 0,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_100.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_101",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_101.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_102",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_102.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_103",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_103.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_104",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_104.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_105",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_105.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_106",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_106.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_107",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_107.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_108",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_108.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_109",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_109.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_110",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_110.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_111",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_111.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_112",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_112.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_113",
+      "paddedX": 0,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_113.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_114",
+      "paddedX": 0,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_114.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_115",
+      "paddedX": 0,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_115.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_116",
+      "paddedX": 1,
+      "paddedY": 25,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_116.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_117",
+      "paddedX": 1,
+      "paddedY": 19,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_117.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_118",
+      "paddedX": 1,
+      "paddedY": 19,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_118.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_119",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_119.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_120",
+      "paddedX": 0,
+      "paddedY": 30,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_120.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_121",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_121.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_122",
+      "paddedX": 0,
+      "paddedY": 13,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_122.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_123",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_123.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_124",
+      "paddedX": 0,
+      "paddedY": 30,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_124.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_125",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_125.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_126",
+      "paddedX": 0,
+      "paddedY": 13,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_126.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_127",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_127.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_128",
+      "paddedX": 0,
+      "paddedY": 24,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_128.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_129",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_129.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_130",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_130.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_131",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_131.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_132",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_132.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_133",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_133.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_134",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_134.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_135",
+      "paddedX": 1,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_135.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_136",
+      "paddedX": 1,
+      "paddedY": 24,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_136.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_137",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_137.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_138",
+      "paddedX": 1,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_138.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_139",
+      "paddedX": 1,
+      "paddedY": 24,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_139.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_140",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_140.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_141",
+      "paddedX": 0,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_141.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_142",
+      "paddedX": 0,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_142.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_143",
+      "paddedX": 0,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_143.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_144",
+      "paddedX": 1,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_144.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_145",
+      "paddedX": 1,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_145.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_146",
+      "paddedX": 1,
+      "paddedY": 2,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_146.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_147",
+      "paddedX": 0,
+      "paddedY": 18,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_147.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_148",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_148.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_149",
+      "paddedX": 0,
+      "paddedY": 4,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_149.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_150",
+      "paddedX": 0,
+      "paddedY": 18,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_150.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_151",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_151.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_152",
+      "paddedX": 0,
+      "paddedY": 4,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_152.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_153",
+      "paddedX": 2,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_153.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_154",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_154.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_155",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_155.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_156",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_156.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_157",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_157.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_158",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_158.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_159",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_159.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_160",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_160.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_161",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_161.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_162",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_162.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_163",
+      "paddedX": 0,
+      "paddedY": 20,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_163.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_164",
+      "paddedX": 0,
+      "paddedY": 11,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_164.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_165",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_165.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_166",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_166.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_167",
+      "paddedX": 1,
+      "paddedY": 22,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_167.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_168",
+      "paddedX": 1,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_168.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_169",
+      "paddedX": 1,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_169.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_170",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_170.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_171",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_171.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_172",
+      "paddedX": 0,
+      "paddedY": 14,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_172.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_173",
+      "paddedX": 0,
+      "paddedY": 6,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_173.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_174",
+      "paddedX": 1,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_174.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_175",
+      "paddedX": 1,
+      "paddedY": -9,
       "paddedWidth": 32,
       "paddedHeight": 48,
-      "splitMarker": true
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_175.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_27_B_A_A",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 128,
-      "paddedY": 183,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_A_B_A",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 144,
-      "paddedY": 183,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_A_B_B_A",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 160,
-      "paddedY": 183,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_A_B_B_B_A",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 176,
-      "paddedY": 183,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_A_B_B_B_B",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 192,
-      "paddedY": 183,
+      "id": "ASSET_Modern_Office_Singles_176",
+      "paddedX": 1,
+      "paddedY": -9,
       "paddedWidth": 32,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_176.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_27_B_B_0_0",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 128,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_B_0_1",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 144,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_B_0_2",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 160,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_B_0_3",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 176,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_B_0_4",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 192,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_27_B_B_0_5",
-      "x": 0,
-      "y": 160,
-      "width": 224,
-      "height": 96,
-      "paddedX": 208,
-      "paddedY": 221,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true,
-      "discard": false
-    },
-    {
-      "id": "ASSET_28",
-      "x": 193,
-      "y": 185,
-      "width": 29,
-      "height": 31,
-      "paddedX": 192,
-      "paddedY": 184,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_29",
-      "x": 225,
-      "y": 185,
-      "width": 29,
-      "height": 31,
-      "paddedX": 224,
-      "paddedY": 184,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_30",
-      "x": 230,
-      "y": 229,
-      "width": 4,
-      "height": 27,
-      "paddedX": 224,
-      "paddedY": 224,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_32",
-      "x": 2,
-      "y": 258,
-      "width": 12,
-      "height": 16,
+      "id": "ASSET_Modern_Office_Singles_177",
       "paddedX": 0,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_38",
-      "x": 18,
-      "y": 260,
-      "width": 12,
-      "height": 14,
-      "paddedX": 16,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_33",
-      "x": 34,
-      "y": 258,
-      "width": 12,
-      "height": 16,
-      "paddedX": 32,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_34",
-      "x": 50,
-      "y": 258,
-      "width": 12,
-      "height": 16,
-      "paddedX": 48,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_35",
-      "x": 66,
-      "y": 258,
-      "width": 12,
-      "height": 16,
-      "paddedX": 64,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_39",
-      "x": 82,
-      "y": 260,
-      "width": 12,
-      "height": 14,
-      "paddedX": 80,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_36",
-      "x": 98,
-      "y": 258,
-      "width": 12,
-      "height": 16,
-      "paddedX": 96,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_37",
-      "x": 114,
-      "y": 258,
-      "width": 12,
-      "height": 16,
-      "paddedX": 112,
-      "paddedY": 258,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_42",
-      "x": 144,
-      "y": 267,
-      "width": 12,
-      "height": 29,
-      "paddedX": 142,
-      "paddedY": 264,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_41_0_0",
-      "x": 192,
-      "y": 265,
-      "width": 32,
-      "height": 31,
-      "paddedX": 192,
-      "paddedY": 264,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true
-    },
-    {
-      "id": "ASSET_41_0_1",
-      "x": 192,
-      "y": 265,
-      "width": 32,
-      "height": 31,
-      "paddedX": 208,
-      "paddedY": 264,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "splitMarker": true
-    },
-    {
-      "id": "ASSET_40",
-      "x": 229,
-      "y": 264,
-      "width": 23,
-      "height": 32,
-      "paddedX": 225,
-      "paddedY": 264,
+      "paddedY": 14,
       "paddedWidth": 32,
-      "paddedHeight": 32
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_177.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_44",
-      "x": 134,
-      "y": 281,
-      "width": 8,
-      "height": 13,
-      "paddedX": 130,
-      "paddedY": 278,
-      "paddedWidth": 16,
-      "paddedHeight": 16,
-      "erasedPixels": [
-        {
-          "x": 14,
-          "y": 1
-        },
-        {
-          "x": 14,
-          "y": 2
-        },
-        {
-          "x": 14,
-          "y": 3
-        },
-        {
-          "x": 14,
-          "y": 4
-        },
-        {
-          "x": 14,
-          "y": 5
-        },
-        {
-          "x": 14,
-          "y": 6
-        },
-        {
-          "x": 14,
-          "y": 7
-        },
-        {
-          "x": 14,
-          "y": 8
-        },
-        {
-          "x": 14,
-          "y": 9
-        },
-        {
-          "x": 14,
-          "y": 10
-        },
-        {
-          "x": 14,
-          "y": 11
-        },
-        {
-          "x": 14,
-          "y": 12
-        },
-        {
-          "x": 14,
-          "y": 13
-        },
-        {
-          "x": 14,
-          "y": 14
-        },
-        {
-          "x": 14,
-          "y": 15
-        },
-        {
-          "x": 15,
-          "y": 15
-        },
-        {
-          "x": 15,
-          "y": 14
-        },
-        {
-          "x": 15,
-          "y": 13
-        },
-        {
-          "x": 15,
-          "y": 12
-        },
-        {
-          "x": 15,
-          "y": 11
-        },
-        {
-          "x": 15,
-          "y": 10
-        },
-        {
-          "x": 15,
-          "y": 9
-        },
-        {
-          "x": 15,
-          "y": 8
-        },
-        {
-          "x": 15,
-          "y": 7
-        },
-        {
-          "x": 15,
-          "y": 6
-        },
-        {
-          "x": 15,
-          "y": 5
-        },
-        {
-          "x": 15,
-          "y": 4
-        },
-        {
-          "x": 15,
-          "y": 3
-        },
-        {
-          "x": 15,
-          "y": 2
-        },
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 15,
-          "y": 0
-        },
-        {
-          "x": 14,
-          "y": 0
-        }
-      ]
-    },
-    {
-      "id": "ASSET_46",
-      "x": 18,
-      "y": 288,
-      "width": 12,
-      "height": 32,
-      "paddedX": 16,
-      "paddedY": 288,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_47",
-      "x": 34,
-      "y": 288,
-      "width": 12,
-      "height": 32,
-      "paddedX": 32,
-      "paddedY": 288,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_49",
-      "x": 2,
-      "y": 293,
-      "width": 12,
-      "height": 13,
+      "id": "ASSET_Modern_Office_Singles_178",
       "paddedX": 0,
-      "paddedY": 290,
-      "paddedWidth": 16,
-      "paddedHeight": 16
+      "paddedY": 14,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_178.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_50_0_0",
-      "x": 64,
-      "y": 299,
-      "width": 64,
-      "height": 16,
-      "paddedX": 64,
-      "paddedY": 299,
+      "id": "ASSET_Modern_Office_Singles_179",
+      "paddedX": 2,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_179.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_180",
+      "paddedX": 0,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_180.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_181",
+      "paddedX": -1,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_181.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_182",
+      "paddedX": 2,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_182.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_183",
+      "paddedX": 0,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_183.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_184",
+      "paddedX": -1,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_184.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_185",
+      "paddedX": 2,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_185.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_186",
+      "paddedX": 0,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_186.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_187",
+      "paddedX": -1,
+      "paddedY": 5,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_187.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_188",
+      "paddedX": 5,
+      "paddedY": 32,
       "paddedWidth": 32,
       "paddedHeight": 16,
-      "splitMarker": true
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_188.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_50_0_1",
-      "x": 64,
-      "y": 299,
-      "width": 64,
-      "height": 16,
-      "paddedX": 96,
-      "paddedY": 299,
+      "id": "ASSET_Modern_Office_Singles_189",
+      "paddedX": 5,
+      "paddedY": 32,
       "paddedWidth": 32,
       "paddedHeight": 16,
-      "splitMarker": true
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_189.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_51",
-      "x": 229,
-      "y": 307,
-      "width": 8,
-      "height": 8,
-      "paddedX": 225,
-      "paddedY": 299,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_54",
-      "x": 131,
-      "y": 316,
-      "width": 13,
-      "height": 19,
-      "paddedX": 125,
-      "paddedY": 303,
-      "paddedWidth": 32,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 1,
-          "y": 10
-        },
-        {
-          "x": 1,
-          "y": 9
-        },
-        {
-          "x": 1,
-          "y": 8
-        },
-        {
-          "x": 1,
-          "y": 7
-        },
-        {
-          "x": 1,
-          "y": 6
-        },
-        {
-          "x": 1,
-          "y": 5
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 0,
-          "y": 5
-        },
-        {
-          "x": 0,
-          "y": 6
-        },
-        {
-          "x": 0,
-          "y": 7
-        },
-        {
-          "x": 0,
-          "y": 8
-        },
-        {
-          "x": 0,
-          "y": 9
-        },
-        {
-          "x": 0,
-          "y": 10
-        },
-        {
-          "x": 2,
-          "y": 7
-        },
-        {
-          "x": 2,
-          "y": 6
-        },
-        {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 0
-        }
-      ]
-    },
-    {
-      "id": "ASSET_55",
-      "x": 163,
-      "y": 316,
-      "width": 13,
-      "height": 19,
-      "paddedX": 161,
-      "paddedY": 303,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_61",
-      "x": 199,
-      "y": 330,
-      "width": 3,
-      "height": 1,
-      "paddedX": 192,
-      "paddedY": 315,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_63",
-      "x": 35,
-      "y": 331,
-      "width": 25,
-      "height": 15,
-      "paddedX": 32,
-      "paddedY": 330,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_64",
-      "x": 67,
-      "y": 331,
-      "width": 25,
-      "height": 15,
-      "paddedX": 64,
-      "paddedY": 330,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_65",
-      "x": 99,
-      "y": 331,
-      "width": 25,
-      "height": 15,
-      "paddedX": 96,
-      "paddedY": 330,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_70",
-      "x": 135,
-      "y": 340,
-      "width": 8,
-      "height": 9,
-      "paddedX": 131,
-      "paddedY": 336,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_71",
-      "x": 151,
-      "y": 340,
-      "width": 8,
-      "height": 9,
-      "paddedX": 147,
-      "paddedY": 336,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_72",
-      "x": 167,
-      "y": 340,
-      "width": 8,
-      "height": 9,
-      "paddedX": 163,
-      "paddedY": 336,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_73",
-      "x": 183,
-      "y": 340,
-      "width": 8,
-      "height": 9,
-      "paddedX": 179,
-      "paddedY": 336,
-      "paddedWidth": 16,
-      "paddedHeight": 16,
-      "erasedPixels": [
-        {
-          "x": 14,
-          "y": 3
-        },
-        {
-          "x": 14,
-          "y": 4
-        },
-        {
-          "x": 14,
-          "y": 5
-        },
-        {
-          "x": 14,
-          "y": 6
-        },
-        {
-          "x": 15,
-          "y": 7
-        },
-        {
-          "x": 15,
-          "y": 8
-        },
-        {
-          "x": 15,
-          "y": 9
-        },
-        {
-          "x": 15,
-          "y": 10
-        },
-        {
-          "x": 15,
-          "y": 11
-        },
-        {
-          "x": 15,
-          "y": 12
-        },
-        {
-          "x": 14,
-          "y": 10
-        },
-        {
-          "x": 14,
-          "y": 9
-        },
-        {
-          "x": 14,
-          "y": 8
-        },
-        {
-          "x": 14,
-          "y": 7
-        },
-        {
-          "x": 15,
-          "y": 5
-        },
-        {
-          "x": 15,
-          "y": 6
-        },
-        {
-          "x": 15,
-          "y": 4
-        },
-        {
-          "x": 15,
-          "y": 3
-        },
-        {
-          "x": 15,
-          "y": 2
-        },
-        {
-          "x": 14,
-          "y": 11
-        }
-      ]
-    },
-    {
-      "id": "ASSET_78",
-      "x": 192,
-      "y": 360,
-      "width": 16,
-      "height": 15,
-      "paddedX": 192,
-      "paddedY": 359,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_79",
-      "x": 224,
-      "y": 360,
-      "width": 16,
-      "height": 15,
-      "paddedX": 224,
-      "paddedY": 359,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_83",
-      "x": 2,
-      "y": 365,
-      "width": 11,
-      "height": 11,
-      "paddedX": 0,
-      "paddedY": 360,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_84",
-      "x": 18,
-      "y": 365,
-      "width": 11,
-      "height": 11,
-      "paddedX": 16,
-      "paddedY": 360,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_87",
-      "x": 66,
-      "y": 365,
-      "width": 11,
-      "height": 11,
-      "paddedX": 64,
-      "paddedY": 360,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_74",
-      "x": 129,
-      "y": 360,
-      "width": 14,
-      "height": 16,
-      "paddedX": 128,
-      "paddedY": 360,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_75",
-      "x": 144,
-      "y": 360,
-      "width": 7,
-      "height": 16,
-      "paddedX": 128,
-      "paddedY": 360,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_76",
-      "x": 161,
-      "y": 360,
-      "width": 14,
-      "height": 16,
-      "paddedX": 160,
-      "paddedY": 360,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_77",
-      "x": 176,
-      "y": 360,
-      "width": 7,
-      "height": 16,
-      "paddedX": 160,
-      "paddedY": 360,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_80",
-      "x": 80,
-      "y": 363,
-      "width": 15,
-      "height": 15,
-      "paddedX": 80,
-      "paddedY": 362,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_81",
-      "x": 97,
-      "y": 363,
-      "width": 14,
-      "height": 15,
-      "paddedX": 96,
-      "paddedY": 362,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_82",
-      "x": 113,
-      "y": 363,
-      "width": 14,
-      "height": 15,
-      "paddedX": 112,
-      "paddedY": 362,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_90",
-      "x": 195,
-      "y": 377,
-      "width": 10,
-      "height": 5,
-      "paddedX": 192,
-      "paddedY": 352,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_92",
-      "x": 227,
-      "y": 377,
-      "width": 10,
-      "height": 5,
-      "paddedX": 224,
-      "paddedY": 352,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_94",
-      "x": 131,
-      "y": 378,
-      "width": 10,
-      "height": 5,
-      "paddedX": 128,
-      "paddedY": 353,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_95",
-      "x": 143,
-      "y": 378,
-      "width": 4,
-      "height": 5,
-      "paddedX": 160,
-      "paddedY": 353,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_98",
-      "x": 160,
-      "y": 385,
-      "width": 13,
-      "height": 17,
-      "paddedX": 159,
-      "paddedY": 370,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 4,
-          "y": 12
-        },
-        {
-          "x": 5,
-          "y": 12
-        },
-        {
-          "x": 6,
-          "y": 12
-        },
-        {
-          "x": 7,
-          "y": 12
-        },
-        {
-          "x": 8,
-          "y": 12
-        },
-        {
-          "x": 9,
-          "y": 12
-        },
-        {
-          "x": 10,
-          "y": 12
-        },
-        {
-          "x": 11,
-          "y": 12
-        },
-        {
-          "x": 12,
-          "y": 12
-        },
-        {
-          "x": 13,
-          "y": 12
-        },
-        {
-          "x": 14,
-          "y": 11
-        },
-        {
-          "x": 14,
-          "y": 10
-        },
-        {
-          "x": 14,
-          "y": 9
-        },
-        {
-          "x": 13,
-          "y": 10
-        },
-        {
-          "x": 13,
-          "y": 11
-        },
-        {
-          "x": 12,
-          "y": 11
-        },
-        {
-          "x": 12,
-          "y": 10
-        },
-        {
-          "x": 13,
-          "y": 9
-        },
-        {
-          "x": 11,
-          "y": 11
-        },
-        {
-          "x": 10,
-          "y": 11
-        },
-        {
-          "x": 10,
-          "y": 10
-        },
-        {
-          "x": 11,
-          "y": 9
-        },
-        {
-          "x": 12,
-          "y": 8
-        },
-        {
-          "x": 13,
-          "y": 8
-        },
-        {
-          "x": 12,
-          "y": 9
-        },
-        {
-          "x": 11,
-          "y": 10
-        },
-        {
-          "x": 9,
-          "y": 11
-        },
-        {
-          "x": 8,
-          "y": 11
-        },
-        {
-          "x": 9,
-          "y": 10
-        },
-        {
-          "x": 10,
-          "y": 9
-        },
-        {
-          "x": 8,
-          "y": 10
-        },
-        {
-          "x": 7,
-          "y": 11
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 6,
-          "y": 10
-        },
-        {
-          "x": 7,
-          "y": 10
-        },
-        {
-          "x": 8,
-          "y": 9
-        },
-        {
-          "x": 9,
-          "y": 9
-        },
-        {
-          "x": 5,
-          "y": 11
-        },
-        {
-          "x": 4,
-          "y": 11
-        },
-        {
-          "x": 3,
-          "y": 11
-        },
-        {
-          "x": 3,
-          "y": 10
-        },
-        {
-          "x": 4,
-          "y": 9
-        },
-        {
-          "x": 5,
-          "y": 9
-        },
-        {
-          "x": 5,
-          "y": 8
-        },
-        {
-          "x": 6,
-          "y": 8
-        },
-        {
-          "x": 6,
-          "y": 9
-        },
-        {
-          "x": 4,
-          "y": 8
-        },
-        {
-          "x": 5,
-          "y": 10
-        },
-        {
-          "x": 4,
-          "y": 7
-        },
-        {
-          "x": 7,
-          "y": 9
-        },
-        {
-          "x": 3,
-          "y": 9
-        },
-        {
-          "x": 8,
-          "y": 8
-        },
-        {
-          "x": 9,
-          "y": 8
-        },
-        {
-          "x": 10,
-          "y": 8
-        },
-        {
-          "x": 11,
-          "y": 8
-        },
-        {
-          "x": 7,
-          "y": 8
-        },
-        {
-          "x": 4,
-          "y": 10
-        },
-        {
-          "x": 8,
-          "y": 7
-        },
-        {
-          "x": 9,
-          "y": 7
-        },
-        {
-          "x": 9,
-          "y": 6
-        },
-        {
-          "x": 8,
-          "y": 6
-        },
-        {
-          "x": 7,
-          "y": 7
-        },
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 5,
-          "y": 7
-        },
-        {
-          "x": 3,
-          "y": 8
-        },
-        {
-          "x": 7,
-          "y": 6
-        },
-        {
-          "x": 7,
-          "y": 5
-        },
-        {
-          "x": 6,
-          "y": 5
-        },
-        {
-          "x": 8,
-          "y": 5
-        },
-        {
-          "x": 9,
-          "y": 5
-        },
-        {
-          "x": 10,
-          "y": 6
-        },
-        {
-          "x": 11,
-          "y": 6
-        },
-        {
-          "x": 10,
-          "y": 5
-        },
-        {
-          "x": 5,
-          "y": 5
-        },
-        {
-          "x": 4,
-          "y": 5
-        },
-        {
-          "x": 3,
-          "y": 5
-        },
-        {
-          "x": 3,
-          "y": 6
-        },
-        {
-          "x": 4,
-          "y": 6
-        },
-        {
-          "x": 5,
-          "y": 6
-        },
-        {
-          "x": 6,
-          "y": 6
-        },
-        {
-          "x": 11,
-          "y": 5
-        },
-        {
-          "x": 12,
-          "y": 6
-        },
-        {
-          "x": 12,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 4
-        },
-        {
-          "x": 6,
-          "y": 4
-        },
-        {
-          "x": 7,
-          "y": 4
-        },
-        {
-          "x": 8,
-          "y": 4
-        },
-        {
-          "x": 9,
-          "y": 4
-        },
-        {
-          "x": 10,
-          "y": 4
-        },
-        {
-          "x": 11,
-          "y": 4
-        },
-        {
-          "x": 12,
-          "y": 4
-        },
-        {
-          "x": 13,
-          "y": 4
-        },
-        {
-          "x": 14,
-          "y": 4
-        },
-        {
-          "x": 13,
-          "y": 3
-        },
-        {
-          "x": 14,
-          "y": 3
-        },
-        {
-          "x": 15,
-          "y": 3
-        },
-        {
-          "x": 12,
-          "y": 3
-        },
-        {
-          "x": 11,
-          "y": 3
-        },
-        {
-          "x": 10,
-          "y": 3
-        },
-        {
-          "x": 9,
-          "y": 3
-        },
-        {
-          "x": 8,
-          "y": 3
-        },
-        {
-          "x": 7,
-          "y": 3
-        },
-        {
-          "x": 6,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 6,
-          "y": 2
-        },
-        {
-          "x": 7,
-          "y": 2
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 8,
-          "y": 2
-        },
-        {
-          "x": 9,
-          "y": 2
-        },
-        {
-          "x": 10,
-          "y": 2
-        },
-        {
-          "x": 11,
-          "y": 2
-        },
-        {
-          "x": 12,
-          "y": 2
-        },
-        {
-          "x": 13,
-          "y": 2
-        },
-        {
-          "x": 14,
-          "y": 2
-        },
-        {
-          "x": 15,
-          "y": 2
-        },
-        {
-          "x": 10,
-          "y": 1
-        },
-        {
-          "x": 9,
-          "y": 1
-        },
-        {
-          "x": 8,
-          "y": 1
-        },
-        {
-          "x": 7,
-          "y": 1
-        },
-        {
-          "x": 11,
-          "y": 1
-        },
-        {
-          "x": 12,
-          "y": 1
-        },
-        {
-          "x": 13,
-          "y": 1
-        },
-        {
-          "x": 14,
-          "y": 1
-        },
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 14,
-          "y": 0
-        },
-        {
-          "x": 13,
-          "y": 0
-        },
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 15,
-          "y": 0
-        },
-        {
-          "x": 14,
-          "y": 5
-        },
-        {
-          "x": 14,
-          "y": 6
-        },
-        {
-          "x": 13,
-          "y": 6
-        },
-        {
-          "x": 13,
-          "y": 7
-        },
-        {
-          "x": 13,
-          "y": 5
-        },
-        {
-          "x": 12,
-          "y": 7
-        },
-        {
-          "x": 11,
-          "y": 7
-        },
-        {
-          "x": 10,
-          "y": 7
-        },
-        {
-          "x": 5,
-          "y": 13
-        },
-        {
-          "x": 6,
-          "y": 13
-        },
-        {
-          "x": 7,
-          "y": 13
-        },
-        {
-          "x": 8,
-          "y": 13
-        },
-        {
-          "x": 9,
-          "y": 13
-        },
-        {
-          "x": 10,
-          "y": 13
-        },
-        {
-          "x": 11,
-          "y": 13
-        },
-        {
-          "x": 9,
-          "y": 14
-        },
-        {
-          "x": 8,
-          "y": 14
-        },
-        {
-          "x": 7,
-          "y": 14
-        },
-        {
-          "x": 6,
-          "y": 14
-        },
-        {
-          "x": 5,
-          "y": 14
-        },
-        {
-          "x": 4,
-          "y": 13
-        },
-        {
-          "x": 3,
-          "y": 13
-        },
-        {
-          "x": 2,
-          "y": 13
-        },
-        {
-          "x": 2,
-          "y": 12
-        },
-        {
-          "x": 3,
-          "y": 12
-        },
-        {
-          "x": 14,
-          "y": 12
-        },
-        {
-          "x": 15,
-          "y": 12
-        },
-        {
-          "x": 15,
-          "y": 11
-        },
-        {
-          "x": 15,
-          "y": 10
-        },
-        {
-          "x": 15,
-          "y": 9
-        },
-        {
-          "x": 14,
-          "y": 8
-        },
-        {
-          "x": 15,
-          "y": 8
-        },
-        {
-          "x": 13,
-          "y": 13
-        },
-        {
-          "x": 12,
-          "y": 13
-        },
-        {
-          "x": 12,
-          "y": 14
-        },
-        {
-          "x": 11,
-          "y": 14
-        }
-      ]
-    },
-    {
-      "id": "ASSET_99",
-      "x": 179,
-      "y": 385,
-      "width": 13,
-      "height": 17,
-      "paddedX": 177,
-      "paddedY": 370,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 2,
-          "y": 9
-        },
-        {
-          "x": 1,
-          "y": 10
-        },
-        {
-          "x": 1,
-          "y": 11
-        },
-        {
-          "x": 0,
-          "y": 11
-        },
-        {
-          "x": 0,
-          "y": 12
-        },
-        {
-          "x": 0,
-          "y": 10
-        },
-        {
-          "x": 0,
-          "y": 9
-        },
-        {
-          "x": 0,
-          "y": 8
-        },
-        {
-          "x": 1,
-          "y": 7
-        },
-        {
-          "x": 1,
-          "y": 8
-        },
-        {
-          "x": 1,
-          "y": 9
-        },
-        {
-          "x": 1,
-          "y": 12
-        },
-        {
-          "x": 0,
-          "y": 7
-        },
-        {
-          "x": 0,
-          "y": 6
-        },
-        {
-          "x": 0,
-          "y": 5
-        },
-        {
-          "x": 1,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 6
-        },
-        {
-          "x": 3,
-          "y": 6
-        },
-        {
-          "x": 4,
-          "y": 6
-        },
-        {
-          "x": 5,
-          "y": 6
-        },
-        {
-          "x": 5,
-          "y": 5
-        },
-        {
-          "x": 5,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 5
-        },
-        {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 1,
-          "y": 6
-        },
-        {
-          "x": 4,
-          "y": 5
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 2,
-          "y": 3
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 2
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 1
-        },
-        {
-          "x": 9,
-          "y": 1
-        },
-        {
-          "x": 10,
-          "y": 1
-        },
-        {
-          "x": 11,
-          "y": 1
-        },
-        {
-          "x": 12,
-          "y": 1
-        },
-        {
-          "x": 13,
-          "y": 1
-        },
-        {
-          "x": 14,
-          "y": 1
-        },
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 15,
-          "y": 2
-        },
-        {
-          "x": 15,
-          "y": 3
-        },
-        {
-          "x": 15,
-          "y": 0
-        },
-        {
-          "x": 14,
-          "y": 0
-        },
-        {
-          "x": 13,
-          "y": 0
-        },
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        }
-      ]
-    },
-    {
-      "id": "ASSET_100",
-      "x": 243,
-      "y": 388,
-      "width": 9,
-      "height": 8,
-      "paddedX": 240,
-      "paddedY": 384,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_107",
-      "x": 130,
-      "y": 397,
-      "width": 12,
-      "height": 17,
-      "paddedX": 128,
-      "paddedY": 384,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 7,
-          "y": 1
-        },
-        {
-          "x": 8,
-          "y": 1
-        },
-        {
-          "x": 9,
-          "y": 1
-        },
-        {
-          "x": 10,
-          "y": 1
-        },
-        {
-          "x": 11,
-          "y": 1
-        },
-        {
-          "x": 12,
-          "y": 1
-        },
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 13,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        }
-      ]
-    },
-    {
-      "id": "ASSET_108",
-      "x": 146,
-      "y": 397,
-      "width": 12,
-      "height": 17,
-      "paddedX": 144,
-      "paddedY": 384,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 0
-        }
-      ]
-    },
-    {
-      "id": "ASSET_110",
-      "x": 228,
-      "y": 398,
-      "width": 8,
-      "height": 9,
-      "paddedX": 224,
-      "paddedY": 394,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_109",
-      "x": 202,
-      "y": 398,
-      "width": 12,
-      "height": 10,
-      "paddedX": 200,
-      "paddedY": 395,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_101",
-      "x": 1,
-      "y": 395,
-      "width": 30,
-      "height": 16,
-      "paddedX": 0,
-      "paddedY": 395,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_102",
-      "x": 33,
-      "y": 395,
-      "width": 30,
-      "height": 16,
-      "paddedX": 32,
-      "paddedY": 395,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_103",
-      "x": 65,
-      "y": 395,
-      "width": 14,
-      "height": 16,
-      "paddedX": 64,
-      "paddedY": 395,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_104",
-      "x": 81,
-      "y": 395,
-      "width": 14,
-      "height": 16,
-      "paddedX": 80,
-      "paddedY": 395,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_105",
-      "x": 97,
-      "y": 395,
-      "width": 14,
-      "height": 16,
-      "paddedX": 96,
-      "paddedY": 395,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_106",
-      "x": 113,
-      "y": 395,
-      "width": 14,
-      "height": 16,
-      "paddedX": 112,
-      "paddedY": 395,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_111",
-      "x": 244,
-      "y": 404,
-      "width": 9,
-      "height": 8,
-      "paddedX": 241,
-      "paddedY": 400,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_122",
-      "x": 5,
-      "y": 426,
-      "width": 22,
-      "height": 17,
-      "paddedX": 0,
-      "paddedY": 418,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_118",
-      "x": 35,
-      "y": 425,
-      "width": 26,
-      "height": 19,
-      "paddedX": 32,
-      "paddedY": 418,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_119",
-      "x": 67,
-      "y": 425,
-      "width": 26,
-      "height": 19,
-      "paddedX": 64,
-      "paddedY": 418,
-      "paddedWidth": 32,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 5,
-          "y": 31
-        },
-        {
-          "x": 6,
-          "y": 31
-        },
-        {
-          "x": 7,
-          "y": 31
-        },
-        {
-          "x": 8,
-          "y": 31
-        },
-        {
-          "x": 9,
-          "y": 31
-        },
-        {
-          "x": 10,
-          "y": 31
-        },
-        {
-          "x": 11,
-          "y": 31
-        },
-        {
-          "x": 12,
-          "y": 31
-        },
-        {
-          "x": 13,
-          "y": 31
-        },
-        {
-          "x": 14,
-          "y": 31
-        },
-        {
-          "x": 15,
-          "y": 31
-        },
-        {
-          "x": 16,
-          "y": 31
-        },
-        {
-          "x": 17,
-          "y": 31
-        },
-        {
-          "x": 18,
-          "y": 31
-        },
-        {
-          "x": 19,
-          "y": 31
-        },
-        {
-          "x": 20,
-          "y": 31
-        },
-        {
-          "x": 21,
-          "y": 31
-        },
-        {
-          "x": 22,
-          "y": 31
-        },
-        {
-          "x": 23,
-          "y": 31
-        },
-        {
-          "x": 24,
-          "y": 31
-        },
-        {
-          "x": 25,
-          "y": 31
-        },
-        {
-          "x": 26,
-          "y": 31
-        },
-        {
-          "x": 27,
-          "y": 31
-        },
-        {
-          "x": 28,
-          "y": 31
-        },
-        {
-          "x": 4,
-          "y": 31
-        }
-      ]
-    },
-    {
-      "id": "ASSET_120",
-      "x": 97,
-      "y": 425,
-      "width": 30,
-      "height": 20,
-      "paddedX": 96,
-      "paddedY": 419,
-      "paddedWidth": 32,
-      "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 10,
-          "y": 30
-        },
-        {
-          "x": 10,
-          "y": 31
-        },
-        {
-          "x": 9,
-          "y": 31
-        },
-        {
-          "x": 9,
-          "y": 30
-        },
-        {
-          "x": 11,
-          "y": 30
-        },
-        {
-          "x": 12,
-          "y": 30
-        },
-        {
-          "x": 11,
-          "y": 31
-        },
-        {
-          "x": 12,
-          "y": 31
-        },
-        {
-          "x": 13,
-          "y": 31
-        },
-        {
-          "x": 14,
-          "y": 31
-        },
-        {
-          "x": 15,
-          "y": 31
-        },
-        {
-          "x": 16,
-          "y": 31
-        },
-        {
-          "x": 17,
-          "y": 30
-        },
-        {
-          "x": 18,
-          "y": 30
-        },
-        {
-          "x": 19,
-          "y": 30
-        },
-        {
-          "x": 20,
-          "y": 30
-        },
-        {
-          "x": 21,
-          "y": 30
-        },
-        {
-          "x": 22,
-          "y": 30
-        },
-        {
-          "x": 23,
-          "y": 30
-        },
-        {
-          "x": 24,
-          "y": 31
-        },
-        {
-          "x": 23,
-          "y": 31
-        },
-        {
-          "x": 22,
-          "y": 31
-        },
-        {
-          "x": 21,
-          "y": 31
-        },
-        {
-          "x": 20,
-          "y": 31
-        },
-        {
-          "x": 19,
-          "y": 31
-        },
-        {
-          "x": 18,
-          "y": 31
-        },
-        {
-          "x": 17,
-          "y": 31
-        }
-      ]
-    },
-    {
-      "id": "ASSET_114",
-      "x": 193,
-      "y": 418,
-      "width": 14,
-      "height": 14,
-      "paddedX": 192,
-      "paddedY": 416,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_112",
-      "x": 208,
-      "y": 416,
-      "width": 7,
-      "height": 16,
-      "paddedX": 192,
-      "paddedY": 416,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_121",
-      "x": 152,
-      "y": 425,
-      "width": 16,
-      "height": 15,
-      "paddedX": 152,
-      "paddedY": 424,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_123",
-      "x": 135,
-      "y": 426,
-      "width": 7,
-      "height": 16,
-      "paddedX": 131,
-      "paddedY": 426,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_125",
-      "x": 183,
-      "y": 432,
-      "width": 18,
-      "height": 15,
-      "paddedX": 176,
-      "paddedY": 431,
+      "id": "ASSET_Modern_Office_Singles_190",
+      "paddedX": 5,
+      "paddedY": 27,
       "paddedWidth": 32,
       "paddedHeight": 16,
-      "erasedPixels": [
-        {
-          "x": 20,
-          "y": 1
-        },
-        {
-          "x": 21,
-          "y": 1
-        },
-        {
-          "x": 22,
-          "y": 1
-        },
-        {
-          "x": 23,
-          "y": 1
-        },
-        {
-          "x": 24,
-          "y": 1
-        },
-        {
-          "x": 25,
-          "y": 1
-        },
-        {
-          "x": 26,
-          "y": 1
-        },
-        {
-          "x": 27,
-          "y": 1
-        },
-        {
-          "x": 27,
-          "y": 0
-        },
-        {
-          "x": 26,
-          "y": 0
-        },
-        {
-          "x": 25,
-          "y": 0
-        },
-        {
-          "x": 24,
-          "y": 0
-        },
-        {
-          "x": 23,
-          "y": 0
-        },
-        {
-          "x": 22,
-          "y": 0
-        },
-        {
-          "x": 21,
-          "y": 0
-        },
-        {
-          "x": 20,
-          "y": 0
-        }
-      ]
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_190.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_126",
-      "x": 216,
-      "y": 432,
-      "width": 16,
-      "height": 15,
-      "paddedX": 216,
-      "paddedY": 431,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_127",
-      "x": 242,
-      "y": 434,
-      "width": 13,
-      "height": 14,
-      "paddedX": 241,
-      "paddedY": 432,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_133_0_0",
-      "x": 51,
-      "y": 455,
-      "width": 10,
-      "height": 18,
-      "paddedX": 48,
-      "paddedY": 443,
-      "paddedWidth": 16,
-      "paddedHeight": 32,
-      "discard": false,
-      "erasedPixels": [
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        }
-      ],
-      "splitMarker": true
-    },
-    {
-      "id": "ASSET_133_1_0",
-      "x": 51,
-      "y": 455,
-      "width": 10,
-      "height": 18,
-      "paddedX": 49,
-      "paddedY": 463,
-      "paddedWidth": 16,
+      "id": "ASSET_Modern_Office_Singles_191",
+      "paddedX": 5,
+      "paddedY": 32,
+      "paddedWidth": 32,
       "paddedHeight": 16,
-      "discard": false,
-      "splitMarker": true
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_191.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_134",
-      "x": 1,
-      "y": 457,
-      "width": 30,
-      "height": 20,
-      "paddedX": 0,
-      "paddedY": 451,
+      "id": "ASSET_Modern_Office_Singles_192",
+      "paddedX": 5,
+      "paddedY": 32,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_192.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_193",
+      "paddedX": 5,
+      "paddedY": 28,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_193.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_194",
+      "paddedX": 5,
+      "paddedY": 12,
       "paddedWidth": 32,
       "paddedHeight": 32,
-      "erasedPixels": [
-        {
-          "x": 4,
-          "y": 31
-        },
-        {
-          "x": 5,
-          "y": 31
-        },
-        {
-          "x": 6,
-          "y": 31
-        },
-        {
-          "x": 7,
-          "y": 31
-        },
-        {
-          "x": 8,
-          "y": 31
-        },
-        {
-          "x": 9,
-          "y": 31
-        },
-        {
-          "x": 10,
-          "y": 31
-        },
-        {
-          "x": 11,
-          "y": 31
-        },
-        {
-          "x": 12,
-          "y": 31
-        },
-        {
-          "x": 13,
-          "y": 31
-        },
-        {
-          "x": 14,
-          "y": 31
-        },
-        {
-          "x": 15,
-          "y": 31
-        },
-        {
-          "x": 16,
-          "y": 31
-        },
-        {
-          "x": 17,
-          "y": 31
-        },
-        {
-          "x": 18,
-          "y": 31
-        },
-        {
-          "x": 19,
-          "y": 31
-        },
-        {
-          "x": 20,
-          "y": 31
-        },
-        {
-          "x": 21,
-          "y": 31
-        },
-        {
-          "x": 22,
-          "y": 31
-        },
-        {
-          "x": 23,
-          "y": 31
-        },
-        {
-          "x": 24,
-          "y": 31
-        },
-        {
-          "x": 25,
-          "y": 31
-        },
-        {
-          "x": 26,
-          "y": 31
-        },
-        {
-          "x": 27,
-          "y": 31
-        }
-      ]
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_194.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_128",
-      "x": 66,
-      "y": 449,
-      "width": 13,
-      "height": 15,
-      "paddedX": 65,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_129",
-      "x": 82,
-      "y": 449,
-      "width": 13,
-      "height": 15,
-      "paddedX": 81,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_130",
-      "x": 99,
-      "y": 449,
-      "width": 11,
-      "height": 15,
-      "paddedX": 97,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_131",
-      "x": 115,
-      "y": 449,
-      "width": 11,
-      "height": 15,
-      "paddedX": 113,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_138",
-      "x": 130,
-      "y": 459,
-      "width": 13,
-      "height": 21,
-      "paddedX": 129,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_135",
-      "x": 146,
-      "y": 458,
-      "width": 13,
-      "height": 22,
-      "paddedX": 145,
-      "paddedY": 448,
-      "paddedWidth": 16,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_136",
-      "x": 163,
-      "y": 458,
-      "width": 26,
-      "height": 22,
-      "paddedX": 160,
-      "paddedY": 448,
+      "id": "ASSET_Modern_Office_Singles_195",
+      "paddedX": 5,
+      "paddedY": -5,
       "paddedWidth": 32,
-      "paddedHeight": 32
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_195.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_137",
-      "x": 195,
-      "y": 458,
-      "width": 26,
-      "height": 22,
-      "paddedX": 192,
-      "paddedY": 448,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_139",
-      "x": 227,
-      "y": 460,
-      "width": 26,
-      "height": 20,
-      "paddedX": 224,
-      "paddedY": 448,
-      "paddedWidth": 32,
-      "paddedHeight": 32
-    },
-    {
-      "id": "ASSET_132",
-      "x": 35,
-      "y": 455,
-      "width": 10,
-      "height": 16,
-      "paddedX": 32,
-      "paddedY": 455,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_140",
-      "x": 66,
-      "y": 465,
-      "width": 13,
-      "height": 15,
-      "paddedX": 65,
-      "paddedY": 464,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_141",
-      "x": 82,
-      "y": 465,
-      "width": 13,
-      "height": 15,
-      "paddedX": 81,
-      "paddedY": 464,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_142",
-      "x": 99,
-      "y": 465,
-      "width": 11,
-      "height": 15,
-      "paddedX": 97,
-      "paddedY": 464,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_143",
-      "x": 115,
-      "y": 465,
-      "width": 11,
-      "height": 15,
-      "paddedX": 113,
-      "paddedY": 464,
-      "paddedWidth": 16,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_144",
-      "x": 5,
-      "y": 482,
-      "width": 22,
-      "height": 12,
+      "id": "ASSET_Modern_Office_Singles_196",
       "paddedX": 0,
-      "paddedY": 478,
-      "paddedWidth": 32,
-      "paddedHeight": 16
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_196.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_145",
-      "x": 37,
-      "y": 482,
-      "width": 22,
-      "height": 12,
-      "paddedX": 32,
-      "paddedY": 478,
-      "paddedWidth": 32,
-      "paddedHeight": 16
+      "id": "ASSET_Modern_Office_Singles_197",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_197.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_146",
-      "x": 69,
-      "y": 482,
-      "width": 22,
-      "height": 12,
-      "paddedX": 64,
-      "paddedY": 478,
-      "paddedWidth": 32,
-      "paddedHeight": 16,
-      "erasedPixels": [
-        {
-          "x": 5,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 2
-        },
-        {
-          "x": 7,
-          "y": 2
-        },
-        {
-          "x": 8,
-          "y": 2
-        },
-        {
-          "x": 9,
-          "y": 2
-        },
-        {
-          "x": 10,
-          "y": 2
-        },
-        {
-          "x": 11,
-          "y": 2
-        },
-        {
-          "x": 12,
-          "y": 2
-        },
-        {
-          "x": 12,
-          "y": 1
-        },
-        {
-          "x": 13,
-          "y": 1
-        },
-        {
-          "x": 13,
-          "y": 0
-        },
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 1
-        },
-        {
-          "x": 9,
-          "y": 1
-        },
-        {
-          "x": 8,
-          "y": 1
-        },
-        {
-          "x": 7,
-          "y": 1
-        },
-        {
-          "x": 6,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 1
-        },
-        {
-          "x": 4,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 5,
-          "y": 2
-        },
-        {
-          "x": 14,
-          "y": 1
-        },
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 16,
-          "y": 1
-        },
-        {
-          "x": 17,
-          "y": 1
-        },
-        {
-          "x": 18,
-          "y": 0
-        },
-        {
-          "x": 19,
-          "y": 0
-        },
-        {
-          "x": 20,
-          "y": 0
-        },
-        {
-          "x": 21,
-          "y": 0
-        },
-        {
-          "x": 22,
-          "y": 0
-        },
-        {
-          "x": 21,
-          "y": 1
-        },
-        {
-          "x": 20,
-          "y": 1
-        },
-        {
-          "x": 22,
-          "y": 1
-        },
-        {
-          "x": 23,
-          "y": 1
-        },
-        {
-          "x": 24,
-          "y": 1
-        },
-        {
-          "x": 25,
-          "y": 1
-        },
-        {
-          "x": 26,
-          "y": 1
-        },
-        {
-          "x": 25,
-          "y": 0
-        },
-        {
-          "x": 24,
-          "y": 0
-        },
-        {
-          "x": 23,
-          "y": 0
-        },
-        {
-          "x": 27,
-          "y": 1
-        },
-        {
-          "x": 28,
-          "y": 1
-        },
-        {
-          "x": 29,
-          "y": 1
-        },
-        {
-          "x": 28,
-          "y": 0
-        },
-        {
-          "x": 27,
-          "y": 0
-        },
-        {
-          "x": 26,
-          "y": 0
-        }
-      ]
+      "id": "ASSET_Modern_Office_Singles_198",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_198.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_147",
-      "x": 108,
-      "y": 482,
-      "width": 16,
-      "height": 13,
-      "paddedX": 108,
-      "paddedY": 479,
+      "id": "ASSET_Modern_Office_Singles_199",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_199.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_200",
+      "paddedX": 1,
+      "paddedY": 12,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_200.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_201",
+      "paddedX": 2,
+      "paddedY": -6,
+      "paddedWidth": 32,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_201.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_202",
+      "paddedX": -1,
+      "paddedY": -6,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_202.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_203",
+      "paddedX": 2,
+      "paddedY": -6,
+      "paddedWidth": 32,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_203.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_204",
+      "paddedX": -1,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_204.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_205",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_205.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_206",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_206.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_207",
+      "paddedX": 7,
+      "paddedY": 0,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_207.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_208",
+      "paddedX": 0,
+      "paddedY": 5,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_208.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_209",
+      "paddedX": 0,
+      "paddedY": 0,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_209.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_210",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_210.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_211",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_211.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_212",
+      "paddedX": -2,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_212.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_213",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_213.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_214",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_214.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_215",
+      "paddedX": -2,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_215.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_216",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_216.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_217",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_217.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_218",
+      "paddedX": -2,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_218.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_219",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_219.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_220",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_220.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_221",
+      "paddedX": -2,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_221.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_222",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_222.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_223",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_223.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_224",
+      "paddedX": -2,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_224.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_225",
+      "paddedX": 3,
+      "paddedY": 9,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_225.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_226",
+      "paddedX": -3,
+      "paddedY": 11,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_226.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_227",
+      "paddedX": 0,
+      "paddedY": 9,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_227.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_228",
+      "paddedX": -3,
+      "paddedY": 25,
       "paddedWidth": 16,
       "paddedHeight": 16,
-      "erasedPixels": [
-        {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 0
-        },
-        {
-          "x": 6,
-          "y": 0
-        },
-        {
-          "x": 7,
-          "y": 0
-        },
-        {
-          "x": 8,
-          "y": 0
-        },
-        {
-          "x": 9,
-          "y": 0
-        },
-        {
-          "x": 10,
-          "y": 0
-        },
-        {
-          "x": 11,
-          "y": 0
-        },
-        {
-          "x": 12,
-          "y": 0
-        },
-        {
-          "x": 13,
-          "y": 0
-        },
-        {
-          "x": 14,
-          "y": 0
-        },
-        {
-          "x": 15,
-          "y": 0
-        }
-      ]
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_228.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_148",
-      "x": 5,
-      "y": 498,
-      "width": 22,
-      "height": 12,
-      "paddedX": 0,
-      "paddedY": 494,
+      "id": "ASSET_Modern_Office_Singles_229",
+      "paddedX": 3,
+      "paddedY": 8,
       "paddedWidth": 32,
-      "paddedHeight": 16
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_229.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     },
     {
-      "id": "ASSET_149",
-      "x": 37,
-      "y": 498,
-      "width": 22,
-      "height": 12,
-      "paddedX": 32,
-      "paddedY": 494,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_150",
-      "x": 69,
-      "y": 498,
-      "width": 22,
-      "height": 12,
-      "paddedX": 64,
-      "paddedY": 494,
-      "paddedWidth": 32,
-      "paddedHeight": 16
-    },
-    {
-      "id": "ASSET_151",
-      "x": 108,
-      "y": 498,
-      "width": 16,
-      "height": 13,
-      "paddedX": 108,
-      "paddedY": 495,
+      "id": "ASSET_Modern_Office_Singles_230",
+      "paddedX": -3,
+      "paddedY": 10,
       "paddedWidth": 16,
-      "paddedHeight": 16
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_230.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_231",
+      "paddedX": 0,
+      "paddedY": 8,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_231.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_232",
+      "paddedX": -1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_232.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_233",
+      "paddedX": 2,
+      "paddedY": 8,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_233.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_234",
+      "paddedX": -3,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_234.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_235",
+      "paddedX": 2,
+      "paddedY": 8,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_235.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_236",
+      "paddedX": -3,
+      "paddedY": 8,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_236.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_237",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_237.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_238",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_238.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_239",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_239.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_240",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 32,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_240.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_241",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_241.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_242",
+      "paddedX": -3,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_242.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_243",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_243.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_244",
+      "paddedX": -3,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_244.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_245",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_245.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_246",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_246.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_247",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_247.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_248",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_248.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_249",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_249.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_250",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_250.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_251",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_251.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_252",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_252.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_253",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_253.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_254",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_254.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_255",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_255.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_256",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_256.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_257",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_257.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_258",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_258.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_259",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_259.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_260",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_260.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_261",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_261.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_262",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_262.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_263",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_263.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_264",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_264.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_265",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_265.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_266",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_266.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_267",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_267.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_268",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_268.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_269",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_269.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_270",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_270.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_271",
+      "paddedX": 0,
+      "paddedY": 12,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_271.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_272",
+      "paddedX": -4,
+      "paddedY": 30,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_272.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_273",
+      "paddedX": 1,
+      "paddedY": 24,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_273.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_274",
+      "paddedX": 0,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_274.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_275",
+      "paddedX": 0,
+      "paddedY": -12,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_275.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_276",
+      "paddedX": 0,
+      "paddedY": -12,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_276.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_277",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_277.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_278",
+      "paddedX": 1,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_278.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_279",
+      "paddedX": 1,
+      "paddedY": 25,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_279.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_280",
+      "paddedX": 1,
+      "paddedY": 25,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_280.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_281",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_281.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_282",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_282.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_283",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_283.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_284",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_284.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_285",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_285.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_286",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_286.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_287",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_287.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_288",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_288.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_289",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_289.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_290",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_290.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_291",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_291.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_292",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_292.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_293",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_293.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_294",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_294.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_295",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_295.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_296",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_296.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_297",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_297.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_298",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_298.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_299",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_299.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_300",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_300.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_301",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_301.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_302",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_302.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_303",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_303.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_304",
+      "paddedX": 0,
+      "paddedY": 3,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_304.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_305",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_305.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_306",
+      "paddedX": 0,
+      "paddedY": 11,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_306.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_307",
+      "paddedX": 0,
+      "paddedY": 11,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_307.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_308",
+      "paddedX": 0,
+      "paddedY": 24,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_308.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_309",
+      "paddedX": 1,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_309.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_310",
+      "paddedX": 5,
+      "paddedY": 30,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_310.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_311",
+      "paddedX": 0,
+      "paddedY": -12,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_311.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_312",
+      "paddedX": 0,
+      "paddedY": -12,
+      "paddedWidth": 16,
+      "paddedHeight": 48,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_312.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_313",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_313.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_314",
+      "paddedX": 0,
+      "paddedY": 32,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_314.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_315",
+      "paddedX": 0,
+      "paddedY": 25,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_315.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_316",
+      "paddedX": 0,
+      "paddedY": 25,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_316.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_317",
+      "paddedX": 2,
+      "paddedY": 15,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_317.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_318",
+      "paddedX": 2,
+      "paddedY": 15,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_318.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_319",
+      "paddedX": 2,
+      "paddedY": 15,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_319.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_320",
+      "paddedX": 1,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_320.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_321",
+      "paddedX": 1,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_321.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_322",
+      "paddedX": 1,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_322.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_323",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_323.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_324",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_324.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_325",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_325.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_326",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_326.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_327",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_327.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_328",
+      "paddedX": 0,
+      "paddedY": 7,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_328.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_329",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_329.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_330",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_330.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_331",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_331.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_332",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_332.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_333",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_333.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_334",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_334.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_335",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_335.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_336",
+      "paddedX": 1,
+      "paddedY": 9,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_336.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_337",
+      "paddedX": 1,
+      "paddedY": 26,
+      "paddedWidth": 16,
+      "paddedHeight": 16,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_337.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_338",
+      "paddedX": 0,
+      "paddedY": 16,
+      "paddedWidth": 16,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_338.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
+    },
+    {
+      "id": "ASSET_Modern_Office_Singles_339",
+      "paddedX": 1,
+      "paddedY": 16,
+      "paddedWidth": 32,
+      "paddedHeight": 32,
+      "sourceFile": "/Users/albalize/Downloads/Modern_Office_Revamped_v1.2/4_Modern_Office_singles/16x16/Modern_Office_Singles_339.png",
+      "sourceWidth": 32,
+      "sourceHeight": 48
     }
   ]
 }

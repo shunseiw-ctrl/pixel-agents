@@ -7,15 +7,8 @@ import type {
   Seat,
   TileType as TileTypeVal,
 } from '../types.js';
-import {
-  DEFAULT_COLS,
-  DEFAULT_ROWS,
-  Direction,
-  FurnitureType,
-  TILE_SIZE,
-  TileType,
-} from '../types.js';
-import { getCatalogEntry } from './furnitureCatalog.js';
+import { DEFAULT_COLS, DEFAULT_ROWS, Direction, TILE_SIZE, TileType } from '../types.js';
+import { getCatalogEntry, migrateLayoutFurnitureTypes } from './furnitureCatalog.js';
 
 /** Convert flat tile array from layout into 2D grid */
 export function layoutToTileMap(layout: OfficeLayout): TileTypeVal[][] {
@@ -288,23 +281,23 @@ export function createDefaultLayout(): OfficeLayout {
   }
 
   const furniture: PlacedFurniture[] = [
-    { uid: 'desk-left', type: FurnitureType.DESK, col: 4, row: 3 },
-    { uid: 'desk-right', type: FurnitureType.DESK, col: 13, row: 3 },
-    { uid: 'bookshelf-1', type: FurnitureType.BOOKSHELF, col: 1, row: 5 },
-    { uid: 'plant-left', type: FurnitureType.PLANT, col: 1, row: 1 },
-    { uid: 'cooler-1', type: FurnitureType.COOLER, col: 17, row: 7 },
-    { uid: 'plant-right', type: FurnitureType.PLANT, col: 18, row: 1 },
-    { uid: 'whiteboard-1', type: FurnitureType.WHITEBOARD, col: 15, row: 0 },
+    { uid: 'desk-left', type: 'DESK_WOOD_FRONT', col: 4, row: 3 },
+    { uid: 'desk-right', type: 'DESK_WOOD_FRONT', col: 13, row: 3 },
+    { uid: 'bookshelf-1', type: 'BOOKSHELF_WOOD', col: 1, row: 5 },
+    { uid: 'plant-left', type: 'PLANT_POT_SM', col: 1, row: 1 },
+    { uid: 'cooler-1', type: 'WATER_COOLER', col: 17, row: 7 },
+    { uid: 'plant-right', type: 'PLANT_POT_SM', col: 18, row: 1 },
+    { uid: 'whiteboard-1', type: 'WHITEBOARD_LG', col: 15, row: 0 },
     // Left desk chairs
-    { uid: 'chair-l-top', type: FurnitureType.CHAIR, col: 4, row: 2 },
-    { uid: 'chair-l-bottom', type: FurnitureType.CHAIR, col: 5, row: 5 },
-    { uid: 'chair-l-left', type: FurnitureType.CHAIR, col: 3, row: 4 },
-    { uid: 'chair-l-right', type: FurnitureType.CHAIR, col: 6, row: 3 },
+    { uid: 'chair-l-top', type: 'CHAIR_OFFICE_DARK_FRONT', col: 4, row: 2 },
+    { uid: 'chair-l-bottom', type: 'CHAIR_OFFICE_DARK_FRONT', col: 5, row: 5 },
+    { uid: 'chair-l-left', type: 'CHAIR_OFFICE_DARK_FRONT', col: 3, row: 4 },
+    { uid: 'chair-l-right', type: 'CHAIR_OFFICE_DARK_FRONT', col: 6, row: 3 },
     // Right desk chairs
-    { uid: 'chair-r-top', type: FurnitureType.CHAIR, col: 13, row: 2 },
-    { uid: 'chair-r-bottom', type: FurnitureType.CHAIR, col: 14, row: 5 },
-    { uid: 'chair-r-left', type: FurnitureType.CHAIR, col: 12, row: 4 },
-    { uid: 'chair-r-right', type: FurnitureType.CHAIR, col: 15, row: 3 },
+    { uid: 'chair-r-top', type: 'CHAIR_OFFICE_DARK_FRONT', col: 13, row: 2 },
+    { uid: 'chair-r-bottom', type: 'CHAIR_OFFICE_DARK_FRONT', col: 14, row: 5 },
+    { uid: 'chair-r-left', type: 'CHAIR_OFFICE_DARK_FRONT', col: 12, row: 4 },
+    { uid: 'chair-r-right', type: 'CHAIR_OFFICE_DARK_FRONT', col: 15, row: 3 },
   ];
 
   return { version: 1, cols: DEFAULT_COLS, rows: DEFAULT_ROWS, tiles, tileColors, furniture };
@@ -337,12 +330,14 @@ export function migrateLayoutColors(layout: OfficeLayout): OfficeLayout {
 }
 
 /**
- * Migrate old layouts that use legacy tile types (TILE_FLOOR=1, WOOD_FLOOR=2, CARPET=3, DOORWAY=4)
- * to the new pattern-based system. If tileColors is already present, no migration needed.
+ * Migrate old layouts: legacy tile types → new patterns, legacy furniture types → LimeZu types.
  */
 function migrateLayout(layout: OfficeLayout): OfficeLayout {
+  // Migrate legacy furniture types (desk → DESK_WOOD_FRONT, etc.)
+  migrateLayoutFurnitureTypes(layout.furniture);
+
   if (layout.tileColors && layout.tileColors.length === layout.tiles.length) {
-    return layout; // Already migrated
+    return layout; // Tile colors already migrated
   }
 
   // Check if any tiles use old values (1-4) — these map directly to FLOOR_1-4

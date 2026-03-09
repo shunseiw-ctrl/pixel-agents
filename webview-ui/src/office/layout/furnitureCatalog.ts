@@ -120,6 +120,34 @@ export const FURNITURE_CATALOG: CatalogEntryWithCategory[] = [
   },
 ];
 
+// ── Legacy type migration ────────────────────────────────────────
+// Maps old hand-drawn furniture types → new LimeZu asset IDs (name-based).
+const TYPE_MIGRATION_MAP: Record<string, string> = {
+  desk: 'DESK_WOOD_FRONT',
+  chair: 'CHAIR_OFFICE_DARK_FRONT',
+  bookshelf: 'BOOKSHELF_WOOD',
+  plant: 'PLANT_POT_SM',
+  cooler: 'WATER_COOLER',
+  whiteboard: 'WHITEBOARD_LG',
+  pc: 'MONITOR_FRONT_OFF',
+  lamp: 'DESK_LAMP',
+};
+
+/** Migrate a legacy furniture type to its new LimeZu equivalent. Returns input if no mapping exists. */
+export function migrateFurnitureType(type: string): string {
+  return TYPE_MIGRATION_MAP[type] ?? type;
+}
+
+/** Migrate all furniture types in a PlacedFurniture array. Mutates in place and returns the array. */
+export function migrateLayoutFurnitureTypes(
+  furniture: Array<{ type: string }>,
+): Array<{ type: string }> {
+  for (const item of furniture) {
+    item.type = migrateFurnitureType(item.type);
+  }
+  return furniture;
+}
+
 // ── Rotation groups ──────────────────────────────────────────────
 // Flexible rotation: supports 2+ orientations (not just all 4)
 interface RotationGroup {
@@ -315,12 +343,26 @@ export function buildDynamicCatalog(assets: LoadedAssetData): boolean {
 }
 
 export function getCatalogEntry(type: string): CatalogEntryWithCategory | undefined {
-  // Check internal catalog first (includes all variants, e.g., non-front rotations)
+  // 1. Check internal catalog first (includes all variants, e.g., non-front rotations)
   if (internalCatalog) {
-    return internalCatalog.find((e) => e.type === type);
+    const found = internalCatalog.find((e) => e.type === type);
+    if (found) return found;
+    // 2. Try migrating legacy type → new LimeZu type
+    const migrated = TYPE_MIGRATION_MAP[type];
+    if (migrated) {
+      return internalCatalog.find((e) => e.type === migrated);
+    }
   }
+  // 3. Fall back to dynamic/hardcoded catalog
   const catalog = dynamicCatalog || FURNITURE_CATALOG;
-  return catalog.find((e) => e.type === type);
+  const found = catalog.find((e) => e.type === type);
+  if (found) return found;
+  // 4. Try migration on fallback catalog too
+  const migrated = TYPE_MIGRATION_MAP[type];
+  if (migrated) {
+    return catalog.find((e) => e.type === migrated);
+  }
+  return undefined;
 }
 
 export function getCatalogByCategory(category: FurnitureCategory): CatalogEntryWithCategory[] {
