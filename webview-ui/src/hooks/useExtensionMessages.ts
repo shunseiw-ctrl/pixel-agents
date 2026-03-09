@@ -431,6 +431,7 @@ export function useExtensionMessages(
         if (msg.thoughtEnabled !== undefined) {
           onThoughtEnabledLoaded?.(msg.thoughtEnabled as boolean);
         }
+        // Notification settings are handled by SettingsModal directly via vscode.postMessage
       } else if (msg.type === 'furnitureAssetsLoaded') {
         try {
           const catalog = msg.catalog as FurnitureAsset[];

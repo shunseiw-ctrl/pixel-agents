@@ -24,6 +24,10 @@ import {
   sendWallTilesToWebview,
 } from './assetLoader.js';
 import {
+  GLOBAL_KEY_NOTIFY_COMPLETE,
+  GLOBAL_KEY_NOTIFY_ERROR,
+  GLOBAL_KEY_NOTIFY_INPUT_WAIT,
+  GLOBAL_KEY_NOTIFY_LOOP,
   GLOBAL_KEY_SOUND_ENABLED,
   GLOBAL_KEY_THOUGHT_ENABLED,
   WORKSPACE_KEY_AGENT_SEATS,
@@ -31,6 +35,7 @@ import {
 import { ensureProjectScan } from './fileWatcher.js';
 import type { LayoutWatcher } from './layoutPersistence.js';
 import { readLayoutFromFile, watchLayoutFile, writeLayoutToFile } from './layoutPersistence.js';
+import { clearAgentCooldowns, sendNotification } from './notificationManager.js';
 import type { AgentState } from './types.js';
 
 export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
@@ -115,6 +120,18 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         this.context.globalState.update(GLOBAL_KEY_SOUND_ENABLED, message.enabled);
       } else if (message.type === 'setThoughtEnabled') {
         this.context.globalState.update(GLOBAL_KEY_THOUGHT_ENABLED, message.enabled);
+      } else if (message.type === 'setNotifySetting') {
+        const key = message.key as string;
+        const enabled = message.enabled as boolean;
+        const validKeys = [
+          GLOBAL_KEY_NOTIFY_ERROR,
+          GLOBAL_KEY_NOTIFY_LOOP,
+          GLOBAL_KEY_NOTIFY_COMPLETE,
+          GLOBAL_KEY_NOTIFY_INPUT_WAIT,
+        ];
+        if (validKeys.includes(key)) {
+          this.context.globalState.update(key, enabled);
+        }
       } else if (message.type === 'webviewReady') {
         restoreAgents(
           this.context,
@@ -138,7 +155,25 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           GLOBAL_KEY_THOUGHT_ENABLED,
           true,
         );
-        this.webview?.postMessage({ type: 'settingsLoaded', soundEnabled, thoughtEnabled });
+        const notifyError = this.context.globalState.get<boolean>(GLOBAL_KEY_NOTIFY_ERROR, true);
+        const notifyLoop = this.context.globalState.get<boolean>(GLOBAL_KEY_NOTIFY_LOOP, true);
+        const notifyComplete = this.context.globalState.get<boolean>(
+          GLOBAL_KEY_NOTIFY_COMPLETE,
+          true,
+        );
+        const notifyInputWait = this.context.globalState.get<boolean>(
+          GLOBAL_KEY_NOTIFY_INPUT_WAIT,
+          true,
+        );
+        this.webview?.postMessage({
+          type: 'settingsLoaded',
+          soundEnabled,
+          thoughtEnabled,
+          notifyError,
+          notifyLoop,
+          notifyComplete,
+          notifyInputWait,
+        });
 
         // Send workspace folders to webview (only when multi-root)
         const wsFolders = vscode.workspace.workspaceFolders;
@@ -335,6 +370,7 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           if (this.activeAgentId.current === id) {
             this.activeAgentId.current = null;
           }
+          clearAgentCooldowns(id);
           removeAgent(
             id,
             this.agents,
@@ -346,6 +382,10 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
             this.persistAgents,
           );
           webviewView.webview.postMessage({ type: 'agentClosed', id });
+          // Check if all agents are now done
+          if (this.agents.size === 0) {
+            sendNotification(0, 'complete', 'すべてのエージェントが作業を完了しました');
+          }
         }
       }
     });

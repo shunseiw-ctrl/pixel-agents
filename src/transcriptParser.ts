@@ -9,6 +9,7 @@ import {
   THOUGHT_MAX_LENGTH,
   TOOL_DONE_DELAY_MS,
 } from './constants.js';
+import { sendNotification } from './notificationManager.js';
 import {
   cancelPermissionTimer,
   cancelWaitingTimer,
@@ -88,6 +89,7 @@ function sendThought(
     if (agent.thoughtRepeatCount >= LOOP_DETECTION_THRESHOLD) {
       isAnomalous = true;
       text = '⚠ 同じ処理を繰り返しています';
+      sendNotification(agentId, 'loop', `Agent #${agentId} がループしている可能性があります`);
     }
   } else {
     agent.lastThoughtText = text;
@@ -304,6 +306,7 @@ export function processTranscriptLine(
         status: 'waiting',
       });
       sendThought(agentId, '指示を待っています', agent, webview);
+      sendNotification(agentId, 'inputWait', `Agent #${agentId} が入力を待っています`);
     }
   } catch {
     // Ignore malformed lines

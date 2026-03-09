@@ -33,9 +33,18 @@ export const LAYOUT_FILE_POLL_INTERVAL_MS = 2000;
 export const THOUGHT_MAX_LENGTH = 30;
 export const LOOP_DETECTION_THRESHOLD = 3;
 
+// ── Notification Cooldowns (ms) ─────────────────────────────
+export const NOTIFY_COOLDOWN_ERROR_MS = 30_000;
+export const NOTIFY_COOLDOWN_LOOP_MS = 60_000;
+export const NOTIFY_COOLDOWN_INPUT_MS = 15_000;
+
 // ── Settings Persistence ────────────────────────────────────
 export const GLOBAL_KEY_SOUND_ENABLED = 'pixel-agents.soundEnabled';
 export const GLOBAL_KEY_THOUGHT_ENABLED = 'pixel-agents.thoughtBubblesEnabled';
+export const GLOBAL_KEY_NOTIFY_ERROR = 'pixel-agents.notifyError';
+export const GLOBAL_KEY_NOTIFY_LOOP = 'pixel-agents.notifyLoop';
+export const GLOBAL_KEY_NOTIFY_COMPLETE = 'pixel-agents.notifyComplete';
+export const GLOBAL_KEY_NOTIFY_INPUT_WAIT = 'pixel-agents.notifyInputWait';
 
 // ── VS Code Identifiers ─────────────────────────────────────
 export const VIEW_ID = 'pixel-agents.panelView';
