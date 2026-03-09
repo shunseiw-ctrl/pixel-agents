@@ -5,7 +5,6 @@ import * as vscode from 'vscode';
 
 import {
   getProjectDirPath,
-  launchNewTerminal,
   persistAgents,
   removeAgent,
   restoreAgents,
@@ -32,7 +31,7 @@ import {
   GLOBAL_KEY_THOUGHT_ENABLED,
   WORKSPACE_KEY_AGENT_SEATS,
 } from './constants.js';
-import { ensureProjectScan } from './fileWatcher.js';
+import { ensureProjectScan, scanExistingSessions } from './fileWatcher.js';
 import type { LayoutWatcher } from './layoutPersistence.js';
 import { readLayoutFromFile, watchLayoutFile, writeLayoutToFile } from './layoutPersistence.js';
 import { clearAgentCooldowns, sendNotification } from './notificationManager.js';
@@ -58,6 +57,13 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
 
   // Bundled default layout (loaded from assets/default-layout.json)
   defaultLayout: Record<string, unknown> | null = null;
+
+  // Cached loaded assets for re-sending when webview becomes visible
+  private cachedCharSprites: import('./assetLoader.js').LoadedCharacterSprites | null = null;
+  private cachedFloorTiles: import('./assetLoader.js').LoadedFloorTiles | null = null;
+  private cachedWallTiles: import('./assetLoader.js').LoadedWallTiles | null = null;
+  private cachedFurnitureAssets: import('./assetLoader.js').LoadedAssets | null = null;
+  private assetsLoaded = false;
 
   // Cross-window layout sync
   layoutWatcher: LayoutWatcher | null = null;
@@ -85,32 +91,23 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.options = { enableScripts: true };
     webviewView.webview.html = getWebviewContent(webviewView.webview, this.extensionUri);
 
+    // Re-send cached assets when webview becomes visible (messages may have been dropped while hidden)
+    webviewView.onDidChangeVisibility(() => {
+      if (webviewView.visible && this.assetsLoaded && this.webview) {
+        console.log('[Extension] Webview became visible — re-sending cached assets');
+        this.sendCachedAssets();
+      }
+    });
+
     webviewView.webview.onDidReceiveMessage(async (message) => {
-      if (message.type === 'openClaude') {
-        await launchNewTerminal(
-          this.nextAgentId,
-          this.nextTerminalIndex,
-          this.agents,
-          this.activeAgentId,
-          this.knownJsonlFiles,
-          this.fileWatchers,
-          this.pollingTimers,
-          this.waitingTimers,
-          this.permissionTimers,
-          this.jsonlPollTimers,
-          this.projectScanTimer,
-          this.webview,
-          this.persistAgents,
-          message.folderPath as string | undefined,
-        );
-      } else if (message.type === 'focusAgent') {
+      if (message.type === 'focusAgent') {
         const agent = this.agents.get(message.id);
-        if (agent) {
+        if (agent?.terminalRef) {
           agent.terminalRef.show();
         }
       } else if (message.type === 'closeAgent') {
         const agent = this.agents.get(message.id);
-        if (agent) {
+        if (agent?.terminalRef) {
           agent.terminalRef.dispose();
         }
       } else if (message.type === 'saveAgentSeats') {
@@ -179,21 +176,28 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           notifyInputWait,
         });
 
-        // Send workspace folders to webview (only when multi-root)
-        const wsFolders = vscode.workspace.workspaceFolders;
-        if (wsFolders && wsFolders.length > 1) {
-          this.webview?.postMessage({
-            type: 'workspaceFolders',
-            folders: wsFolders.map((f) => ({ name: f.name, path: f.uri.fsPath })),
-          });
-        }
-
         // Ensure project scan runs even with no restored agents (to adopt external terminals)
         const projectDir = getProjectDirPath();
         const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         console.log('[Extension] workspaceRoot:', workspaceRoot);
         console.log('[Extension] projectDir:', projectDir);
         if (projectDir) {
+          // Scan for existing JSONL sessions (external terminals, recent sessions)
+          const scannedIds = scanExistingSessions(
+            projectDir,
+            this.knownJsonlFiles,
+            this.nextAgentId,
+            this.agents,
+            this.fileWatchers,
+            this.pollingTimers,
+            this.waitingTimers,
+            this.permissionTimers,
+            this.webview,
+            this.persistAgents,
+          );
+          if (scannedIds.length > 0) {
+            console.log(`[Extension] Detected ${scannedIds.length} existing session(s)`);
+          }
           ensureProjectScan(
             projectDir,
             this.knownJsonlFiles,
@@ -242,41 +246,25 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
               // Load bundled default layout
               this.defaultLayout = loadDefaultLayout(assetsRoot);
 
-              // Load character sprites
-              const charSprites = await loadCharacterSprites(assetsRoot);
-              if (charSprites && this.webview) {
-                console.log('[Extension] Character sprites loaded, sending to webview');
-                sendCharacterSpritesToWebview(this.webview, charSprites);
-              }
+              // Load and cache all assets
+              this.cachedCharSprites = await loadCharacterSprites(assetsRoot);
+              this.cachedFloorTiles = await loadFloorTiles(assetsRoot);
+              this.cachedWallTiles = await loadWallTiles(assetsRoot);
+              this.cachedFurnitureAssets = await loadFurnitureAssets(assetsRoot);
+              this.assetsLoaded = true;
 
-              // Load floor tiles
-              const floorTiles = await loadFloorTiles(assetsRoot);
-              if (floorTiles && this.webview) {
-                console.log('[Extension] Floor tiles loaded, sending to webview');
-                sendFloorTilesToWebview(this.webview, floorTiles);
-              }
-
-              // Load wall tiles
-              const wallTiles = await loadWallTiles(assetsRoot);
-              if (wallTiles && this.webview) {
-                console.log('[Extension] Wall tiles loaded, sending to webview');
-                sendWallTilesToWebview(this.webview, wallTiles);
-              }
-
-              const assets = await loadFurnitureAssets(assetsRoot);
-              if (assets && this.webview) {
-                console.log('[Extension] ✅ Assets loaded, sending to webview');
-                sendAssetsToWebview(this.webview, assets);
+              // Send all cached assets to webview
+              if (this.webview) {
+                await this.sendCachedAssets();
               }
             } catch (err) {
               console.error('[Extension] ❌ Error loading assets:', err);
+              // If loading failed, still send layout
+              if (this.webview) {
+                sendLayout(this.context, this.webview, this.defaultLayout);
+              }
             }
-            // Always send saved layout (or null for default)
-            if (this.webview) {
-              console.log('[Extension] Sending saved layout');
-              sendLayout(this.context, this.webview, this.defaultLayout);
-              this.startLayoutWatcher();
-            }
+            this.startLayoutWatcher();
           })();
         } else {
           // No project dir — still try to load floor/wall tiles, then send saved layout
@@ -374,23 +362,13 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           if (this.activeAgentId.current === id) {
             this.activeAgentId.current = null;
           }
-          const success = !agent.lastTurnHadError;
+          // Don't remove the agent — mark as idle instead
+          // Character will move to rest zone and remain visible
+          agent.terminalRef = null;
           clearAgentCooldowns(id);
-          removeAgent(
-            id,
-            this.agents,
-            this.fileWatchers,
-            this.pollingTimers,
-            this.waitingTimers,
-            this.permissionTimers,
-            this.jsonlPollTimers,
-            this.persistAgents,
-          );
-          webviewView.webview.postMessage({ type: 'agentClosed', id, success });
-          // Check if all agents are now done
-          if (this.agents.size === 0) {
-            sendNotification(0, 'complete', 'すべてのエージェントが作業を完了しました');
-          }
+          this.persistAgents();
+          // Notify webview to mark agent as idle (not closed)
+          webviewView.webview.postMessage({ type: 'agentIdle', id });
         }
       }
     });
@@ -420,6 +398,30 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     vscode.window.showInformationMessage(
       `Pixel Agents: デフォルトレイアウトを ${targetPath} にエクスポートしました`,
     );
+  }
+
+  /** Send all cached assets + layout to webview. Called on initial load and when webview becomes visible. */
+  private async sendCachedAssets(): Promise<void> {
+    if (!this.webview) return;
+    if (this.cachedCharSprites) {
+      console.log('[Extension] Sending cached character sprites');
+      sendCharacterSpritesToWebview(this.webview, this.cachedCharSprites);
+    }
+    if (this.cachedFloorTiles) {
+      console.log('[Extension] Sending cached floor tiles');
+      sendFloorTilesToWebview(this.webview, this.cachedFloorTiles);
+    }
+    if (this.cachedWallTiles) {
+      console.log('[Extension] Sending cached wall tiles');
+      sendWallTilesToWebview(this.webview, this.cachedWallTiles);
+    }
+    if (this.cachedFurnitureAssets) {
+      console.log('[Extension] Sending cached furniture assets');
+      await sendAssetsToWebview(this.webview, this.cachedFurnitureAssets);
+    }
+    // Re-send layout after assets so dynamic catalog is built first
+    console.log('[Extension] Sending layout');
+    sendLayout(this.context, this.webview, this.defaultLayout);
   }
 
   private startLayoutWatcher(): void {
