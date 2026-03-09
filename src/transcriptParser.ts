@@ -3,6 +3,10 @@ import type * as vscode from 'vscode';
 
 import {
   BASH_COMMAND_DISPLAY_MAX_LENGTH,
+  COST_CACHE_READ_PER_1K,
+  COST_CACHE_WRITE_PER_1K,
+  COST_INPUT_PER_1K,
+  COST_OUTPUT_PER_1K,
   LOOP_DETECTION_THRESHOLD,
   TASK_DESCRIPTION_DISPLAY_MAX_LENGTH,
   TEXT_IDLE_DELAY_MS,
@@ -189,12 +193,54 @@ export function processTranscriptLine(
             // Send thought text for the tool
             const thought = generateThoughtText(toolName, block.input || {});
             sendThought(agentId, thought, agent, webview);
+            // Detect pipeline steps from Bash commands
+            if (toolName === 'Bash' && block.input?.command) {
+              const cmd = block.input.command as string;
+              const pipelineSteps = [
+                { pattern: /flutter analyze/, step: 'analyze' },
+                { pattern: /flutter test/, step: 'test' },
+                { pattern: /git push/, step: 'push' },
+                { pattern: /gh pr create/, step: 'pr' },
+              ];
+              for (const { pattern, step } of pipelineSteps) {
+                if (pattern.test(cmd)) {
+                  webview?.postMessage({
+                    type: 'agentPipelineStep',
+                    id: agentId,
+                    step,
+                    status: 'running',
+                  });
+                  break;
+                }
+              }
+            }
           }
         }
         if (hasNonExemptTool) {
           startPermissionTimer(agentId, agents, permissionTimers, PERMISSION_EXEMPT_TOOLS, webview);
         }
-      } else if (blocks.some((b) => b.type === 'text') && !agent.hadToolsInTurn) {
+      }
+      // Extract token usage from assistant message
+      const usage = record.message?.usage as Record<string, number> | undefined;
+      if (usage) {
+        agent.tokenUsage.inputTokens += usage.input_tokens || 0;
+        agent.tokenUsage.outputTokens += usage.output_tokens || 0;
+        agent.tokenUsage.cacheWriteTokens += usage.cache_creation_input_tokens || 0;
+        agent.tokenUsage.cacheReadTokens += usage.cache_read_input_tokens || 0;
+        const cost =
+          (agent.tokenUsage.inputTokens / 1000) * COST_INPUT_PER_1K +
+          (agent.tokenUsage.outputTokens / 1000) * COST_OUTPUT_PER_1K +
+          (agent.tokenUsage.cacheWriteTokens / 1000) * COST_CACHE_WRITE_PER_1K +
+          (agent.tokenUsage.cacheReadTokens / 1000) * COST_CACHE_READ_PER_1K;
+        webview?.postMessage({
+          type: 'agentTokenUsage',
+          id: agentId,
+          usage: agent.tokenUsage,
+          costUsd: Math.round(cost * 1000) / 1000,
+        });
+      }
+
+      if (!hasToolUse && blocks.some((b) => b.type === 'text') && !agent.hadToolsInTurn) {
         // Text-only response in a turn that hasn't used any tools.
         // turn_duration handles tool-using turns reliably but is never
         // emitted for text-only turns, so we use a silence-based timer:

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import type { AgentCost, AgentPipeline } from '../hooks/useExtensionMessages.js';
 import type { ToolActivity } from '../office/types.js';
 
 export interface AgentMeta {
@@ -22,6 +23,8 @@ interface StatusSummaryPanelProps {
   agentStatuses: Record<number, string>;
   agentTools: Record<number, ToolActivity[]>;
   agentMetas: Record<number, AgentMeta>;
+  agentCosts: Record<number, AgentCost>;
+  agentPipelines: Record<number, AgentPipeline>;
   agentHistory: AgentHistoryEntry[];
   onSelectAgent: (id: number) => void;
 }
@@ -85,11 +88,20 @@ const statusColors: Record<AgentStatusType, string> = {
   error: '#F44336',
 };
 
+const PIPELINE_LABELS: Record<string, string> = {
+  analyze: 'analyze',
+  test: 'test',
+  push: 'push',
+  pr: 'PR作成',
+};
+
 export function StatusSummaryPanel({
   agents,
   agentStatuses,
   agentTools,
   agentMetas,
+  agentCosts,
+  agentPipelines,
   agentHistory,
   onSelectAgent,
 }: StatusSummaryPanelProps) {
@@ -159,66 +171,100 @@ export function StatusSummaryPanel({
       {/* Agent rows */}
       {agents.map((id) => {
         const meta = agentMetas[id];
+        const cost = agentCosts[id];
+        const pipeline = agentPipelines[id];
         const { status, text } = getAgentStatus(id, agentStatuses, agentTools);
         const elapsed = meta ? now - meta.createdAt : 0;
 
         return (
-          <div
-            key={id}
-            onClick={() => onSelectAgent(id)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '3px 8px',
-              cursor: 'pointer',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
-              background: status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background =
-                status === 'error' ? 'rgba(244, 67, 54, 0.15)' : 'rgba(255,255,255,0.05)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background =
-                status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent';
-            }}
-          >
-            <span style={{ color: statusColors[status], fontSize: '10px' }}>
-              {statusIcons[status]}
-            </span>
-            <span
+          <div key={id}>
+            <div
+              onClick={() => onSelectAgent(id)}
               style={{
-                fontWeight: 'bold',
-                color: 'var(--vscode-foreground)',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                maxWidth: 140,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '3px 8px',
+                cursor: 'pointer',
+                borderBottom: pipeline ? 'none' : '1px solid rgba(255,255,255,0.05)',
+                background: status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  status === 'error' ? 'rgba(244, 67, 54, 0.15)' : 'rgba(255,255,255,0.05)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent';
               }}
             >
-              {getAgentDisplayName(id, meta)}
-            </span>
-            <span
-              style={{
-                color: 'var(--pixel-text-dim)',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                flex: 1,
-              }}
-            >
-              {text}
-            </span>
-            <span
-              style={{
-                color: 'var(--pixel-text-dim)',
-                whiteSpace: 'nowrap',
-                fontSize: '16px',
-              }}
-            >
-              {formatElapsed(elapsed)}
-            </span>
+              <span style={{ color: statusColors[status], fontSize: '10px' }}>
+                {statusIcons[status]}
+              </span>
+              <span
+                style={{
+                  fontWeight: 'bold',
+                  color: 'var(--vscode-foreground)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: 120,
+                }}
+              >
+                {getAgentDisplayName(id, meta)}
+              </span>
+              <span
+                style={{
+                  color: 'var(--pixel-text-dim)',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  flex: 1,
+                }}
+              >
+                {text}
+              </span>
+              {cost && cost.costUsd > 0 && (
+                <span
+                  style={{
+                    color: 'var(--pixel-text-dim)',
+                    whiteSpace: 'nowrap',
+                    fontSize: '14px',
+                  }}
+                >
+                  ${cost.costUsd.toFixed(2)}
+                </span>
+              )}
+              <span
+                style={{
+                  color: 'var(--pixel-text-dim)',
+                  whiteSpace: 'nowrap',
+                  fontSize: '16px',
+                }}
+              >
+                {formatElapsed(elapsed)}
+              </span>
+            </div>
+            {/* Pipeline steps */}
+            {pipeline && Object.keys(pipeline.steps).length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 4,
+                  padding: '1px 8px 3px 24px',
+                  borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  fontSize: '14px',
+                  color: 'var(--pixel-text-dim)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {Object.entries(pipeline.steps).map(([step, stepStatus]) => (
+                  <span key={step}>
+                    {stepStatus === 'done' ? '✅' : '🔄'} {PIPELINE_LABELS[step] || step}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}

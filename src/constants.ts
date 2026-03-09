@@ -38,6 +38,12 @@ export const NOTIFY_COOLDOWN_ERROR_MS = 30_000;
 export const NOTIFY_COOLDOWN_LOOP_MS = 60_000;
 export const NOTIFY_COOLDOWN_INPUT_MS = 15_000;
 
+// ── Cost Calculation ($/1K tokens, Claude Sonnet 4) ────────
+export const COST_INPUT_PER_1K = 0.003;
+export const COST_OUTPUT_PER_1K = 0.015;
+export const COST_CACHE_WRITE_PER_1K = 0.00375;
+export const COST_CACHE_READ_PER_1K = 0.0003;
+
 // ── Settings Persistence ────────────────────────────────────
 export const GLOBAL_KEY_SOUND_ENABLED = 'pixel-agents.soundEnabled';
 export const GLOBAL_KEY_THOUGHT_ENABLED = 'pixel-agents.thoughtBubblesEnabled';

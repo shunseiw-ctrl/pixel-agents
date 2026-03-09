@@ -47,6 +47,14 @@ export interface AgentThought {
   isAnomalous: boolean;
 }
 
+export interface AgentCost {
+  costUsd: number;
+}
+
+export interface AgentPipeline {
+  steps: Record<string, 'pending' | 'running' | 'done'>;
+}
+
 export interface ExtensionMessageState {
   agents: number[];
   selectedAgent: number | null;
@@ -54,6 +62,8 @@ export interface ExtensionMessageState {
   agentStatuses: Record<number, string>;
   agentThoughts: Record<number, AgentThought>;
   agentMetas: Record<number, AgentMeta>;
+  agentCosts: Record<number, AgentCost>;
+  agentPipelines: Record<number, AgentPipeline>;
   agentHistory: AgentHistoryEntry[];
   subagentTools: Record<number, Record<string, ToolActivity[]>>;
   subagentCharacters: SubagentCharacter[];
@@ -83,6 +93,8 @@ export function useExtensionMessages(
   const [agentStatuses, setAgentStatuses] = useState<Record<number, string>>({});
   const [agentThoughts, setAgentThoughts] = useState<Record<number, AgentThought>>({});
   const [agentMetas, setAgentMetas] = useState<Record<number, AgentMeta>>({});
+  const [agentCosts, setAgentCosts] = useState<Record<number, AgentCost>>({});
+  const [agentPipelines, setAgentPipelines] = useState<Record<number, AgentPipeline>>({});
   const [agentHistory, setAgentHistory] = useState<AgentHistoryEntry[]>([]);
   const [subagentTools, setSubagentTools] = useState<
     Record<number, Record<string, ToolActivity[]>>
@@ -310,6 +322,24 @@ export function useExtensionMessages(
             createdAt: (msg.createdAt as number) || Date.now(),
           },
         }));
+      } else if (msg.type === 'agentTokenUsage') {
+        const id = msg.id as number;
+        const costUsd = msg.costUsd as number;
+        setAgentCosts((prev) => ({ ...prev, [id]: { costUsd } }));
+      } else if (msg.type === 'agentPipelineStep') {
+        const id = msg.id as number;
+        const step = msg.step as string;
+        const stepStatus = msg.status as 'running' | 'done';
+        setAgentPipelines((prev) => {
+          const existing = prev[id] || { steps: {} };
+          // Mark previous running steps as done
+          const updatedSteps = { ...existing.steps };
+          for (const [k, v] of Object.entries(updatedSteps)) {
+            if (v === 'running') updatedSteps[k] = 'done';
+          }
+          updatedSteps[step] = stepStatus;
+          return { ...prev, [id]: { steps: updatedSteps } };
+        });
       } else if (msg.type === 'agentToolPermission') {
         const id = msg.id as number;
         setAgentTools((prev) => {
@@ -457,6 +487,8 @@ export function useExtensionMessages(
     agentStatuses,
     agentThoughts,
     agentMetas,
+    agentCosts,
+    agentPipelines,
     agentHistory,
     subagentTools,
     subagentCharacters,

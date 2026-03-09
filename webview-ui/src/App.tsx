@@ -140,6 +140,8 @@ function App() {
     agentStatuses,
     agentThoughts,
     agentMetas,
+    agentCosts,
+    agentPipelines,
     agentHistory,
     subagentTools,
     subagentCharacters,
@@ -357,6 +359,8 @@ function App() {
         agentStatuses={agentStatuses}
         agentTools={agentTools}
         agentMetas={agentMetas}
+        agentCosts={agentCosts}
+        agentPipelines={agentPipelines}
         agentHistory={agentHistory}
         onSelectAgent={handleSelectAgent}
       />

@@ -85,6 +85,7 @@ export async function launchNewTerminal(
     thoughtRepeatCount: 0,
     metaSent: false,
     createdAt: Date.now(),
+    tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
   };
 
   agents.set(id, agent);
@@ -244,6 +245,7 @@ export function restoreAgents(
       thoughtRepeatCount: 0,
       metaSent: false,
       createdAt: Date.now(),
+      tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
     };
 
     agents.set(p.id, agent);

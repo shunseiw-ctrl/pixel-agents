@@ -25,6 +25,13 @@ export interface AgentState {
   metaSent: boolean;
   /** Agent creation timestamp (ms) */
   createdAt: number;
+  /** Accumulated token usage */
+  tokenUsage: {
+    inputTokens: number;
+    outputTokens: number;
+    cacheWriteTokens: number;
+    cacheReadTokens: number;
+  };
 }
 
 export interface PersistedAgent {
