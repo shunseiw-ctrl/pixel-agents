@@ -27,9 +27,11 @@ import type {
   OfficeLayout,
   PlacedFurniture,
   TileType as TileTypeVal,
+  ZoneType as ZoneTypeVal,
 } from '../office/types.js';
 import { EditTool } from '../office/types.js';
 import { TileType } from '../office/types.js';
+import { setTileZone } from '../office/zoneManager.js';
 import { vscode } from '../vscodeApi.js';
 
 export interface EditorActions {
@@ -48,6 +50,7 @@ export interface EditorActions {
   handleWallColorChange: (color: FloorColor) => void;
   handleSelectedFurnitureColorChange: (color: FloorColor | null) => void;
   handleFurnitureTypeChange: (type: string) => void; // FurnitureType enum or asset ID
+  handleZoneTypeChange: (type: ZoneTypeVal) => void;
   handleDeleteSelected: () => void;
   handleRotateSelected: () => void;
   handleToggleState: () => void;
@@ -245,6 +248,14 @@ export function useEditorActions(
       } else {
         editorState.selectedFurnitureType = type;
       }
+      setEditorTick((n) => n + 1);
+    },
+    [editorState],
+  );
+
+  const handleZoneTypeChange = useCallback(
+    (type: ZoneTypeVal) => {
+      editorState.selectedZoneType = type;
       setEditorTick((n) => n + 1);
     },
     [editorState],
@@ -560,6 +571,15 @@ export function useEditorActions(
           editorState.activeTool = EditTool.WALL_PAINT;
         }
         setEditorTick((n) => n + 1);
+      } else if (editorState.activeTool === EditTool.ZONE_PAINT) {
+        if (col < 0 || col >= layout.cols || row < 0 || row >= layout.rows) return;
+        const os2 = getOfficeState();
+        os2.ensureZones();
+        const currentZones = os2.getLayout().zones;
+        if (!currentZones) return;
+        const newZones = setTileZone(currentZones, col, row, editorState.selectedZoneType);
+        const newLayout = { ...layout, zones: newZones };
+        applyEdit(newLayout);
       } else if (editorState.activeTool === EditTool.SELECT) {
         const hit = layout.furniture.find((f) => {
           const entry = getCatalogEntry(f.type);
@@ -610,6 +630,7 @@ export function useEditorActions(
     handleWallColorChange,
     handleSelectedFurnitureColorChange,
     handleFurnitureTypeChange,
+    handleZoneTypeChange,
     handleDeleteSelected,
     handleRotateSelected,
     handleToggleState,

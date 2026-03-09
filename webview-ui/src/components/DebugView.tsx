@@ -45,7 +45,7 @@ function ToolLine({ tool }: { tool: ToolActivity }) {
       }}
     >
       <ToolDot tool={tool} />
-      {tool.permissionWait && !tool.done ? 'Needs approval' : tool.status}
+      {tool.permissionWait && !tool.done ? '許可が必要です' : tool.status}
     </span>
   );
 }
@@ -88,7 +88,7 @@ export function DebugView({
               fontWeight: isSelected ? 'bold' : undefined,
             }}
           >
-            Agent #{id}
+            エージェント #{id}
           </button>
           <button
             onClick={() => vscode.postMessage({ type: 'closeAgent', id })}
@@ -100,7 +100,7 @@ export function DebugView({
               background: isSelected ? 'rgba(90, 140, 255, 0.25)' : undefined,
               color: isSelected ? '#fff' : undefined,
             }}
-            title="Close agent"
+            title="エージェントを閉じる"
           >
             ✕
           </button>
@@ -157,7 +157,7 @@ export function DebugView({
                     flexShrink: 0,
                   }}
                 />
-                Might be waiting for input
+                入力待ちの可能性があります
               </span>
             )}
           </div>

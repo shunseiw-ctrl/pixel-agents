@@ -505,6 +505,25 @@ export interface ButtonBounds {
 export type DeleteButtonBounds = ButtonBounds;
 export type RotateButtonBounds = ButtonBounds;
 
+// ── Zone overlay ────────────────────────────────────────────────
+
+export function renderZoneOverlay(
+  ctx: CanvasRenderingContext2D,
+  zones: import('../types.js').ZoneConfig | undefined,
+  offsetX: number,
+  offsetY: number,
+  zoom: number,
+): void {
+  if (!zones) return;
+  const s = TILE_SIZE * zoom;
+  for (const zone of zones.zones) {
+    ctx.fillStyle = zone.color;
+    for (const tile of zone.tiles) {
+      ctx.fillRect(offsetX + tile.col * s, offsetY + tile.row * s, s, s);
+    }
+  }
+}
+
 export interface EditorRenderState {
   showGrid: boolean;
   ghostSprite: SpriteData | null;
@@ -552,6 +571,7 @@ export function renderFrame(
   tileColors?: Array<FloorColor | null>,
   layoutCols?: number,
   layoutRows?: number,
+  zones?: import('../types.js').ZoneConfig,
 ): { offsetX: number; offsetY: number } {
   // Clear
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -568,6 +588,9 @@ export function renderFrame(
 
   // Draw tiles (floor + wall base color)
   renderTileGrid(ctx, tileMap, offsetX, offsetY, zoom, tileColors, layoutCols);
+
+  // Zone overlays (semi-transparent color on floor tiles)
+  renderZoneOverlay(ctx, zones, offsetX, offsetY, zoom);
 
   // Seat indicators (below furniture/characters, on top of floor)
   if (selection) {

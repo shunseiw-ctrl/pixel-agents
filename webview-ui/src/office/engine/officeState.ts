@@ -28,8 +28,16 @@ import type {
   PlacedFurniture,
   Seat,
   TileType as TileTypeVal,
+  ZoneType as ZoneTypeVal,
 } from '../types.js';
 import { CharacterState, Direction, MATRIX_EFFECT_DURATION, TILE_SIZE } from '../types.js';
+import type { AgentZoneState } from '../zoneManager.js';
+import {
+  createAgentZoneState,
+  createDefaultZones,
+  getZoneTiles,
+  updateAgentZoneState,
+} from '../zoneManager.js';
 import { createCharacter, updateCharacter } from './characters.js';
 import { matrixEffectSeeds } from './matrixEffect.js';
 
@@ -50,6 +58,12 @@ export class OfficeState {
   /** Reverse lookup: sub-agent character ID → parent info */
   subagentMeta: Map<number, { parentAgentId: number; parentToolId: string }> = new Map();
   private nextSubagentId = -1;
+  /** Per-agent zone movement state */
+  agentZoneStates: Map<number, AgentZoneState> = new Map();
+  /** Per-agent idle time tracking (ms since last active) */
+  agentIdleTimers: Map<number, number> = new Map();
+  /** Per-agent error flag */
+  agentErrors: Map<number, boolean> = new Map();
 
   constructor(layout?: OfficeLayout) {
     this.layout = layout || createDefaultLayout();
@@ -58,6 +72,45 @@ export class OfficeState {
     this.blockedTiles = getBlockedTiles(this.layout.furniture);
     this.furniture = layoutToFurnitureInstances(this.layout.furniture);
     this.walkableTiles = getWalkableTiles(this.tileMap, this.blockedTiles);
+  }
+
+  /** Ensure layout has zone configuration; create defaults if missing */
+  ensureZones(): void {
+    if (!this.layout.zones) {
+      this.layout.zones = createDefaultZones(this.layout);
+    }
+  }
+
+  /** Move an agent toward a random walkable tile in the target zone */
+  moveAgentToZone(agentId: number, zoneType: ZoneTypeVal): void {
+    const ch = this.characters.get(agentId);
+    if (!ch || ch.matrixEffect) return;
+
+    const zoneTiles = getZoneTiles(zoneType, this.layout.zones);
+    if (zoneTiles.length === 0) return;
+
+    // Filter to walkable tiles in the zone
+    const walkable = zoneTiles.filter((t) =>
+      isWalkable(t.col, t.row, this.tileMap, this.blockedTiles),
+    );
+    if (walkable.length === 0) return;
+
+    // Pick a random walkable tile in the zone
+    const target = walkable[Math.floor(Math.random() * walkable.length)];
+
+    // Already in this zone tile?
+    if (ch.tileCol === target.col && ch.tileRow === target.row) return;
+
+    const path = this.withOwnSeatUnblocked(ch, () =>
+      findPath(ch.tileCol, ch.tileRow, target.col, target.row, this.tileMap, this.blockedTiles),
+    );
+    if (path.length > 0) {
+      ch.path = path;
+      ch.moveProgress = 0;
+      ch.state = CharacterState.WALK;
+      ch.frame = 0;
+      ch.frameTimer = 0;
+    }
   }
 
   /** Rebuild all derived state from a new layout. Reassigns existing characters.
@@ -278,6 +331,10 @@ export class OfficeState {
     }
     if (this.selectedAgentId === id) this.selectedAgentId = null;
     if (this.cameraFollowId === id) this.cameraFollowId = null;
+    // Clean up zone state
+    this.agentZoneStates.delete(id);
+    this.agentIdleTimers.delete(id);
+    this.agentErrors.delete(id);
     // Start despawn animation instead of immediate delete
     ch.matrixEffect = 'despawn';
     ch.matrixEffectTimer = 0;
@@ -517,15 +574,24 @@ export class OfficeState {
     const ch = this.characters.get(id);
     if (ch) {
       ch.isActive = active;
-      if (!active) {
+      if (active) {
+        this.agentIdleTimers.set(id, 0);
+        this.agentErrors.delete(id);
+      } else {
         // Sentinel -1: signals turn just ended, skip next seat rest timer.
         // Prevents the WALK handler from setting a 2-4 min rest on arrival.
         ch.seatTimer = -1;
         ch.path = [];
         ch.moveProgress = 0;
+        this.agentIdleTimers.set(id, 0);
       }
       this.rebuildFurnitureInstances();
     }
+  }
+
+  /** Mark an agent as having an error (triggers zone movement to alert area) */
+  setAgentError(id: number, hasError: boolean): void {
+    this.agentErrors.set(id, hasError);
   }
 
   /** Rebuild furniture instances with auto-state applied (active agents turn electronics ON) */
@@ -635,6 +701,8 @@ export class OfficeState {
 
   update(dt: number): void {
     const toDelete: number[] = [];
+    const now = Date.now();
+
     for (const ch of this.characters.values()) {
       // Handle matrix effect animation
       if (ch.matrixEffect) {
@@ -666,10 +734,44 @@ export class OfficeState {
           ch.bubbleTimer = 0;
         }
       }
+
+      // Zone auto-movement (skip sub-agents)
+      if (!ch.isSubagent && this.layout.zones) {
+        // Update idle timer
+        if (!ch.isActive) {
+          const prevIdle = this.agentIdleTimers.get(ch.id) ?? 0;
+          this.agentIdleTimers.set(ch.id, prevIdle + dt * 1000);
+        }
+
+        // Initialize zone state if needed
+        if (!this.agentZoneStates.has(ch.id)) {
+          this.agentZoneStates.set(ch.id, createAgentZoneState());
+        }
+        const zoneState = this.agentZoneStates.get(ch.id)!;
+        const idleMs = this.agentIdleTimers.get(ch.id) ?? 0;
+        const hasError = this.agentErrors.get(ch.id) ?? false;
+        const isWaiting = !ch.isActive;
+
+        const targetZone = updateAgentZoneState(
+          zoneState,
+          ch.isActive,
+          hasError,
+          isWaiting,
+          idleMs,
+          now,
+        );
+
+        if (targetZone) {
+          this.moveAgentToZone(ch.id, targetZone);
+        }
+      }
     }
     // Remove characters that finished despawn
     for (const id of toDelete) {
       this.characters.delete(id);
+      this.agentZoneStates.delete(id);
+      this.agentIdleTimers.delete(id);
+      this.agentErrors.delete(id);
     }
   }
 

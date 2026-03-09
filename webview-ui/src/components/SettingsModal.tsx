@@ -78,7 +78,7 @@ export function SettingsModal({
             marginBottom: '4px',
           }}
         >
-          <span style={{ fontSize: '24px', color: 'rgba(255, 255, 255, 0.9)' }}>Settings</span>
+          <span style={{ fontSize: '24px', color: 'rgba(255, 255, 255, 0.9)' }}>設定</span>
           <button
             onClick={onClose}
             onMouseEnter={() => setHovered('close')}
@@ -110,7 +110,7 @@ export function SettingsModal({
             background: hovered === 'sessions' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          Open Sessions Folder
+          セッションフォルダを開く
         </button>
         <button
           onClick={() => {
@@ -124,7 +124,7 @@ export function SettingsModal({
             background: hovered === 'export' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          Export Layout
+          レイアウトをエクスポート
         </button>
         <button
           onClick={() => {
@@ -138,7 +138,7 @@ export function SettingsModal({
             background: hovered === 'import' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          Import Layout
+          レイアウトをインポート
         </button>
         <button
           onClick={() => {
@@ -154,7 +154,7 @@ export function SettingsModal({
             background: hovered === 'sound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          <span>Sound Notifications</span>
+          <span>サウンド通知</span>
           <span
             style={{
               width: 14,
@@ -183,7 +183,7 @@ export function SettingsModal({
             background: hovered === 'debug' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          <span>Debug View</span>
+          <span>デバッグビュー</span>
           {isDebugMode && (
             <span
               style={{

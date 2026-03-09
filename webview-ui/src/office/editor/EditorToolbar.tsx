@@ -8,8 +8,8 @@ import {
   getCatalogByCategory,
 } from '../layout/furnitureCatalog.js';
 import { getCachedSprite } from '../sprites/spriteCache.js';
-import type { FloorColor, TileType as TileTypeVal } from '../types.js';
-import { EditTool } from '../types.js';
+import type { FloorColor, TileType as TileTypeVal, ZoneType as ZoneTypeVal } from '../types.js';
+import { EditTool, ZoneType } from '../types.js';
 
 const btnStyle: React.CSSProperties = {
   padding: '3px 8px',
@@ -59,6 +59,8 @@ interface EditorToolbarProps {
   onWallColorChange: (color: FloorColor) => void;
   onSelectedFurnitureColorChange: (color: FloorColor | null) => void;
   onFurnitureTypeChange: (type: string) => void;
+  selectedZoneType: ZoneTypeVal;
+  onZoneTypeChange: (type: ZoneTypeVal) => void;
   loadedAssets?: LoadedAssetData;
 }
 
@@ -102,7 +104,7 @@ function FloorPatternPreview({
   return (
     <button
       onClick={onClick}
-      title={`Floor ${patternIndex}`}
+      title={`床パターン ${patternIndex}`}
       style={{
         width: displaySize,
         height: displaySize,
@@ -177,6 +179,8 @@ export function EditorToolbar({
   onWallColorChange,
   onSelectedFurnitureColorChange,
   onFurnitureTypeChange,
+  selectedZoneType,
+  onZoneTypeChange,
   loadedAssets,
 }: EditorToolbarProps) {
   const [activeCategory, setActiveCategory] = useState<FurnitureCategory>('desks');
@@ -245,6 +249,7 @@ export function EditorToolbar({
   const isEraseActive = activeTool === EditTool.ERASE;
   const isFurnitureActive =
     activeTool === EditTool.FURNITURE_PLACE || activeTool === EditTool.FURNITURE_PICK;
+  const isZoneActive = activeTool === EditTool.ZONE_PAINT;
 
   return (
     <div
@@ -269,30 +274,37 @@ export function EditorToolbar({
         <button
           style={isFloorActive ? activeBtnStyle : btnStyle}
           onClick={() => onToolChange(EditTool.TILE_PAINT)}
-          title="Paint floor tiles"
+          title="床タイルを塗る"
         >
-          Floor
+          床
         </button>
         <button
           style={isWallActive ? activeBtnStyle : btnStyle}
           onClick={() => onToolChange(EditTool.WALL_PAINT)}
-          title="Paint walls (click to toggle)"
+          title="壁を塗る（クリックで切替）"
         >
-          Wall
+          壁
         </button>
         <button
           style={isEraseActive ? activeBtnStyle : btnStyle}
           onClick={() => onToolChange(EditTool.ERASE)}
-          title="Erase tiles to void"
+          title="タイルを消去"
         >
-          Erase
+          消去
         </button>
         <button
           style={isFurnitureActive ? activeBtnStyle : btnStyle}
           onClick={() => onToolChange(EditTool.FURNITURE_PLACE)}
-          title="Place furniture"
+          title="家具を配置"
         >
-          Furniture
+          家具
+        </button>
+        <button
+          style={isZoneActive ? activeBtnStyle : btnStyle}
+          onClick={() => onToolChange(EditTool.ZONE_PAINT)}
+          title="ゾーンを塗る"
+        >
+          ゾーン
         </button>
       </div>
 
@@ -304,16 +316,16 @@ export function EditorToolbar({
             <button
               style={showColor ? activeBtnStyle : btnStyle}
               onClick={() => setShowColor((v) => !v)}
-              title="Adjust floor color"
+              title="床の色を調整"
             >
-              Color
+              カラー
             </button>
             <button
               style={activeTool === EditTool.EYEDROPPER ? activeBtnStyle : btnStyle}
               onClick={() => onToolChange(EditTool.EYEDROPPER)}
-              title="Pick floor pattern + color from existing tile"
+              title="既存タイルから床パターン＋色をピック"
             >
-              Pick
+              ピック
             </button>
           </div>
 
@@ -392,9 +404,9 @@ export function EditorToolbar({
             <button
               style={showWallColor ? activeBtnStyle : btnStyle}
               onClick={() => setShowWallColor((v) => !v)}
-              title="Adjust wall color"
+              title="壁の色を調整"
             >
-              Color
+              カラー
             </button>
           </div>
 
@@ -470,9 +482,9 @@ export function EditorToolbar({
             <button
               style={activeTool === EditTool.FURNITURE_PICK ? activeBtnStyle : btnStyle}
               onClick={() => onToolChange(EditTool.FURNITURE_PICK)}
-              title="Pick furniture type from placed item"
+              title="配置済みアイテムから家具タイプをピック"
             >
-              Pick
+              ピック
             </button>
           </div>
           {/* Furniture items — single-row horizontal carousel at 2x */}
@@ -532,6 +544,33 @@ export function EditorToolbar({
         </div>
       )}
 
+      {/* Sub-panel: Zone — zone type selector */}
+      {isZoneActive && (
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          <button
+            style={selectedZoneType === ZoneType.WORK ? activeBtnStyle : btnStyle}
+            onClick={() => onZoneTypeChange(ZoneType.WORK)}
+            title="作業エリア"
+          >
+            <span style={{ fontSize: '20px' }}>🔵 作業</span>
+          </button>
+          <button
+            style={selectedZoneType === ZoneType.REST ? activeBtnStyle : btnStyle}
+            onClick={() => onZoneTypeChange(ZoneType.REST)}
+            title="休憩エリア"
+          >
+            <span style={{ fontSize: '20px' }}>🟢 休憩</span>
+          </button>
+          <button
+            style={selectedZoneType === ZoneType.ALERT ? activeBtnStyle : btnStyle}
+            onClick={() => onZoneTypeChange(ZoneType.ALERT)}
+            title="警告エリア"
+          >
+            <span style={{ fontSize: '20px' }}>🔴 警告</span>
+          </button>
+        </div>
+      )}
+
       {/* Selected furniture color panel — shows when any placed furniture item is selected */}
       {selectedFurnitureUid && (
         <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 3 }}>
@@ -539,17 +578,17 @@ export function EditorToolbar({
             <button
               style={showFurnitureColor ? activeBtnStyle : btnStyle}
               onClick={() => setShowFurnitureColor((v) => !v)}
-              title="Adjust selected furniture color"
+              title="選択した家具の色を調整"
             >
-              Color
+              カラー
             </button>
             {selectedFurnitureColor && (
               <button
                 style={{ ...btnStyle, fontSize: '20px', padding: '2px 6px' }}
                 onClick={() => onSelectedFurnitureColorChange(null)}
-                title="Remove color (restore original)"
+                title="色を削除（元に戻す）"
               >
-                Clear
+                クリア
               </button>
             )}
           </div>
@@ -635,7 +674,7 @@ export function EditorToolbar({
                   }
                   style={{ accentColor: 'rgba(90, 140, 255, 0.8)' }}
                 />
-                Colorize
+                カラライズ
               </label>
             </div>
           )}

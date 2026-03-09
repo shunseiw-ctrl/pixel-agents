@@ -76,31 +76,33 @@ function EditActionBar({
       <button
         style={undoDisabled ? actionBarBtnDisabled : actionBarBtnStyle}
         onClick={undoDisabled ? undefined : editor.handleUndo}
-        title="Undo (Ctrl+Z)"
+        title="元に戻す (Ctrl+Z)"
       >
-        Undo
+        元に戻す
       </button>
       <button
         style={redoDisabled ? actionBarBtnDisabled : actionBarBtnStyle}
         onClick={redoDisabled ? undefined : editor.handleRedo}
-        title="Redo (Ctrl+Y)"
+        title="やり直す (Ctrl+Y)"
       >
-        Redo
+        やり直す
       </button>
-      <button style={actionBarBtnStyle} onClick={editor.handleSave} title="Save layout">
-        Save
+      <button style={actionBarBtnStyle} onClick={editor.handleSave} title="レイアウトを保存">
+        保存
       </button>
       {!showResetConfirm ? (
         <button
           style={actionBarBtnStyle}
           onClick={() => setShowResetConfirm(true)}
-          title="Reset to last saved layout"
+          title="最後に保存したレイアウトにリセット"
         >
-          Reset
+          リセット
         </button>
       ) : (
         <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-          <span style={{ fontSize: '22px', color: 'var(--pixel-reset-text)' }}>Reset?</span>
+          <span style={{ fontSize: '22px', color: 'var(--pixel-reset-text)' }}>
+            リセットしますか？
+          </span>
           <button
             style={{ ...actionBarBtnStyle, background: 'var(--pixel-danger-bg)', color: '#fff' }}
             onClick={() => {
@@ -108,10 +110,10 @@ function EditActionBar({
               editor.handleReset();
             }}
           >
-            Yes
+            はい
           </button>
           <button style={actionBarBtnStyle} onClick={() => setShowResetConfirm(false)}>
-            No
+            いいえ
           </button>
         </div>
       )}
@@ -210,7 +212,7 @@ function App() {
           color: 'var(--vscode-foreground)',
         }}
       >
-        Loading...
+        読み込み中...
       </div>
     );
   }
@@ -290,7 +292,7 @@ function App() {
             whiteSpace: 'nowrap',
           }}
         >
-          Press <b>R</b> to rotate
+          <b>R</b>キーで回転
         </div>
       )}
 
@@ -316,6 +318,8 @@ function App() {
               onWallColorChange={editor.handleWallColorChange}
               onSelectedFurnitureColorChange={editor.handleSelectedFurnitureColorChange}
               onFurnitureTypeChange={editor.handleFurnitureTypeChange}
+              selectedZoneType={editorState.selectedZoneType}
+              onZoneTypeChange={editor.handleZoneTypeChange}
               loadedAssets={loadedAssets}
             />
           );

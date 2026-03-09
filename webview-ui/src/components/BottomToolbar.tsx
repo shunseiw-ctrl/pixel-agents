@@ -103,7 +103,7 @@ export function BottomToolbar({
             color: 'var(--pixel-agent-text)',
           }}
         >
-          + Agent
+          + エージェント
         </button>
         {isFolderPickerOpen && (
           <div
@@ -158,9 +158,9 @@ export function BottomToolbar({
                 background: hovered === 'edit' ? 'var(--pixel-btn-hover-bg)' : btnBase.background,
               }
         }
-        title="Edit office layout"
+        title="オフィスレイアウトを編集"
       >
-        Layout
+        レイアウト
       </button>
       <div style={{ position: 'relative' }}>
         <button
@@ -176,9 +176,9 @@ export function BottomToolbar({
                     hovered === 'settings' ? 'var(--pixel-btn-hover-bg)' : btnBase.background,
                 }
           }
-          title="Settings"
+          title="設定"
         >
-          Settings
+          設定
         </button>
         <SettingsModal
           isOpen={isSettingsOpen}

@@ -269,7 +269,9 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
       } else if (message.type === 'exportLayout') {
         const layout = readLayoutFromFile();
         if (!layout) {
-          vscode.window.showWarningMessage('Pixel Agents: No saved layout to export.');
+          vscode.window.showWarningMessage(
+            'Pixel Agents: エクスポートするレイアウトがありません。',
+          );
           return;
         }
         const uri = await vscode.window.showSaveDialog({
@@ -278,7 +280,7 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         });
         if (uri) {
           fs.writeFileSync(uri.fsPath, JSON.stringify(layout, null, 2), 'utf-8');
-          vscode.window.showInformationMessage('Pixel Agents: Layout exported successfully.');
+          vscode.window.showInformationMessage('Pixel Agents: レイアウトをエクスポートしました。');
         }
       } else if (message.type === 'importLayout') {
         const uris = await vscode.window.showOpenDialog({
@@ -290,15 +292,17 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           const raw = fs.readFileSync(uris[0].fsPath, 'utf-8');
           const imported = JSON.parse(raw) as Record<string, unknown>;
           if (imported.version !== 1 || !Array.isArray(imported.tiles)) {
-            vscode.window.showErrorMessage('Pixel Agents: Invalid layout file.');
+            vscode.window.showErrorMessage('Pixel Agents: 無効なレイアウトファイルです。');
             return;
           }
           this.layoutWatcher?.markOwnWrite();
           writeLayoutToFile(imported);
           this.webview?.postMessage({ type: 'layoutLoaded', layout: imported });
-          vscode.window.showInformationMessage('Pixel Agents: Layout imported successfully.');
+          vscode.window.showInformationMessage('Pixel Agents: レイアウトをインポートしました。');
         } catch {
-          vscode.window.showErrorMessage('Pixel Agents: Failed to read or parse layout file.');
+          vscode.window.showErrorMessage(
+            'Pixel Agents: レイアウトファイルの読み込みに失敗しました。',
+          );
         }
       }
     });
@@ -341,12 +345,12 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   exportDefaultLayout(): void {
     const layout = readLayoutFromFile();
     if (!layout) {
-      vscode.window.showWarningMessage('Pixel Agents: No saved layout found.');
+      vscode.window.showWarningMessage('Pixel Agents: 保存されたレイアウトが見つかりません。');
       return;
     }
     const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
     if (!workspaceRoot) {
-      vscode.window.showErrorMessage('Pixel Agents: No workspace folder found.');
+      vscode.window.showErrorMessage('Pixel Agents: ワークスペースフォルダが見つかりません。');
       return;
     }
     const targetPath = path.join(
@@ -358,7 +362,9 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     );
     const json = JSON.stringify(layout, null, 2);
     fs.writeFileSync(targetPath, json, 'utf-8');
-    vscode.window.showInformationMessage(`Pixel Agents: Default layout exported to ${targetPath}`);
+    vscode.window.showInformationMessage(
+      `Pixel Agents: デフォルトレイアウトを ${targetPath} にエクスポートしました`,
+    );
   }
 
   private startLayoutWatcher(): void {

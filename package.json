@@ -22,11 +22,11 @@
     "commands": [
       {
         "command": "pixel-agents.showPanel",
-        "title": "Pixel Agents: Show Panel"
+        "title": "Pixel Agents: パネルを表示"
       },
       {
         "command": "pixel-agents.exportDefaultLayout",
-        "title": "Pixel Agents: Export Layout as Default"
+        "title": "Pixel Agents: デフォルトレイアウトとしてエクスポート"
       }
     ],
     "viewsContainers": {

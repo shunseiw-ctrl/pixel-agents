@@ -102,6 +102,7 @@ export const EditTool = {
   SELECT: 'select',
   EYEDROPPER: 'eyedropper',
   ERASE: 'erase',
+  ZONE_PAINT: 'zone_paint',
 } as const;
 export type EditTool = (typeof EditTool)[keyof typeof EditTool];
 
@@ -132,6 +133,26 @@ export interface PlacedFurniture {
   color?: FloorColor;
 }
 
+/** Zone types for automatic agent movement */
+export const ZoneType = {
+  WORK: 'work',
+  REST: 'rest',
+  ALERT: 'alert',
+} as const;
+export type ZoneType = (typeof ZoneType)[keyof typeof ZoneType];
+
+export interface Zone {
+  type: ZoneType;
+  label: string;
+  color: string;
+  tiles: Array<{ col: number; row: number }>;
+  seats: Array<{ col: number; row: number }>;
+}
+
+export interface ZoneConfig {
+  zones: Zone[];
+}
+
 export interface OfficeLayout {
   version: 1;
   cols: number;
@@ -140,6 +161,8 @@ export interface OfficeLayout {
   furniture: PlacedFurniture[];
   /** Per-tile color settings, parallel to tiles array. null = wall/no color */
   tileColors?: Array<FloorColor | null>;
+  /** Zone configuration for automatic agent movement */
+  zones?: ZoneConfig;
 }
 
 export interface Character {

@@ -111,3 +111,30 @@ export const CHARACTER_HIT_HALF_WIDTH = 8;
 export const CHARACTER_HIT_HEIGHT = 24;
 export const TOOL_OVERLAY_VERTICAL_OFFSET = 32;
 export const PULSE_ANIMATION_DURATION_SEC = 1.5;
+
+// ── Zone System ─────────────────────────────────────────────
+export const ZONE_MOVE_DEBOUNCE_MS = 3000;
+export const IDLE_TO_REST_DELAY_MS = 15000;
+export const ZONE_WORK_COLOR = 'rgba(74, 144, 217, 0.15)';
+export const ZONE_REST_COLOR = 'rgba(80, 200, 120, 0.15)';
+export const ZONE_ALERT_COLOR = 'rgba(217, 83, 79, 0.15)';
+
+// ── Thought Bubbles ─────────────────────────────────────────
+export const THOUGHT_MAX_LENGTH = 30;
+export const THOUGHT_UPDATE_INTERVAL_MS = 5000;
+export const LOOP_DETECTION_THRESHOLD = 3;
+
+// ── Notification Throttling ─────────────────────────────────
+export const NOTIFY_COOLDOWN_ERROR_MS = 30000;
+export const NOTIFY_COOLDOWN_LOOP_MS = 60000;
+export const NOTIFY_COOLDOWN_INPUT_MS = 15000;
+
+// ── Cost Calculation ($/1K tokens, Claude Sonnet 4) ─────────
+export const COST_INPUT_PER_1K = 0.003;
+export const COST_OUTPUT_PER_1K = 0.015;
+export const COST_CACHE_WRITE_PER_1K = 0.00375;
+export const COST_CACHE_READ_PER_1K = 0.0003;
+
+// ── Completion/Failure Animation ────────────────────────────
+export const COMPLETE_POSE_DURATION_SEC = 2.0;
+export const FAILED_POSE_DURATION_SEC = 2.0;

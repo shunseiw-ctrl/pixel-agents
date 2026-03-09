@@ -339,13 +339,13 @@ export function getActiveCategories(): Array<{ id: FurnitureCategory; label: str
 }
 
 export const FURNITURE_CATEGORIES: Array<{ id: FurnitureCategory; label: string }> = [
-  { id: 'desks', label: 'Desks' },
-  { id: 'chairs', label: 'Chairs' },
-  { id: 'storage', label: 'Storage' },
-  { id: 'electronics', label: 'Tech' },
-  { id: 'decor', label: 'Decor' },
-  { id: 'wall', label: 'Wall' },
-  { id: 'misc', label: 'Misc' },
+  { id: 'desks', label: 'デスク' },
+  { id: 'chairs', label: 'チェア' },
+  { id: 'storage', label: '収納' },
+  { id: 'electronics', label: '電子機器' },
+  { id: 'decor', label: '装飾' },
+  { id: 'wall', label: '壁面' },
+  { id: 'misc', label: 'その他' },
 ];
 
 // ── Rotation helpers ─────────────────────────────────────────────

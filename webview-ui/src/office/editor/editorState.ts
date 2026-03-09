@@ -1,6 +1,11 @@
 import { DEFAULT_FLOOR_COLOR, DEFAULT_WALL_COLOR, UNDO_STACK_MAX_SIZE } from '../../constants.js';
-import type { FloorColor, OfficeLayout, TileType as TileTypeVal } from '../types.js';
-import { EditTool, TileType } from '../types.js';
+import type {
+  FloorColor,
+  OfficeLayout,
+  TileType as TileTypeVal,
+  ZoneType as ZoneTypeVal,
+} from '../types.js';
+import { EditTool, TileType, ZoneType } from '../types.js';
 
 export class EditorState {
   isEditMode = false;
@@ -19,6 +24,9 @@ export class EditorState {
 
   // Picked furniture color (copied by pick tool, applied on placement)
   pickedFurnitureColor: FloorColor | null = null;
+
+  // Zone paint: selected zone type
+  selectedZoneType: ZoneTypeVal = ZoneType.WORK;
 
   // Ghost preview position
   ghostCol = -1;

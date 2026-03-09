@@ -28,7 +28,7 @@ function getActivityText(
     // Find the latest non-done tool
     const activeTool = [...tools].reverse().find((t) => !t.done);
     if (activeTool) {
-      if (activeTool.permissionWait) return 'Needs approval';
+      if (activeTool.permissionWait) return '許可が必要です';
       return activeTool.status;
     }
     // All tools done but agent still active (mid-turn) — keep showing last tool status
@@ -38,7 +38,7 @@ function getActivityText(
     }
   }
 
-  return 'Idle';
+  return '待機中';
 }
 
 export function ToolOverlay({
@@ -104,10 +104,10 @@ export function ToolOverlay({
         let activityText: string;
         if (isSub) {
           if (subHasPermission) {
-            activityText = 'Needs approval';
+            activityText = '許可が必要です';
           } else {
             const sub = subagentCharacters.find((s) => s.id === id);
-            activityText = sub ? sub.label : 'Subtask';
+            activityText = sub ? sub.label : 'サブタスク';
           }
         } else {
           activityText = getActivityText(id, agentTools, ch.isActive);
@@ -202,7 +202,7 @@ export function ToolOverlay({
                     e.stopPropagation();
                     onCloseAgent(id);
                   }}
-                  title="Close agent"
+                  title="エージェントを閉じる"
                   style={{
                     background: 'none',
                     border: 'none',

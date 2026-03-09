@@ -131,7 +131,8 @@ export function OfficeCanvas({
           const showGhostBorder =
             editorState.activeTool === EditTool.TILE_PAINT ||
             editorState.activeTool === EditTool.WALL_PAINT ||
-            editorState.activeTool === EditTool.ERASE;
+            editorState.activeTool === EditTool.ERASE ||
+            editorState.activeTool === EditTool.ZONE_PAINT;
           editorRender = {
             showGrid: true,
             ghostSprite: null,
@@ -262,6 +263,7 @@ export function OfficeCanvas({
           officeState.getLayout().tileColors,
           officeState.getLayout().cols,
           officeState.getLayout().rows,
+          officeState.getLayout().zones,
         );
         offsetRef.current = { x: offsetX, y: offsetY };
 
@@ -305,12 +307,13 @@ export function OfficeCanvas({
       const col = Math.floor(pos.worldX / TILE_SIZE);
       const row = Math.floor(pos.worldY / TILE_SIZE);
       const layout = officeState.getLayout();
-      // In edit mode with floor/wall/erase tool, extend valid range by 1 for ghost border
+      // In edit mode with floor/wall/erase/zone tool, extend valid range by 1 for ghost border
       if (
         isEditMode &&
         (editorState.activeTool === EditTool.TILE_PAINT ||
           editorState.activeTool === EditTool.WALL_PAINT ||
-          editorState.activeTool === EditTool.ERASE)
+          editorState.activeTool === EditTool.ERASE ||
+          editorState.activeTool === EditTool.ZONE_PAINT)
       ) {
         if (col < -1 || col > layout.cols || row < -1 || row > layout.rows) return null;
         return { col, row };
@@ -363,12 +366,13 @@ export function OfficeCanvas({
             }
           }
 
-          // Paint on drag (tile/wall/erase paint tool only, not during furniture drag)
+          // Paint on drag (tile/wall/erase/zone paint tool only, not during furniture drag)
           if (
             editorState.isDragging &&
             (editorState.activeTool === EditTool.TILE_PAINT ||
               editorState.activeTool === EditTool.WALL_PAINT ||
-              editorState.activeTool === EditTool.ERASE) &&
+              editorState.activeTool === EditTool.ERASE ||
+              editorState.activeTool === EditTool.ZONE_PAINT) &&
             !editorState.dragUid
           ) {
             onEditorTileAction(tile.col, tile.row);
@@ -378,7 +382,8 @@ export function OfficeCanvas({
             isEraseDraggingRef.current &&
             (editorState.activeTool === EditTool.TILE_PAINT ||
               editorState.activeTool === EditTool.WALL_PAINT ||
-              editorState.activeTool === EditTool.ERASE)
+              editorState.activeTool === EditTool.ERASE ||
+              editorState.activeTool === EditTool.ZONE_PAINT)
           ) {
             const layout = officeState.getLayout();
             if (
@@ -518,7 +523,8 @@ export function OfficeCanvas({
           tile &&
           (editorState.activeTool === EditTool.TILE_PAINT ||
             editorState.activeTool === EditTool.WALL_PAINT ||
-            editorState.activeTool === EditTool.ERASE)
+            editorState.activeTool === EditTool.ERASE ||
+            editorState.activeTool === EditTool.ZONE_PAINT)
         ) {
           const layout = officeState.getLayout();
           if (tile.col >= 0 && tile.col < layout.cols && tile.row >= 0 && tile.row < layout.rows) {

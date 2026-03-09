@@ -108,9 +108,11 @@ export function useExtensionMessages(
         const layout = rawLayout && rawLayout.version === 1 ? migrateLayoutColors(rawLayout) : null;
         if (layout) {
           os.rebuildFromLayout(layout);
+          os.ensureZones();
           onLayoutLoaded?.(layout);
         } else {
           // Default layout — snapshot whatever OfficeState built
+          os.ensureZones();
           onLayoutLoaded?.(os.getLayout());
         }
         // Add buffered agents now that layout (and seats) are correct

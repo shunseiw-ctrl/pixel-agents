@@ -22,37 +22,37 @@ export function formatToolStatus(toolName: string, input: Record<string, unknown
   const base = (p: unknown) => (typeof p === 'string' ? path.basename(p) : '');
   switch (toolName) {
     case 'Read':
-      return `Reading ${base(input.file_path)}`;
+      return `${base(input.file_path)} を読取中`;
     case 'Edit':
-      return `Editing ${base(input.file_path)}`;
+      return `${base(input.file_path)} を編集中`;
     case 'Write':
-      return `Writing ${base(input.file_path)}`;
+      return `${base(input.file_path)} を書込中`;
     case 'Bash': {
       const cmd = (input.command as string) || '';
-      return `Running: ${cmd.length > BASH_COMMAND_DISPLAY_MAX_LENGTH ? cmd.slice(0, BASH_COMMAND_DISPLAY_MAX_LENGTH) + '\u2026' : cmd}`;
+      return `実行中: ${cmd.length > BASH_COMMAND_DISPLAY_MAX_LENGTH ? cmd.slice(0, BASH_COMMAND_DISPLAY_MAX_LENGTH) + '\u2026' : cmd}`;
     }
     case 'Glob':
-      return 'Searching files';
+      return 'ファイル検索中';
     case 'Grep':
-      return 'Searching code';
+      return 'コード検索中';
     case 'WebFetch':
-      return 'Fetching web content';
+      return 'Web取得中';
     case 'WebSearch':
-      return 'Searching the web';
+      return 'Web検索中';
     case 'Task': {
       const desc = typeof input.description === 'string' ? input.description : '';
       return desc
-        ? `Subtask: ${desc.length > TASK_DESCRIPTION_DISPLAY_MAX_LENGTH ? desc.slice(0, TASK_DESCRIPTION_DISPLAY_MAX_LENGTH) + '\u2026' : desc}`
-        : 'Running subtask';
+        ? `サブタスク: ${desc.length > TASK_DESCRIPTION_DISPLAY_MAX_LENGTH ? desc.slice(0, TASK_DESCRIPTION_DISPLAY_MAX_LENGTH) + '\u2026' : desc}`
+        : 'サブタスク実行中';
     }
     case 'AskUserQuestion':
-      return 'Waiting for your answer';
+      return '入力待ち';
     case 'EnterPlanMode':
-      return 'Planning';
+      return '計画中';
     case 'NotebookEdit':
-      return `Editing notebook`;
+      return 'ノートブック編集中';
     default:
-      return `Using ${toolName}`;
+      return `${toolName} を使用中`;
   }
 }
 
