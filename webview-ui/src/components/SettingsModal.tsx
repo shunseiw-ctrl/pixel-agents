@@ -8,6 +8,8 @@ interface SettingsModalProps {
   onClose: () => void;
   isDebugMode: boolean;
   onToggleDebugMode: () => void;
+  showThoughts: boolean;
+  onToggleThoughts: () => void;
 }
 
 const menuItemBase: React.CSSProperties = {
@@ -30,6 +32,8 @@ export function SettingsModal({
   onClose,
   isDebugMode,
   onToggleDebugMode,
+  showThoughts,
+  onToggleThoughts,
 }: SettingsModalProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [soundLocal, setSoundLocal] = useState(isSoundEnabled);
@@ -172,6 +176,35 @@ export function SettingsModal({
             }}
           >
             {soundLocal ? 'X' : ''}
+          </span>
+        </button>
+        <button
+          onClick={onToggleThoughts}
+          onMouseEnter={() => setHovered('thoughts')}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            ...menuItemBase,
+            background: hovered === 'thoughts' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+          }}
+        >
+          <span>思考つぶやき表示</span>
+          <span
+            style={{
+              width: 14,
+              height: 14,
+              border: '2px solid rgba(255, 255, 255, 0.5)',
+              borderRadius: 0,
+              background: showThoughts ? 'rgba(90, 140, 255, 0.8)' : 'transparent',
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              lineHeight: 1,
+              color: '#fff',
+            }}
+          >
+            {showThoughts ? 'X' : ''}
           </span>
         </button>
         <button

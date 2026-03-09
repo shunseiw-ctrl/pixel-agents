@@ -41,11 +41,17 @@ export interface WorkspaceFolder {
   path: string;
 }
 
+export interface AgentThought {
+  text: string;
+  isAnomalous: boolean;
+}
+
 export interface ExtensionMessageState {
   agents: number[];
   selectedAgent: number | null;
   agentTools: Record<number, ToolActivity[]>;
   agentStatuses: Record<number, string>;
+  agentThoughts: Record<number, AgentThought>;
   subagentTools: Record<number, Record<string, ToolActivity[]>>;
   subagentCharacters: SubagentCharacter[];
   layoutReady: boolean;
@@ -66,11 +72,13 @@ export function useExtensionMessages(
   getOfficeState: () => OfficeState,
   onLayoutLoaded?: (layout: OfficeLayout) => void,
   isEditDirty?: () => boolean,
+  onThoughtEnabledLoaded?: (enabled: boolean) => void,
 ): ExtensionMessageState {
   const [agents, setAgents] = useState<number[]>([]);
   const [selectedAgent, setSelectedAgent] = useState<number | null>(null);
   const [agentTools, setAgentTools] = useState<Record<number, ToolActivity[]>>({});
   const [agentStatuses, setAgentStatuses] = useState<Record<number, string>>({});
+  const [agentThoughts, setAgentThoughts] = useState<Record<number, AgentThought>>({});
   const [subagentTools, setSubagentTools] = useState<
     Record<number, Record<string, ToolActivity[]>>
   >({});
@@ -143,6 +151,12 @@ export function useExtensionMessages(
           return next;
         });
         setAgentStatuses((prev) => {
+          if (!(id in prev)) return prev;
+          const next = { ...prev };
+          delete next[id];
+          return next;
+        });
+        setAgentThoughts((prev) => {
           if (!(id in prev)) return prev;
           const next = { ...prev };
           delete next[id];
@@ -258,6 +272,11 @@ export function useExtensionMessages(
           os.showWaitingBubble(id);
           playDoneSound();
         }
+      } else if (msg.type === 'agentThought') {
+        const id = msg.id as number;
+        const text = msg.text as string;
+        const isAnomalous = msg.isAnomalous as boolean;
+        setAgentThoughts((prev) => ({ ...prev, [id]: { text, isAnomalous } }));
       } else if (msg.type === 'agentToolPermission') {
         const id = msg.id as number;
         setAgentTools((prev) => {
@@ -376,6 +395,9 @@ export function useExtensionMessages(
       } else if (msg.type === 'settingsLoaded') {
         const soundOn = msg.soundEnabled as boolean;
         setSoundEnabled(soundOn);
+        if (msg.thoughtEnabled !== undefined) {
+          onThoughtEnabledLoaded?.(msg.thoughtEnabled as boolean);
+        }
       } else if (msg.type === 'furnitureAssetsLoaded') {
         try {
           const catalog = msg.catalog as FurnitureAsset[];
@@ -399,6 +421,7 @@ export function useExtensionMessages(
     selectedAgent,
     agentTools,
     agentStatuses,
+    agentThoughts,
     subagentTools,
     subagentCharacters,
     layoutReady,

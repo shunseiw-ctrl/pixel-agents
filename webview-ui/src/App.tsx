@@ -129,21 +129,30 @@ function App() {
     [editor.isEditMode, editor.isDirty],
   );
 
+  const [isDebugMode, setIsDebugMode] = useState(false);
+  const [showThoughts, setShowThoughts] = useState(true);
+
   const {
     agents,
     selectedAgent,
     agentTools,
     agentStatuses,
+    agentThoughts,
     subagentTools,
     subagentCharacters,
     layoutReady,
     loadedAssets,
     workspaceFolders,
-  } = useExtensionMessages(getOfficeState, editor.setLastSavedLayout, isEditDirty);
-
-  const [isDebugMode, setIsDebugMode] = useState(false);
+  } = useExtensionMessages(getOfficeState, editor.setLastSavedLayout, isEditDirty, setShowThoughts);
 
   const handleToggleDebugMode = useCallback(() => setIsDebugMode((prev) => !prev), []);
+  const handleToggleThoughts = useCallback(() => {
+    setShowThoughts((prev) => {
+      const newVal = !prev;
+      vscode.postMessage({ type: 'setThoughtEnabled', enabled: newVal });
+      return newVal;
+    });
+  }, []);
 
   const handleSelectAgent = useCallback((id: number) => {
     vscode.postMessage({ type: 'focusAgent', id });
@@ -266,6 +275,8 @@ function App() {
         onToggleEditMode={editor.handleToggleEditMode}
         isDebugMode={isDebugMode}
         onToggleDebugMode={handleToggleDebugMode}
+        showThoughts={showThoughts}
+        onToggleThoughts={handleToggleThoughts}
         workspaceFolders={workspaceFolders}
       />
 
@@ -329,6 +340,8 @@ function App() {
         officeState={officeState}
         agents={agents}
         agentTools={agentTools}
+        agentThoughts={agentThoughts}
+        showThoughts={showThoughts}
         subagentCharacters={subagentCharacters}
         containerRef={containerRef}
         zoom={editor.zoom}

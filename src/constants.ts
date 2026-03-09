@@ -29,8 +29,13 @@ export const LAYOUT_FILE_DIR = '.pixel-agents';
 export const LAYOUT_FILE_NAME = 'layout.json';
 export const LAYOUT_FILE_POLL_INTERVAL_MS = 2000;
 
+// ── Thought Bubbles ─────────────────────────────────────────
+export const THOUGHT_MAX_LENGTH = 30;
+export const LOOP_DETECTION_THRESHOLD = 3;
+
 // ── Settings Persistence ────────────────────────────────────
 export const GLOBAL_KEY_SOUND_ENABLED = 'pixel-agents.soundEnabled';
+export const GLOBAL_KEY_THOUGHT_ENABLED = 'pixel-agents.thoughtBubblesEnabled';
 
 // ── VS Code Identifiers ─────────────────────────────────────
 export const VIEW_ID = 'pixel-agents.panelView';

@@ -17,6 +17,10 @@ export interface AgentState {
   hadToolsInTurn: boolean;
   /** Workspace folder name (only set for multi-root workspaces) */
   folderName?: string;
+  /** Last thought text for loop detection */
+  lastThoughtText: string;
+  /** Consecutive count of same thought text */
+  thoughtRepeatCount: number;
 }
 
 export interface PersistedAgent {

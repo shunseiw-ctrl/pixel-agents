@@ -81,6 +81,8 @@ export async function launchNewTerminal(
     permissionSent: false,
     hadToolsInTurn: false,
     folderName,
+    lastThoughtText: '',
+    thoughtRepeatCount: 0,
   };
 
   agents.set(id, agent);
@@ -236,6 +238,8 @@ export function restoreAgents(
       permissionSent: false,
       hadToolsInTurn: false,
       folderName: p.folderName,
+      lastThoughtText: '',
+      thoughtRepeatCount: 0,
     };
 
     agents.set(p.id, agent);

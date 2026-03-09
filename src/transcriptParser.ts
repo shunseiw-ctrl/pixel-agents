@@ -3,8 +3,10 @@ import type * as vscode from 'vscode';
 
 import {
   BASH_COMMAND_DISPLAY_MAX_LENGTH,
+  LOOP_DETECTION_THRESHOLD,
   TASK_DESCRIPTION_DISPLAY_MAX_LENGTH,
   TEXT_IDLE_DELAY_MS,
+  THOUGHT_MAX_LENGTH,
   TOOL_DONE_DELAY_MS,
 } from './constants.js';
 import {
@@ -17,6 +19,77 @@ import {
 import type { AgentState } from './types.js';
 
 export const PERMISSION_EXEMPT_TOOLS = new Set(['Task', 'AskUserQuestion']);
+
+/** Generate a concise thought text from tool usage for bubble display */
+function generateThoughtText(toolName: string, input: Record<string, unknown>): string {
+  const base = (p: unknown) => (typeof p === 'string' ? path.basename(p) : '');
+  let text: string;
+  switch (toolName) {
+    case 'Read':
+    case 'Glob':
+    case 'Grep':
+      text = base(input.file_path) ? `${base(input.file_path)} を確認中...` : '情報を確認中...';
+      break;
+    case 'Edit':
+      text = base(input.file_path) ? `${base(input.file_path)} を編集中...` : 'コードを編集中...';
+      break;
+    case 'Write':
+      text = base(input.file_path) ? `${base(input.file_path)} を書込中...` : 'ファイルを作成中...';
+      break;
+    case 'Bash': {
+      const cmd = ((input.command as string) || '').split(/\s+/)[0] || '';
+      text = cmd ? `${cmd} を実行中...` : 'コマンド実行中...';
+      break;
+    }
+    case 'WebFetch':
+    case 'WebSearch':
+      text = '情報を検索中...';
+      break;
+    case 'Task':
+      text = 'サブタスクを実行中...';
+      break;
+    case 'AskUserQuestion':
+      text = '入力を待っています';
+      break;
+    case 'EnterPlanMode':
+      text = '計画を立てています...';
+      break;
+    default:
+      text = `${toolName} を使用中...`;
+      break;
+  }
+  // Truncate to max length
+  if (text.length > THOUGHT_MAX_LENGTH) {
+    text = text.slice(0, THOUGHT_MAX_LENGTH - 1) + '…';
+  }
+  return text;
+}
+
+/** Send thought text to webview with loop detection */
+function sendThought(
+  agentId: number,
+  text: string,
+  agent: AgentState,
+  webview: vscode.Webview | undefined,
+): void {
+  let isAnomalous = false;
+  if (text === agent.lastThoughtText) {
+    agent.thoughtRepeatCount++;
+    if (agent.thoughtRepeatCount >= LOOP_DETECTION_THRESHOLD) {
+      isAnomalous = true;
+      text = '⚠ 同じ処理を繰り返しています';
+    }
+  } else {
+    agent.lastThoughtText = text;
+    agent.thoughtRepeatCount = 1;
+  }
+  webview?.postMessage({
+    type: 'agentThought',
+    id: agentId,
+    text,
+    isAnomalous,
+  });
+}
 
 export function formatToolStatus(toolName: string, input: Record<string, unknown>): string {
   const base = (p: unknown) => (typeof p === 'string' ? path.basename(p) : '');
@@ -101,6 +174,9 @@ export function processTranscriptLine(
               toolId: block.id,
               status,
             });
+            // Send thought text for the tool
+            const thought = generateThoughtText(toolName, block.input || {});
+            sendThought(agentId, thought, agent, webview);
           }
         }
         if (hasNonExemptTool) {
@@ -187,6 +263,7 @@ export function processTranscriptLine(
         id: agentId,
         status: 'waiting',
       });
+      sendThought(agentId, '指示を待っています', agent, webview);
     }
   } catch {
     // Ignore malformed lines
