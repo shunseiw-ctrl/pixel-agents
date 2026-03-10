@@ -30,6 +30,7 @@ import {
   GLOBAL_KEY_SOUND_ENABLED,
   GLOBAL_KEY_THOUGHT_ENABLED,
   WORKSPACE_KEY_AGENT_SEATS,
+  WORKSPACE_KEY_AGENTS,
 } from './constants.js';
 import { ensureProjectScan } from './fileWatcher.js';
 import type { LayoutWatcher } from './layoutPersistence.js';
@@ -109,6 +110,21 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         const agent = this.agents.get(message.id);
         if (agent?.terminalRef) {
           agent.terminalRef.dispose();
+          // onDidCloseTerminal will handle removal
+        } else if (agent) {
+          // No terminal — remove directly
+          clearAgentCooldowns(message.id);
+          removeAgent(
+            message.id,
+            this.agents,
+            this.fileWatchers,
+            this.pollingTimers,
+            this.waitingTimers,
+            this.permissionTimers,
+            this.jsonlPollTimers,
+            this.persistAgents,
+          );
+          webviewView.webview.postMessage({ type: 'agentClosed', id: message.id });
         }
       } else if (message.type === 'saveAgentSeats') {
         // Store seat assignments in a separate key (never touched by persistAgents)
@@ -134,6 +150,8 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           this.context.globalState.update(key, enabled);
         }
       } else if (message.type === 'webviewReady') {
+        // Clear stale persisted agents (one-time migration from scanExistingSessions era)
+        this.context.workspaceState.update(WORKSPACE_KEY_AGENTS, undefined);
         restoreAgents(
           this.context,
           this.nextAgentId,

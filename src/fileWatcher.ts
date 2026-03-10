@@ -163,54 +163,62 @@ function scanForNewJsonlFiles(
     return;
   }
 
+  // Build set of files already tracked by agents
+  const agentFiles = new Set<string>();
+  for (const agent of agents.values()) {
+    agentFiles.add(agent.jsonlFile);
+  }
+
   for (const file of files) {
-    if (!knownJsonlFiles.has(file)) {
+    if (knownJsonlFiles.has(file) || agentFiles.has(file)) continue;
+
+    if (activeAgentIdRef.current !== null) {
+      // Active agent focused → /clear reassignment
       knownJsonlFiles.add(file);
-      if (activeAgentIdRef.current !== null) {
-        // Active agent focused → /clear reassignment
-        console.log(
-          `[Pixel Agents] New JSONL detected: ${path.basename(file)}, reassigning to agent ${activeAgentIdRef.current}`,
-        );
-        reassignAgentToFile(
-          activeAgentIdRef.current,
-          file,
-          agents,
-          fileWatchers,
-          pollingTimers,
-          waitingTimers,
-          permissionTimers,
-          webview,
-          persistAgents,
-        );
-      } else {
-        // No active agent → try to adopt the focused terminal
-        const activeTerminal = vscode.window.activeTerminal;
-        if (activeTerminal) {
-          let owned = false;
-          for (const agent of agents.values()) {
-            if (agent.terminalRef === activeTerminal) {
-              owned = true;
-              break;
-            }
-          }
-          if (!owned) {
-            adoptTerminalForFile(
-              activeTerminal,
-              file,
-              projectDir,
-              nextAgentIdRef,
-              agents,
-              activeAgentIdRef,
-              fileWatchers,
-              pollingTimers,
-              waitingTimers,
-              permissionTimers,
-              webview,
-              persistAgents,
-            );
+      console.log(
+        `[Pixel Agents] New JSONL detected: ${path.basename(file)}, reassigning to agent ${activeAgentIdRef.current}`,
+      );
+      reassignAgentToFile(
+        activeAgentIdRef.current,
+        file,
+        agents,
+        fileWatchers,
+        pollingTimers,
+        waitingTimers,
+        permissionTimers,
+        webview,
+        persistAgents,
+      );
+    } else {
+      // No active agent → try to adopt the focused terminal
+      const activeTerminal = vscode.window.activeTerminal;
+      if (activeTerminal) {
+        let owned = false;
+        for (const agent of agents.values()) {
+          if (agent.terminalRef === activeTerminal) {
+            owned = true;
+            break;
           }
         }
+        if (!owned) {
+          knownJsonlFiles.add(file);
+          adoptTerminalForFile(
+            activeTerminal,
+            file,
+            projectDir,
+            nextAgentIdRef,
+            agents,
+            activeAgentIdRef,
+            fileWatchers,
+            pollingTimers,
+            waitingTimers,
+            permissionTimers,
+            webview,
+            persistAgents,
+          );
+        }
       }
+      // If no active terminal, DON'T mark as known — retry on next scan
     }
   }
 }

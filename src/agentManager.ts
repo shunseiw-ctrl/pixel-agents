@@ -23,7 +23,7 @@ export function getProjectDirPath(cwd?: string): string | null {
 
   // Walk from exact workspace path up to home, return first existing dir.
   // Claude Code may resolve the project root to a parent directory
-  // (e.g. home dir) when the workspace lacks .git.
+  // (e.g. home dir) when the workspace lacks its own project dir.
   let current = workspacePath;
   while (current.length >= home.length) {
     const dirName = current.replace(/[^a-zA-Z0-9-]/g, '-');
