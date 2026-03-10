@@ -295,29 +295,6 @@ export function useExtensionMessages(
         setSubagentCharacters((prev) => prev.filter((s) => s.parentAgentId !== id));
         os.setAgentTool(id, null);
         os.clearPermissionBubble(id);
-      } else if (msg.type === 'agentIdle') {
-        // Terminal closed but agent stays visible — mark as inactive
-        // Zone system will move character to rest zone automatically
-        const id = msg.id as number;
-        os.setAgentActive(id, false);
-        os.setAgentTool(id, null);
-        os.clearPermissionBubble(id);
-        // Remove all sub-agents
-        os.removeAllSubagents(id);
-        setSubagentCharacters((prev) => prev.filter((s) => s.parentAgentId !== id));
-        // Clear tools but keep agent in the list
-        setAgentTools((prev) => {
-          if (!(id in prev)) return prev;
-          const next = { ...prev };
-          delete next[id];
-          return next;
-        });
-        setSubagentTools((prev) => {
-          if (!(id in prev)) return prev;
-          const next = { ...prev };
-          delete next[id];
-          return next;
-        });
       } else if (msg.type === 'agentSelected') {
         const id = msg.id as number;
         setSelectedAgent(id);

@@ -17,9 +17,34 @@ import type { AgentState, PersistedAgent } from './types.js';
 export function getProjectDirPath(cwd?: string): string | null {
   const workspacePath = cwd || vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
   if (!workspacePath) return null;
+
+  const home = os.homedir();
+  const projectsBase = path.join(home, '.claude', 'projects');
+
+  // Walk from exact workspace path up to home, return first existing dir.
+  // Claude Code may resolve the project root to a parent directory
+  // (e.g. home dir) when the workspace lacks .git.
+  let current = workspacePath;
+  while (current.length >= home.length) {
+    const dirName = current.replace(/[^a-zA-Z0-9-]/g, '-');
+    const candidate = path.join(projectsBase, dirName);
+    try {
+      if (fs.existsSync(candidate)) {
+        console.log(`[Pixel Agents] Project dir: ${workspacePath} → ${dirName} (found)`);
+        return candidate;
+      }
+    } catch {
+      /* ignore */
+    }
+    const parent = path.dirname(current);
+    if (parent === current) break;
+    current = parent;
+  }
+
+  // No existing dir found — return the workspace-based path (for new projects)
   const dirName = workspacePath.replace(/[^a-zA-Z0-9-]/g, '-');
-  const projectDir = path.join(os.homedir(), '.claude', 'projects', dirName);
-  console.log(`[Pixel Agents] Project dir: ${workspacePath} → ${dirName}`);
+  const projectDir = path.join(projectsBase, dirName);
+  console.log(`[Pixel Agents] Project dir: ${workspacePath} → ${dirName} (new)`);
   return projectDir;
 }
 

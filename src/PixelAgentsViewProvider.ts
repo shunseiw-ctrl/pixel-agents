@@ -31,7 +31,7 @@ import {
   GLOBAL_KEY_THOUGHT_ENABLED,
   WORKSPACE_KEY_AGENT_SEATS,
 } from './constants.js';
-import { ensureProjectScan, scanExistingSessions } from './fileWatcher.js';
+import { ensureProjectScan } from './fileWatcher.js';
 import type { LayoutWatcher } from './layoutPersistence.js';
 import { readLayoutFromFile, watchLayoutFile, writeLayoutToFile } from './layoutPersistence.js';
 import { clearAgentCooldowns, sendNotification } from './notificationManager.js';
@@ -182,22 +182,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         console.log('[Extension] workspaceRoot:', workspaceRoot);
         console.log('[Extension] projectDir:', projectDir);
         if (projectDir) {
-          // Scan for existing JSONL sessions (external terminals, recent sessions)
-          const scannedIds = scanExistingSessions(
-            projectDir,
-            this.knownJsonlFiles,
-            this.nextAgentId,
-            this.agents,
-            this.fileWatchers,
-            this.pollingTimers,
-            this.waitingTimers,
-            this.permissionTimers,
-            this.webview,
-            this.persistAgents,
-          );
-          if (scannedIds.length > 0) {
-            console.log(`[Extension] Detected ${scannedIds.length} existing session(s)`);
-          }
           ensureProjectScan(
             projectDir,
             this.knownJsonlFiles,
@@ -362,13 +346,18 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           if (this.activeAgentId.current === id) {
             this.activeAgentId.current = null;
           }
-          // Don't remove the agent — mark as idle instead
-          // Character will move to rest zone and remain visible
-          agent.terminalRef = null;
           clearAgentCooldowns(id);
-          this.persistAgents();
-          // Notify webview to mark agent as idle (not closed)
-          webviewView.webview.postMessage({ type: 'agentIdle', id });
+          removeAgent(
+            id,
+            this.agents,
+            this.fileWatchers,
+            this.pollingTimers,
+            this.waitingTimers,
+            this.permissionTimers,
+            this.jsonlPollTimers,
+            this.persistAgents,
+          );
+          webviewView.webview.postMessage({ type: 'agentClosed', id });
         }
       }
     });

@@ -189,6 +189,20 @@ export function ToolOverlay({
                   />
                 )}
                 <div style={{ overflow: 'hidden' }}>
+                  {ch.displayName && (
+                    <span
+                      style={{
+                        fontSize: '18px',
+                        color: 'var(--pixel-accent)',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: 'block',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {ch.displayName}
+                    </span>
+                  )}
                   <span
                     style={{
                       fontSize: isSub ? '20px' : '22px',
