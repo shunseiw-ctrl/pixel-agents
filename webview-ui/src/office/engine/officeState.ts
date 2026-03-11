@@ -327,6 +327,7 @@ export class OfficeState {
     skipSpawnEffect?: boolean,
     folderName?: string,
     displayName?: string,
+    preferredZone?: string,
   ): void {
     if (this.characters.has(id)) return;
 
@@ -341,7 +342,7 @@ export class OfficeState {
       hueShift = pick.hueShift;
     }
 
-    // Try preferred seat → WORK zone seat → any free seat
+    // Try preferred seat → preferred zone seat → (no zone pref: WORK zone → any free seat)
     let seatId: string | null = null;
     if (preferredSeatId && this.seats.has(preferredSeatId)) {
       const seat = this.seats.get(preferredSeatId)!;
@@ -349,11 +350,20 @@ export class OfficeState {
         seatId = preferredSeatId;
       }
     }
-    if (!seatId) {
-      seatId = findFreeSeatInZone('work', this.seats, this.layout.zones);
+    if (!seatId && preferredZone) {
+      seatId = findFreeSeatInZone(
+        preferredZone as 'work' | 'rest' | 'alert' | 'boss',
+        this.seats,
+        this.layout.zones,
+      );
+      // When preferredZone is set, do NOT fall back to other zones —
+      // agents without a seat will spawn on walkable tiles in their zone
     }
-    if (!seatId) {
-      seatId = this.findFreeSeat();
+    if (!seatId && !preferredZone) {
+      seatId = findFreeSeatInZone('work', this.seats, this.layout.zones);
+      if (!seatId) {
+        seatId = this.findFreeSeat();
+      }
     }
 
     let ch: Character;
@@ -362,10 +372,15 @@ export class OfficeState {
       seat.assigned = true;
       ch = createCharacter(id, palette, seatId, seat, hueShift);
     } else {
-      // No seats — spawn at random walkable tile
+      // No seats — spawn at random walkable tile (prefer zone if specified)
+      let spawnTiles = this.walkableTiles;
+      if (preferredZone) {
+        const zoneTiles = this.getZoneWalkable(preferredZone as 'work' | 'rest' | 'alert' | 'boss');
+        if (zoneTiles.length >= 3) spawnTiles = zoneTiles;
+      }
       const spawn =
-        this.walkableTiles.length > 0
-          ? this.walkableTiles[Math.floor(Math.random() * this.walkableTiles.length)]
+        spawnTiles.length > 0
+          ? spawnTiles[Math.floor(Math.random() * spawnTiles.length)]
           : { col: 1, row: 1 };
       ch = createCharacter(id, palette, null, null, hueShift);
       ch.x = spawn.col * TILE_SIZE + TILE_SIZE / 2;
@@ -384,6 +399,14 @@ export class OfficeState {
       ch.matrixEffectSeeds = matrixEffectSeeds();
     }
     this.characters.set(id, ch);
+
+    // Configured agents (with preferredZone) start inactive so zone system keeps them in place
+    if (preferredZone) {
+      ch.isActive = false;
+      const zoneState = createAgentZoneState();
+      zoneState.currentZone = preferredZone as 'work' | 'rest' | 'alert' | 'boss';
+      this.agentZoneStates.set(id, zoneState);
+    }
   }
 
   removeAgent(id: number, success?: boolean): void {

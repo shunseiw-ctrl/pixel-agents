@@ -29,6 +29,10 @@ export const LAYOUT_FILE_DIR = '.pixel-agents';
 export const LAYOUT_FILE_NAME = 'layout.json';
 export const LAYOUT_FILE_POLL_INTERVAL_MS = 2000;
 
+// ── Configured Agents (from ~/.claude/agents/) ──────────────
+/** ID offset for configured agent characters (avoids collision with session agents) */
+export const CONFIGURED_AGENT_ID_OFFSET = 10000;
+
 // ── External Session Scanning ────────────────────────────────
 /** How often to scan for external JSONL sessions (ms) */
 export const EXTERNAL_SCAN_INTERVAL_MS = 5000;

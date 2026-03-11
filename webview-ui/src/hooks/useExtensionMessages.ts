@@ -123,6 +123,7 @@ export function useExtensionMessages(
       seatId?: string;
       folderName?: string;
       displayName?: string;
+      initialZone?: string;
     }> = [];
 
     const handler = (e: MessageEvent) => {
@@ -148,7 +149,16 @@ export function useExtensionMessages(
         }
         // Add buffered agents now that layout (and seats) are correct
         for (const p of pendingAgents) {
-          os.addAgent(p.id, p.palette, p.hueShift, p.seatId, true, p.folderName, p.displayName);
+          os.addAgent(
+            p.id,
+            p.palette,
+            p.hueShift,
+            p.seatId,
+            true,
+            p.folderName,
+            p.displayName,
+            p.initialZone,
+          );
         }
         pendingAgents = [];
         layoutReadyRef.current = true;
@@ -258,6 +268,34 @@ export function useExtensionMessages(
           }
           return merged.sort((a, b) => a - b);
         });
+      } else if (msg.type === 'configuredAgents') {
+        const incoming = msg.agents as Array<{ id: number; name: string; displayName: string }>;
+        if (layoutReadyRef.current) {
+          // Layout already loaded — add directly (skip spawn effect for bulk add)
+          for (const agent of incoming) {
+            if (!os.characters.has(agent.id)) {
+              os.addAgent(
+                agent.id,
+                undefined,
+                undefined,
+                undefined,
+                true,
+                undefined,
+                agent.displayName,
+                'rest',
+              );
+            }
+          }
+        } else {
+          // Buffer until layout loads — will move to REST zone after layout
+          for (const agent of incoming) {
+            pendingAgents.push({
+              id: agent.id,
+              displayName: agent.displayName,
+              initialZone: 'rest',
+            });
+          }
+        }
       } else if (msg.type === 'agentToolStart') {
         const id = msg.id as number;
         const toolId = msg.toolId as string;

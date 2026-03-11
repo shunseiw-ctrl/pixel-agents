@@ -360,7 +360,6 @@ function App() {
 
       <AgentLabels
         officeState={officeState}
-        agents={agents}
         agentStatuses={agentStatuses}
         containerRef={containerRef}
         zoom={editor.zoom}

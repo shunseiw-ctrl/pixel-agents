@@ -26,6 +26,7 @@ import {
   sendWallTilesToWebview,
 } from './assetLoader.js';
 import {
+  CONFIGURED_AGENT_ID_OFFSET,
   EXTERNAL_SCAN_INTERVAL_MS,
   EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS,
   GLOBAL_KEY_MASTER_VOLUME,
@@ -339,6 +340,9 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         })();
 
         sendExistingAgents(this.agents, this.context, this.webview);
+
+        // Send configured agents from ~/.claude/agents/
+        this.scanConfiguredAgents();
 
         // Start scanning for external JSONL sessions (macOS Terminal, etc.)
         this.startExternalSessionScanning();
@@ -658,6 +662,36 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           /* ignore stat errors */
         }
       }
+    }
+  }
+
+  /** Scan ~/.claude/agents/ for configured agent definitions and send to webview */
+  private scanConfiguredAgents(): void {
+    const home = os.homedir();
+    const agentsDir = path.join(home, '.claude', 'agents');
+
+    try {
+      if (!fs.existsSync(agentsDir)) return;
+
+      const files = fs.readdirSync(agentsDir).filter((f) => f.endsWith('.md'));
+      const agents = files.map((file, index) => {
+        const name = file.replace('.md', '');
+        // Convert "engineering-mobile-app-builder" → "Mobile App Builder"
+        const displayName = name
+          .split('-')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' ');
+        return {
+          id: CONFIGURED_AGENT_ID_OFFSET + index,
+          name,
+          displayName,
+        };
+      });
+
+      console.log(`[Pixel Agents] Found ${agents.length} configured agents in ${agentsDir}`);
+      this.webview?.postMessage({ type: 'configuredAgents', agents });
+    } catch {
+      /* ignore errors reading agents directory */
     }
   }
 

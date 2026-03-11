@@ -6,7 +6,6 @@ import { CharacterState, TILE_SIZE } from '../office/types.js';
 
 interface AgentLabelsProps {
   officeState: OfficeState;
-  agents: number[];
   agentStatuses: Record<number, string>;
   containerRef: React.RefObject<HTMLDivElement | null>;
   zoom: number;
@@ -16,7 +15,6 @@ interface AgentLabelsProps {
 
 export function AgentLabels({
   officeState,
-  agents,
   agentStatuses,
   containerRef,
   zoom,
@@ -53,8 +51,8 @@ export function AgentLabels({
     subLabelMap.set(sub.id, sub.label);
   }
 
-  // All character IDs to render labels for (regular agents + sub-agents)
-  const allIds = [...agents, ...subagentCharacters.map((s) => s.id)];
+  // All character IDs to render labels for (all characters in office)
+  const allIds = Array.from(officeState.characters.keys());
 
   return (
     <>
