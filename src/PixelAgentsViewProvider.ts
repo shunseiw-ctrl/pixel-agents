@@ -583,21 +583,31 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     sendLayout(this.context, this.webview, this.defaultLayout);
   }
 
-  /** Scan project directory for active JSONL sessions not already tracked (external terminals) */
+  /** Scan project directories for active JSONL sessions not already tracked (external terminals) */
   private scanExternalSessions(): void {
-    const projectDir = getProjectDirPath();
-    if (!projectDir || !fs.existsSync(projectDir)) return;
+    const home = os.homedir();
+    const projectsBase = path.join(home, '.claude', 'projects');
+
+    // Collect all project directories to scan:
+    // 1. The workspace-specific project dir
+    // 2. The home directory project dir (Claude Code often resolves to this)
+    const dirsToScan = new Set<string>();
+
+    const workspaceDir = getProjectDirPath();
+    if (workspaceDir && fs.existsSync(workspaceDir)) {
+      dirsToScan.add(workspaceDir);
+    }
+
+    // Also scan the home directory project (Claude Code sessions started from ~)
+    const homeDirName = home.replace(/[^a-zA-Z0-9-]/g, '-');
+    const homeProjectDir = path.join(projectsBase, homeDirName);
+    if (fs.existsSync(homeProjectDir)) {
+      dirsToScan.add(homeProjectDir);
+    }
+
+    if (dirsToScan.size === 0) return;
 
     const now = Date.now();
-    let jsonlFiles: string[];
-    try {
-      jsonlFiles = fs
-        .readdirSync(projectDir)
-        .filter((f) => f.endsWith('.jsonl'))
-        .map((f) => path.join(projectDir, f));
-    } catch {
-      return;
-    }
 
     // Collect JSONL files already tracked by agents
     const trackedFiles = new Set<string>();
@@ -605,35 +615,48 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
       trackedFiles.add(agent.jsonlFile);
     }
 
-    for (const file of jsonlFiles) {
-      if (trackedFiles.has(file)) continue;
-
-      // Check if file was recently modified (active session)
+    for (const projectDir of dirsToScan) {
+      let jsonlFiles: string[];
       try {
-        const stat = fs.statSync(file);
-        const age = now - stat.mtimeMs;
-        if (age > EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS) continue;
-
-        // Active JSONL not tracked — create an agent for it
-        console.log(
-          `[Pixel Agents] External session detected: ${path.basename(file)} (${Math.round(age / 1000)}s old)`,
-        );
-        const agentId = createAgentForFile(
-          file,
-          projectDir,
-          this.nextAgentId,
-          this.agents,
-          this.activeAgentId,
-          this.fileWatchers,
-          this.pollingTimers,
-          this.waitingTimers,
-          this.permissionTimers,
-          this.webview,
-          this.persistAgents,
-        );
-        this.startClearDetection(agentId, projectDir);
+        jsonlFiles = fs
+          .readdirSync(projectDir)
+          .filter((f) => f.endsWith('.jsonl'))
+          .map((f) => path.join(projectDir, f));
       } catch {
-        /* ignore stat errors */
+        continue;
+      }
+
+      for (const file of jsonlFiles) {
+        if (trackedFiles.has(file)) continue;
+
+        // Check if file was recently modified (active session)
+        try {
+          const stat = fs.statSync(file);
+          const age = now - stat.mtimeMs;
+          if (age > EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS) continue;
+
+          // Active JSONL not tracked — create an agent for it
+          console.log(
+            `[Pixel Agents] External session detected: ${path.basename(file)} (${Math.round(age / 1000)}s old)`,
+          );
+          const agentId = createAgentForFile(
+            file,
+            projectDir,
+            this.nextAgentId,
+            this.agents,
+            this.activeAgentId,
+            this.fileWatchers,
+            this.pollingTimers,
+            this.waitingTimers,
+            this.permissionTimers,
+            this.webview,
+            this.persistAgents,
+          );
+          this.startClearDetection(agentId, projectDir);
+          trackedFiles.add(file);
+        } catch {
+          /* ignore stat errors */
+        }
       }
     }
   }
