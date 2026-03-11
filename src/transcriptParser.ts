@@ -387,7 +387,7 @@ export function processTranscriptLine(
       sendNotification(agentId, 'inputWait', `Agent #${agentId} が入力を待っています`);
     }
   } catch {
-    // Ignore malformed lines
+    /* expected: JSONL lines may be malformed or partially written */
   }
 }
 

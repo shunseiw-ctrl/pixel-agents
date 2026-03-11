@@ -14,8 +14,21 @@
     "vscode": "^1.107.0"
   },
   "categories": [
+    "Visualization",
     "Other"
   ],
+  "keywords": [
+    "pixel-art",
+    "claude",
+    "agents",
+    "office",
+    "animation",
+    "ai"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {

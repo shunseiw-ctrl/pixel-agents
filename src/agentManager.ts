@@ -8,7 +8,7 @@ import {
   WORKSPACE_KEY_AGENT_SEATS,
   WORKSPACE_KEY_AGENTS,
 } from './constants.js';
-import { readNewLines, startFileWatching } from './fileWatcher.js';
+import { clearDebounce, readNewLines, startFileWatching } from './fileWatcher.js';
 import { migrateAndLoadLayout } from './layoutPersistence.js';
 import { cancelPermissionTimer, cancelWaitingTimer } from './timerManager.js';
 import type { AgentState, PersistedAgent } from './types.js';
@@ -33,7 +33,7 @@ export function getProjectDirPath(cwd?: string): string | null {
         return candidate;
       }
     } catch {
-      /* ignore */
+      /* expected: candidate dir may not exist */
     }
     const parent = path.dirname(current);
     if (parent === current) break;
@@ -211,7 +211,7 @@ export function removeAgent(
   try {
     fs.unwatchFile(agent.jsonlFile);
   } catch {
-    /* ignore */
+    /* expected: unwatchFile may throw if not previously watched */
   }
 
   // Cancel timers
@@ -219,6 +219,7 @@ export function removeAgent(
   cancelPermissionTimer(agentId, permissionTimers);
 
   // Remove from maps
+  clearDebounce(agentId);
   agents.delete(agentId);
   persistAgents();
 }

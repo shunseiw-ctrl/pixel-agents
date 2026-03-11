@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import type { AgentHistoryEntry, AgentMeta } from '../components/StatusSummaryPanel.js';
+import { MAX_AGENT_HISTORY } from '../constants.js';
 import {
   playDoneSound,
   playErrorSound,
@@ -198,7 +199,7 @@ export function useExtensionMessages(
                 cacheWriteTokens: cost?.cacheWriteTokens,
                 cacheReadTokens: cost?.cacheReadTokens,
               };
-              setAgentHistory((prev) => [...prev, entry]);
+              setAgentHistory((prev) => [...prev, entry].slice(-MAX_AGENT_HISTORY));
             }
             const next = { ...prevMetas };
             delete next[id];

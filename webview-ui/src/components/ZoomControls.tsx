@@ -121,6 +121,7 @@ export function ZoomControls({ zoom, onZoomChange }: ZoomControlsProps) {
             opacity: maxDisabled ? 'var(--pixel-btn-disabled-opacity)' : 1,
           }}
           title="ズームイン (Ctrl+Scroll)"
+          aria-label="ズームイン"
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <line
@@ -158,6 +159,7 @@ export function ZoomControls({ zoom, onZoomChange }: ZoomControlsProps) {
             opacity: minDisabled ? 'var(--pixel-btn-disabled-opacity)' : 1,
           }}
           title="ズームアウト (Ctrl+Scroll)"
+          aria-label="ズームアウト"
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <line

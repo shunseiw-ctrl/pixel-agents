@@ -37,7 +37,7 @@ const menuItemBase: React.CSSProperties = {
   width: '100%',
   padding: '6px 10px',
   fontSize: '24px',
-  color: 'rgba(255, 255, 255, 0.8)',
+  color: 'var(--pixel-text)',
   background: 'transparent',
   border: 'none',
   borderRadius: 0,
@@ -48,16 +48,16 @@ const menuItemBase: React.CSSProperties = {
 const checkboxStyle = (checked: boolean): React.CSSProperties => ({
   width: 14,
   height: 14,
-  border: '2px solid rgba(255, 255, 255, 0.5)',
+  border: '2px solid var(--pixel-text-dim)',
   borderRadius: 0,
-  background: checked ? 'rgba(90, 140, 255, 0.8)' : 'transparent',
+  background: checked ? 'var(--pixel-accent)' : 'transparent',
   flexShrink: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: '12px',
   lineHeight: 1,
-  color: '#fff',
+  color: 'var(--pixel-text)',
 });
 
 const NOTIFY_KEYS = {
@@ -115,6 +115,19 @@ export function SettingsModal({
     return () => window.removeEventListener('message', handler);
   }, []);
 
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const toggleNotify = (key: string, current: boolean, setter: (v: boolean) => void) => {
@@ -140,6 +153,9 @@ export function SettingsModal({
       />
       {/* Centered modal */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="設定"
         style={{
           position: 'fixed',
           top: '50%',
@@ -167,16 +183,16 @@ export function SettingsModal({
             marginBottom: '4px',
           }}
         >
-          <span style={{ fontSize: '24px', color: 'rgba(255, 255, 255, 0.9)' }}>設定</span>
+          <span style={{ fontSize: '24px', color: 'var(--pixel-text)' }}>設定</span>
           <button
             onClick={onClose}
             onMouseEnter={() => setHovered('close')}
             onMouseLeave={() => setHovered(null)}
             style={{
-              background: hovered === 'close' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+              background: hovered === 'close' ? 'var(--pixel-btn-bg)' : 'transparent',
               border: 'none',
               borderRadius: 0,
-              color: 'rgba(255, 255, 255, 0.6)',
+              color: 'var(--pixel-text-dim)',
               fontSize: '24px',
               cursor: 'pointer',
               padding: '0 4px',
@@ -196,7 +212,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'sessions' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'sessions' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           セッションフォルダを開く
@@ -210,7 +226,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'export' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'export' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           レイアウトをエクスポート
@@ -224,7 +240,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'import' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'import' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           レイアウトをインポート
@@ -240,7 +256,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'presets' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'presets' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>テンプレートを選ぶ</span>
@@ -269,19 +285,19 @@ export function SettingsModal({
                   padding: '4px 8px',
                   margin: '2px 0',
                   fontSize: '20px',
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: 'var(--pixel-text)',
                   background:
                     hovered === `preset-${p.name}`
-                      ? 'rgba(255, 255, 255, 0.08)'
-                      : 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                      ? 'var(--pixel-btn-bg)'
+                      : 'var(--pixel-btn-subtle-bg)',
+                  border: '1px solid var(--pixel-border)',
                   borderRadius: 0,
                   cursor: 'pointer',
                   textAlign: 'left',
                 }}
               >
                 <div style={{ fontWeight: 'bold' }}>{p.name}</div>
-                <div style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.5)' }}>
+                <div style={{ fontSize: '16px', color: 'var(--pixel-text-dim)' }}>
                   {p.description} ({p.cols}×{p.rows}, {p.seats}席)
                 </div>
               </button>
@@ -303,7 +319,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'sound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'sound' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>サウンド (マスター)</span>
@@ -328,7 +344,7 @@ export function SettingsModal({
                 ...menuItemBase,
                 fontSize: '22px',
                 paddingLeft: 24,
-                background: hovered === 'typingSound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                background: hovered === 'typingSound' ? 'var(--pixel-btn-bg)' : 'transparent',
               }}
             >
               <span>タイピング音</span>
@@ -351,7 +367,7 @@ export function SettingsModal({
                 ...menuItemBase,
                 fontSize: '22px',
                 paddingLeft: 24,
-                background: hovered === 'notifSound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                background: hovered === 'notifSound' ? 'var(--pixel-btn-bg)' : 'transparent',
               }}
             >
               <span>通知音</span>
@@ -364,7 +380,7 @@ export function SettingsModal({
                 gap: 8,
                 padding: '4px 10px 4px 24px',
                 fontSize: '22px',
-                color: 'rgba(255, 255, 255, 0.8)',
+                color: 'var(--pixel-text)',
               }}
             >
               <span>音量</span>
@@ -393,7 +409,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'thoughts' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'thoughts' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>思考つぶやき表示</span>
@@ -406,7 +422,7 @@ export function SettingsModal({
           style={{
             padding: '2px 10px',
             fontSize: '20px',
-            color: 'rgba(255, 255, 255, 0.5)',
+            color: 'var(--pixel-text-dim)',
           }}
         >
           通知設定
@@ -418,7 +434,7 @@ export function SettingsModal({
           style={{
             ...menuItemBase,
             fontSize: '22px',
-            background: hovered === 'nError' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'nError' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>エラー通知</span>
@@ -431,7 +447,7 @@ export function SettingsModal({
           style={{
             ...menuItemBase,
             fontSize: '22px',
-            background: hovered === 'nLoop' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'nLoop' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>ループ検知通知</span>
@@ -444,7 +460,7 @@ export function SettingsModal({
           style={{
             ...menuItemBase,
             fontSize: '22px',
-            background: hovered === 'nComplete' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'nComplete' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>タスク完了通知</span>
@@ -457,7 +473,7 @@ export function SettingsModal({
           style={{
             ...menuItemBase,
             fontSize: '22px',
-            background: hovered === 'nInput' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'nInput' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>入力待ち通知</span>
@@ -472,7 +488,7 @@ export function SettingsModal({
               style={{
                 padding: '2px 10px',
                 fontSize: '20px',
-                color: 'rgba(255, 255, 255, 0.5)',
+                color: 'var(--pixel-text-dim)',
               }}
             >
               キャラクターカスタマイズ
@@ -483,7 +499,7 @@ export function SettingsModal({
               return (
                 <div key={agentId} style={{ padding: '4px 10px' }}>
                   <div
-                    style={{ fontSize: '20px', color: 'rgba(255, 255, 255, 0.7)', marginBottom: 4 }}
+                    style={{ fontSize: '20px', color: 'var(--pixel-text-dim)', marginBottom: 4 }}
                   >
                     Agent #{agentId}
                   </div>
@@ -493,7 +509,7 @@ export function SettingsModal({
                       alignItems: 'center',
                       gap: 6,
                       fontSize: '18px',
-                      color: 'rgba(255, 255, 255, 0.7)',
+                      color: 'var(--pixel-text-dim)',
                     }}
                   >
                     <span>パレット:</span>
@@ -506,8 +522,8 @@ export function SettingsModal({
                           height: 20,
                           border:
                             appearance.palette === p
-                              ? '2px solid #5a8cff'
-                              : '1px solid rgba(255,255,255,0.3)',
+                              ? '2px solid var(--pixel-accent)'
+                              : '1px solid var(--pixel-text-dim)',
                           borderRadius: 0,
                           background: `hsl(${[30, 200, 350, 50, 150, 280][p]}, 50%, 40%)`,
                           cursor: 'pointer',
@@ -523,7 +539,7 @@ export function SettingsModal({
                       gap: 8,
                       marginTop: 4,
                       fontSize: '18px',
-                      color: 'rgba(255, 255, 255, 0.7)',
+                      color: 'var(--pixel-text-dim)',
                     }}
                   >
                     <span>色相:</span>
@@ -560,7 +576,7 @@ export function SettingsModal({
           onMouseLeave={() => setHovered(null)}
           style={{
             ...menuItemBase,
-            background: hovered === 'debug' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+            background: hovered === 'debug' ? 'var(--pixel-btn-bg)' : 'transparent',
           }}
         >
           <span>デバッグビュー</span>
@@ -570,7 +586,7 @@ export function SettingsModal({
                 width: 6,
                 height: 6,
                 borderRadius: '50%',
-                background: 'rgba(90, 140, 255, 0.8)',
+                background: 'var(--pixel-accent)',
                 flexShrink: 0,
               }}
             />

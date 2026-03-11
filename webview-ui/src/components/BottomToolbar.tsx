@@ -75,6 +75,8 @@ export function BottomToolbar({
               }
         }
         title="オフィスレイアウトを編集"
+        aria-label="オフィスレイアウトを編集"
+        aria-pressed={isEditMode}
       >
         レイアウト
       </button>
@@ -93,6 +95,8 @@ export function BottomToolbar({
                 }
           }
           title="設定"
+          aria-label="設定を開く"
+          aria-expanded={isSettingsOpen}
         >
           設定
         </button>

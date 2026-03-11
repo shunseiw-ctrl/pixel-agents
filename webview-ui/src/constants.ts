@@ -150,6 +150,9 @@ export const NOTIFY_COOLDOWN_ERROR_MS = 30000;
 export const NOTIFY_COOLDOWN_LOOP_MS = 60000;
 export const NOTIFY_COOLDOWN_INPUT_MS = 15000;
 
+// ── Agent History ──────────────────────────────────────────
+export const MAX_AGENT_HISTORY = 100;
+
 // ── Cost Calculation ($/1K tokens, Claude Sonnet 4) ─────────
 export const COST_INPUT_PER_1K = 0.003;
 export const COST_OUTPUT_PER_1K = 0.015;

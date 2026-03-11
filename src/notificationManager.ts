@@ -70,11 +70,27 @@ function isSoundEnabled(): boolean {
   return extensionContext.globalState.get<boolean>(GLOBAL_KEY_SOUND_ENABLED, true);
 }
 
+// Windows SystemSounds mapping (no file paths needed — uses .NET built-in sounds)
+const WINDOWS_SYSTEM_SOUNDS: Record<NotifyType, string> = {
+  error: '[System.Media.SystemSounds]::Hand.Play()',
+  loop: '[System.Media.SystemSounds]::Hand.Play()',
+  complete: '[System.Media.SystemSounds]::Asterisk.Play()',
+  inputWait: '[System.Media.SystemSounds]::Exclamation.Play()',
+};
+
 function playSound(type: NotifyType): void {
-  const soundPath = SOUNDS[type];
-  exec(`afplay "${soundPath}"`, (err) => {
-    if (err) console.log(`[Pixel Agents] Sound play error: ${err.message}`);
-  });
+  if (process.platform === 'darwin') {
+    const soundPath = SOUNDS[type];
+    exec(`afplay "${soundPath}"`, (err) => {
+      if (err) console.log(`[Pixel Agents] Sound play error: ${err.message}`);
+    });
+  } else if (process.platform === 'win32') {
+    const psCommand = WINDOWS_SYSTEM_SOUNDS[type];
+    exec(`powershell -c "${psCommand}"`, (err) => {
+      if (err) console.log(`[Pixel Agents] Sound play error: ${err.message}`);
+    });
+  }
+  // Linux: skip native sound — webview-side Web Audio API chime provides notification
 }
 
 export function sendNotification(agentId: number, type: NotifyType, message: string): void {

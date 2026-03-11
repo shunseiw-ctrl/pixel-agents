@@ -7,18 +7,19 @@
 }
 
 :root {
-  --pixel-bg: #1e1e2e;
-  --pixel-border: #4a4a6a;
-  --pixel-border-light: #6a6a8a;
-  --pixel-accent: #5a8cff;
+  --pixel-bg: var(--vscode-editor-background, #1e1e2e);
+  --pixel-border: var(--vscode-panel-border, #4a4a6a);
+  --pixel-border-light: var(--vscode-sideBar-border, #6a6a8a);
+  --pixel-accent: var(--vscode-focusBorder, #5a8cff);
   --pixel-green: #5ac88c;
-  --pixel-shadow: 2px 2px 0px #0a0a14;
+  --pixel-shadow: 2px 2px 0px var(--vscode-widget-shadow, #0a0a14);
 
   /* Button base */
-  --pixel-text: rgba(255, 255, 255, 0.8);
-  --pixel-text-dim: rgba(255, 255, 255, 0.7);
-  --pixel-btn-bg: rgba(255, 255, 255, 0.08);
-  --pixel-btn-hover-bg: rgba(255, 255, 255, 0.15);
+  --pixel-text: var(--vscode-foreground, rgba(255, 255, 255, 0.8));
+  --pixel-text-dim: var(--vscode-descriptionForeground, rgba(255, 255, 255, 0.7));
+  --pixel-btn-bg: var(--vscode-button-secondaryBackground, rgba(255, 255, 255, 0.08));
+  --pixel-btn-hover-bg: var(--vscode-button-secondaryHoverBackground, rgba(255, 255, 255, 0.15));
+  --pixel-btn-subtle-bg: var(--vscode-list-hoverBackground, rgba(255, 255, 255, 0.03));
   --pixel-btn-disabled-opacity: 0.35;
 
   /* Active/selected button state */
@@ -31,16 +32,19 @@
   --pixel-agent-text: rgba(200, 255, 220, 0.95);
 
   /* Close button */
-  --pixel-close-text: rgba(255, 255, 255, 0.5);
-  --pixel-close-hover: #e55;
+  --pixel-close-text: var(--vscode-descriptionForeground, rgba(255, 255, 255, 0.5));
+  --pixel-close-hover: var(--vscode-errorForeground, #e55);
 
   /* Hints & confirmations */
-  --pixel-hint-bg: #3278c8;
+  --pixel-hint-bg: var(--vscode-button-background, #3278c8);
   --pixel-reset-text: #ecc;
-  --pixel-danger-bg: #a33;
+  --pixel-danger-bg: var(--vscode-inputValidation-errorBackground, #a33);
 
   /* Vignette */
   --pixel-vignette: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+
+  /* Label background (translucent) */
+  --pixel-label-bg: color-mix(in srgb, var(--vscode-editor-background, #1e1e2e) 70%, transparent);
 
   /* Status dot colors */
   --pixel-status-permission: var(--vscode-charts-yellow, #cca700);

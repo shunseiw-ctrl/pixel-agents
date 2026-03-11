@@ -1,6 +1,7 @@
 // ── Timing (ms) ──────────────────────────────────────────────
 export const JSONL_POLL_INTERVAL_MS = 1000;
 export const FILE_WATCHER_POLL_INTERVAL_MS = 1000;
+export const FILE_WATCHER_DEBOUNCE_MS = 50;
 export const JSONL_DISCOVERY_TIMEOUT_MS = 30000;
 export const TOOL_DONE_DELAY_MS = 300;
 export const PERMISSION_TIMER_DELAY_MS = 7000;

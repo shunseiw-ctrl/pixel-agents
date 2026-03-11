@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { CHARACTER_SITTING_OFFSET_PX, TOOL_OVERLAY_VERTICAL_OFFSET } from '../../constants.js';
 import type { AgentThought, SubagentCharacter } from '../../hooks/useExtensionMessages.js';
@@ -55,28 +55,46 @@ export function ToolOverlay({
   panRef,
   onCloseAgent,
 }: ToolOverlayProps) {
-  const [, setTick] = useState(0);
+  const overlayRefs = useRef(new Map<number, HTMLDivElement>());
+
+  // rAF loop: update positions via direct DOM manipulation (no React re-render per frame)
   useEffect(() => {
     let rafId = 0;
     const tick = () => {
-      setTick((n) => n + 1);
+      const el = containerRef.current;
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        const canvasW = Math.round(rect.width * dpr);
+        const canvasH = Math.round(rect.height * dpr);
+        const layout = officeState.getLayout();
+        const mapW = layout.cols * TILE_SIZE * zoom;
+        const mapH = layout.rows * TILE_SIZE * zoom;
+        const deviceOffsetX = Math.floor((canvasW - mapW) / 2) + Math.round(panRef.current.x);
+        const deviceOffsetY = Math.floor((canvasH - mapH) / 2) + Math.round(panRef.current.y);
+
+        for (const [id, div] of overlayRefs.current) {
+          const ch = officeState.characters.get(id);
+          if (!ch) {
+            div.style.display = 'none';
+            continue;
+          }
+          const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
+          const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
+          const screenY =
+            (deviceOffsetY + (ch.y + sittingOffset - TOOL_OVERLAY_VERTICAL_OFFSET) * zoom) / dpr;
+          div.style.left = `${screenX}px`;
+          div.style.top = `${screenY - 24}px`;
+        }
+      }
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, []);
+  }, [officeState, containerRef, zoom, panRef]);
 
   const el = containerRef.current;
   if (!el) return null;
-  const rect = el.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  const canvasW = Math.round(rect.width * dpr);
-  const canvasH = Math.round(rect.height * dpr);
-  const layout = officeState.getLayout();
-  const mapW = layout.cols * TILE_SIZE * zoom;
-  const mapH = layout.rows * TILE_SIZE * zoom;
-  const deviceOffsetX = Math.floor((canvasW - mapW) / 2) + Math.round(panRef.current.x);
-  const deviceOffsetY = Math.floor((canvasH - mapH) / 2) + Math.round(panRef.current.y);
 
   const selectedId = officeState.selectedAgentId;
   const hoveredId = officeState.hoveredAgentId;
@@ -94,12 +112,6 @@ export function ToolOverlay({
         const isHovered = hoveredId === id;
         const isSub = ch.isSubagent;
         const thought = agentThoughts[id];
-
-        // Position above character
-        const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
-        const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
-        const screenY =
-          (deviceOffsetY + (ch.y + sittingOffset - TOOL_OVERLAY_VERTICAL_OFFSET) * zoom) / dpr;
 
         // Thought bubble: always visible for all agents (if enabled)
         const showThoughtBubble = showThoughts && thought && !isSelected && !isHovered;
@@ -142,10 +154,14 @@ export function ToolOverlay({
         return (
           <div
             key={id}
+            ref={(el) => {
+              if (el) overlayRefs.current.set(id, el);
+              else overlayRefs.current.delete(id);
+            }}
             style={{
               position: 'absolute',
-              left: screenX,
-              top: screenY - 24,
+              left: 0,
+              top: 0,
               transform: 'translateX(-50%)',
               display: 'flex',
               flexDirection: 'column',
@@ -264,8 +280,12 @@ export function ToolOverlay({
             {showThoughtBubble && (
               <div
                 style={{
-                  background: thought.isAnomalous ? '#FFF0F0' : '#ffffff',
-                  border: thought.isAnomalous ? '2px solid #D9534F' : '2px solid #999',
+                  background: thought.isAnomalous
+                    ? 'var(--vscode-inputValidation-errorBackground, #FFF0F0)'
+                    : 'var(--pixel-bg)',
+                  border: thought.isAnomalous
+                    ? '2px solid var(--vscode-inputValidation-errorBorder, #D9534F)'
+                    : '2px solid var(--pixel-border)',
                   borderRadius: 0,
                   padding: '2px 6px',
                   boxShadow: '1px 1px 0px rgba(0,0,0,0.2)',
@@ -278,7 +298,9 @@ export function ToolOverlay({
                 <span
                   style={{
                     fontSize: '18px',
-                    color: thought.isAnomalous ? '#D9534F' : '#333',
+                    color: thought.isAnomalous
+                      ? 'var(--vscode-errorForeground, #D9534F)'
+                      : 'var(--pixel-text)',
                   }}
                 >
                   {thought.text}

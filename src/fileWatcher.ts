@@ -2,10 +2,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { FILE_WATCHER_POLL_INTERVAL_MS } from './constants.js';
+import { FILE_WATCHER_DEBOUNCE_MS, FILE_WATCHER_POLL_INTERVAL_MS } from './constants.js';
 import { cancelPermissionTimer, cancelWaitingTimer, clearAgentActivity } from './timerManager.js';
 import { processTranscriptLine } from './transcriptParser.js';
 import type { AgentState } from './types.js';
+
+/** Per-agent debounce timestamps to prevent redundant reads from triple watchers */
+const lastReadTime = new Map<number, number>();
+
+/** Clean up debounce state when an agent is removed */
+export function clearDebounce(agentId: number): void {
+  lastReadTime.delete(agentId);
+}
 
 export function startFileWatching(
   agentId: number,
@@ -43,7 +51,7 @@ export function startFileWatching(
       try {
         fs.unwatchFile(filePath);
       } catch {
-        /* ignore */
+        /* expected: unwatchFile may throw if not previously watched */
       }
       return;
     }
@@ -61,14 +69,24 @@ export function readNewLines(
 ): void {
   const agent = agents.get(agentId);
   if (!agent) return;
+
+  // Debounce: skip if called within 50ms of last read for this agent
+  const now = Date.now();
+  const lastTime = lastReadTime.get(agentId) || 0;
+  if (now - lastTime < FILE_WATCHER_DEBOUNCE_MS) return;
+  lastReadTime.set(agentId, now);
+
   try {
     const stat = fs.statSync(agent.jsonlFile);
     if (stat.size <= agent.fileOffset) return;
 
     const buf = Buffer.alloc(stat.size - agent.fileOffset);
     const fd = fs.openSync(agent.jsonlFile, 'r');
-    fs.readSync(fd, buf, 0, buf.length, agent.fileOffset);
-    fs.closeSync(fd);
+    try {
+      fs.readSync(fd, buf, 0, buf.length, agent.fileOffset);
+    } finally {
+      fs.closeSync(fd);
+    }
     agent.fileOffset = stat.size;
 
     const text = agent.lineBuffer + buf.toString('utf-8');
@@ -120,7 +138,7 @@ export function reassignAgentToFile(
   try {
     fs.unwatchFile(agent.jsonlFile);
   } catch {
-    /* ignore */
+    /* expected: unwatchFile may throw if not previously watched */
   }
 
   // Clear activity
@@ -175,7 +193,8 @@ export function startProjectDirWatch(
         .filter((f) => f.endsWith('.jsonl'))
         .map((f) => path.join(projectDir, f)),
     );
-  } catch {
+  } catch (e) {
+    console.warn(`[Pixel Agents] Failed to read projectDir ${projectDir}: ${e}`);
     knownFiles = new Set();
   }
 
@@ -202,7 +221,7 @@ export function startProjectDirWatch(
         }
       }
     } catch {
-      /* ignore */
+      /* expected: projectDir may not exist yet */
     }
     return null;
   };

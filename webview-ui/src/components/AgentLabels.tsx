@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
+import { CHARACTER_SITTING_OFFSET_PX, TOOL_OVERLAY_VERTICAL_OFFSET } from '../constants.js';
 import type { SubagentCharacter } from '../hooks/useExtensionMessages.js';
 import type { OfficeState } from '../office/engine/officeState.js';
 import { CharacterState, TILE_SIZE } from '../office/types.js';
@@ -21,29 +22,52 @@ export function AgentLabels({
   panRef,
   subagentCharacters,
 }: AgentLabelsProps) {
-  const [, setTick] = useState(0);
+  const labelRefs = useRef(new Map<number, HTMLDivElement>());
+
+  // rAF loop: update positions and visibility via direct DOM manipulation (no React re-render)
   useEffect(() => {
     let rafId = 0;
     const tick = () => {
-      setTick((n) => n + 1);
+      const el = containerRef.current;
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        const canvasW = Math.round(rect.width * dpr);
+        const canvasH = Math.round(rect.height * dpr);
+        const layout = officeState.getLayout();
+        const mapW = layout.cols * TILE_SIZE * zoom;
+        const mapH = layout.rows * TILE_SIZE * zoom;
+        const deviceOffsetX = Math.floor((canvasW - mapW) / 2) + Math.round(panRef.current.x);
+        const deviceOffsetY = Math.floor((canvasH - mapH) / 2) + Math.round(panRef.current.y);
+
+        for (const [id, div] of labelRefs.current) {
+          const ch = officeState.characters.get(id);
+          if (
+            !ch ||
+            ch.matrixEffect === 'despawn' ||
+            officeState.hoveredAgentId === id ||
+            officeState.selectedAgentId === id
+          ) {
+            div.style.display = 'none';
+            continue;
+          }
+          div.style.display = 'flex';
+          const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
+          const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
+          const screenY =
+            (deviceOffsetY + (ch.y + sittingOffset - TOOL_OVERLAY_VERTICAL_OFFSET) * zoom) / dpr;
+          div.style.left = `${screenX}px`;
+          div.style.top = `${screenY - 16}px`;
+        }
+      }
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, []);
+  }, [officeState, containerRef, zoom, panRef]);
 
   const el = containerRef.current;
   if (!el) return null;
-  const rect = el.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  // Compute device pixel offset (same math as renderFrame, including pan)
-  const canvasW = Math.round(rect.width * dpr);
-  const canvasH = Math.round(rect.height * dpr);
-  const layout = officeState.getLayout();
-  const mapW = layout.cols * TILE_SIZE * zoom;
-  const mapH = layout.rows * TILE_SIZE * zoom;
-  const deviceOffsetX = Math.floor((canvasW - mapW) / 2) + Math.round(panRef.current.x);
-  const deviceOffsetY = Math.floor((canvasH - mapH) / 2) + Math.round(panRef.current.y);
 
   // Build sub-agent label lookup
   const subLabelMap = new Map<number, string>();
@@ -59,17 +83,6 @@ export function AgentLabels({
       {allIds.map((id) => {
         const ch = officeState.characters.get(id);
         if (!ch) return null;
-
-        // Hide label during despawn
-        if (ch.matrixEffect === 'despawn') return null;
-
-        // Hide label when hovered or selected (ToolOverlay shows detail instead)
-        if (officeState.hoveredAgentId === id || officeState.selectedAgentId === id) return null;
-
-        // Character position: device pixels → CSS pixels (follow sitting offset)
-        const sittingOffset = ch.state === CharacterState.TYPE ? 6 : 0;
-        const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
-        const screenY = (deviceOffsetY + (ch.y + sittingOffset - 24) * zoom) / dpr;
 
         const status = agentStatuses[id];
         const isWaiting = status === 'waiting';
@@ -89,12 +102,16 @@ export function AgentLabels({
         return (
           <div
             key={id}
+            ref={(el) => {
+              if (el) labelRefs.current.set(id, el);
+              else labelRefs.current.delete(id);
+            }}
             style={{
               position: 'absolute',
-              left: screenX,
-              top: screenY - 16,
+              left: 0,
+              top: 0,
               transform: 'translateX(-50%)',
-              display: 'flex',
+              display: 'none',
               flexDirection: 'column',
               alignItems: 'center',
               pointerEvents: 'none',
@@ -118,7 +135,7 @@ export function AgentLabels({
                 fontSize: isSub ? '16px' : '18px',
                 fontStyle: isSub ? 'italic' : undefined,
                 color: 'var(--vscode-foreground)',
-                background: 'rgba(30,30,46,0.7)',
+                background: 'var(--pixel-label-bg)',
                 padding: '1px 4px',
                 borderRadius: 2,
                 whiteSpace: 'nowrap',
