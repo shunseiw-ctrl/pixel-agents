@@ -29,6 +29,12 @@ export const LAYOUT_FILE_DIR = '.pixel-agents';
 export const LAYOUT_FILE_NAME = 'layout.json';
 export const LAYOUT_FILE_POLL_INTERVAL_MS = 2000;
 
+// ── External Session Scanning ────────────────────────────────
+/** How often to scan for external JSONL sessions (ms) */
+export const EXTERNAL_SCAN_INTERVAL_MS = 5000;
+/** JSONL files modified within this window are considered active (ms) */
+export const EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS = 60_000;
+
 // ── Thought Bubbles ─────────────────────────────────────────
 export const THOUGHT_MAX_LENGTH = 30;
 export const LOOP_DETECTION_THRESHOLD = 3;

@@ -117,6 +117,69 @@ export function createAgentForTerminal(
   return id;
 }
 
+/**
+ * Create an agent from a JSONL file (external session — no VS Code terminal).
+ * Used for detecting Claude Code sessions running in external terminals.
+ */
+export function createAgentForFile(
+  jsonlFile: string,
+  projectDir: string,
+  nextAgentIdRef: { current: number },
+  agents: Map<number, AgentState>,
+  activeAgentIdRef: { current: number | null },
+  fileWatchers: Map<number, fs.FSWatcher>,
+  pollingTimers: Map<number, ReturnType<typeof setInterval>>,
+  waitingTimers: Map<number, ReturnType<typeof setTimeout>>,
+  permissionTimers: Map<number, ReturnType<typeof setTimeout>>,
+  webview: vscode.Webview | undefined,
+  persistAgents: () => void,
+): number {
+  const id = nextAgentIdRef.current++;
+  const agent: AgentState = {
+    id,
+    // No terminalRef for external sessions
+    projectDir,
+    jsonlFile,
+    fileOffset: 0,
+    lineBuffer: '',
+    activeToolIds: new Set(),
+    activeToolStatuses: new Map(),
+    activeToolNames: new Map(),
+    activeSubagentToolIds: new Map(),
+    activeSubagentToolNames: new Map(),
+    isWaiting: false,
+    permissionSent: false,
+    hadToolsInTurn: false,
+    lastThoughtText: '',
+    thoughtRepeatCount: 0,
+    metaSent: false,
+    lastTurnHadError: false,
+    createdAt: Date.now(),
+    tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
+  };
+
+  agents.set(id, agent);
+  activeAgentIdRef.current = id;
+  persistAgents();
+
+  console.log(`[Pixel Agents] Agent ${id}: created for external JSONL ${path.basename(jsonlFile)}`);
+  webview?.postMessage({ type: 'agentCreated', id, displayName: agent.displayName });
+
+  startFileWatching(
+    id,
+    jsonlFile,
+    agents,
+    fileWatchers,
+    pollingTimers,
+    waitingTimers,
+    permissionTimers,
+    webview,
+  );
+  readNewLines(id, agents, waitingTimers, permissionTimers, webview);
+
+  return id;
+}
+
 export function removeAgent(
   agentId: number,
   agents: Map<number, AgentState>,
@@ -168,7 +231,7 @@ export function persistAgents(
   for (const agent of agents.values()) {
     persisted.push({
       id: agent.id,
-      terminalName: agent.terminalRef.name,
+      terminalName: agent.terminalRef?.name ?? `external-${agent.id}`,
       jsonlFile: agent.jsonlFile,
       projectDir: agent.projectDir,
       folderName: agent.folderName,

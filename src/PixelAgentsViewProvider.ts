@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import {
+  createAgentForFile,
   createAgentForTerminal,
   getProjectDirPath,
   persistAgents,
@@ -25,6 +26,8 @@ import {
   sendWallTilesToWebview,
 } from './assetLoader.js';
 import {
+  EXTERNAL_SCAN_INTERVAL_MS,
+  EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS,
   GLOBAL_KEY_MASTER_VOLUME,
   GLOBAL_KEY_NOTIFICATION_SOUND_ENABLED,
   GLOBAL_KEY_NOTIFY_COMPLETE,
@@ -77,6 +80,9 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   private cachedPresets: import('./assetLoader.js').LayoutPreset[] = [];
   private assetsLoaded = false;
   private assetsRoot: string | null = null;
+
+  // External session scanning
+  private externalScanTimer: ReturnType<typeof setInterval> | null = null;
 
   // Cross-window layout sync
   layoutWatcher: LayoutWatcher | null = null;
@@ -333,6 +339,9 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         })();
 
         sendExistingAgents(this.agents, this.context, this.webview);
+
+        // Start scanning for external JSONL sessions (macOS Terminal, etc.)
+        this.startExternalSessionScanning();
       } else if (message.type === 'saveAgentAppearance') {
         // Save custom palette/hueShift for an agent
         const agentId = message.agentId as number;
@@ -574,6 +583,71 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     sendLayout(this.context, this.webview, this.defaultLayout);
   }
 
+  /** Scan project directory for active JSONL sessions not already tracked (external terminals) */
+  private scanExternalSessions(): void {
+    const projectDir = getProjectDirPath();
+    if (!projectDir || !fs.existsSync(projectDir)) return;
+
+    const now = Date.now();
+    let jsonlFiles: string[];
+    try {
+      jsonlFiles = fs
+        .readdirSync(projectDir)
+        .filter((f) => f.endsWith('.jsonl'))
+        .map((f) => path.join(projectDir, f));
+    } catch {
+      return;
+    }
+
+    // Collect JSONL files already tracked by agents
+    const trackedFiles = new Set<string>();
+    for (const agent of this.agents.values()) {
+      trackedFiles.add(agent.jsonlFile);
+    }
+
+    for (const file of jsonlFiles) {
+      if (trackedFiles.has(file)) continue;
+
+      // Check if file was recently modified (active session)
+      try {
+        const stat = fs.statSync(file);
+        const age = now - stat.mtimeMs;
+        if (age > EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS) continue;
+
+        // Active JSONL not tracked — create an agent for it
+        console.log(
+          `[Pixel Agents] External session detected: ${path.basename(file)} (${Math.round(age / 1000)}s old)`,
+        );
+        const agentId = createAgentForFile(
+          file,
+          projectDir,
+          this.nextAgentId,
+          this.agents,
+          this.activeAgentId,
+          this.fileWatchers,
+          this.pollingTimers,
+          this.waitingTimers,
+          this.permissionTimers,
+          this.webview,
+          this.persistAgents,
+        );
+        this.startClearDetection(agentId, projectDir);
+      } catch {
+        /* ignore stat errors */
+      }
+    }
+  }
+
+  /** Start periodic scanning for external JSONL sessions */
+  private startExternalSessionScanning(): void {
+    // Initial scan
+    this.scanExternalSessions();
+    // Periodic scan
+    this.externalScanTimer = setInterval(() => {
+      this.scanExternalSessions();
+    }, EXTERNAL_SCAN_INTERVAL_MS);
+  }
+
   private startLayoutWatcher(): void {
     if (this.layoutWatcher) return;
     this.layoutWatcher = watchLayoutFile((layout) => {
@@ -583,6 +657,12 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   }
 
   dispose() {
+    // Stop external session scanning
+    if (this.externalScanTimer) {
+      clearInterval(this.externalScanTimer);
+      this.externalScanTimer = null;
+    }
+
     this.layoutWatcher?.dispose();
     this.layoutWatcher = null;
 
