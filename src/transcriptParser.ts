@@ -327,6 +327,9 @@ export function processTranscriptLine(
             if (userText.trim()) {
               const meta = extractAgentMeta(userText);
               agent.metaSent = true;
+              if (meta.taskName) {
+                agent.displayName = meta.taskName;
+              }
               webview?.postMessage({
                 type: 'agentMeta',
                 id: agentId,
@@ -346,6 +349,9 @@ export function processTranscriptLine(
         if (!agent.metaSent) {
           const meta = extractAgentMeta(content);
           agent.metaSent = true;
+          if (meta.taskName) {
+            agent.displayName = meta.taskName;
+          }
           webview?.postMessage({
             type: 'agentMeta',
             id: agentId,

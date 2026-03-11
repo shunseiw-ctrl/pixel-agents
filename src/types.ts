@@ -23,6 +23,8 @@ export interface AgentState {
   thoughtRepeatCount: number;
   /** Whether agent meta (issue/task name) has been sent */
   metaSent: boolean;
+  /** Display name derived from agent meta (task name) */
+  displayName?: string;
   /** Agent creation timestamp (ms) */
   createdAt: number;
   /** Whether the last turn had errors (for completion animation) */

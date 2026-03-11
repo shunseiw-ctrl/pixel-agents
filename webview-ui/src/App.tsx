@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { AgentLabels } from './components/AgentLabels.js';
 import { BottomToolbar } from './components/BottomToolbar.js';
 import { DebugView } from './components/DebugView.js';
 import { StatusSummaryPanel } from './components/StatusSummaryPanel.js';
@@ -356,6 +357,16 @@ function App() {
             />
           );
         })()}
+
+      <AgentLabels
+        officeState={officeState}
+        agents={agents}
+        agentStatuses={agentStatuses}
+        containerRef={containerRef}
+        zoom={editor.zoom}
+        panRef={editor.panRef}
+        subagentCharacters={subagentCharacters}
+      />
 
       <ToolOverlay
         officeState={officeState}

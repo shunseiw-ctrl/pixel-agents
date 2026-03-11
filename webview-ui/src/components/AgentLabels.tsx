@@ -62,6 +62,12 @@ export function AgentLabels({
         const ch = officeState.characters.get(id);
         if (!ch) return null;
 
+        // Hide label during despawn
+        if (ch.matrixEffect === 'despawn') return null;
+
+        // Hide label when hovered or selected (ToolOverlay shows detail instead)
+        if (officeState.hoveredAgentId === id || officeState.selectedAgentId === id) return null;
+
         // Character position: device pixels → CSS pixels (follow sitting offset)
         const sittingOffset = ch.state === CharacterState.TYPE ? 6 : 0;
         const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
@@ -79,7 +85,8 @@ export function AgentLabels({
           dotColor = 'var(--vscode-charts-blue, #3794ff)';
         }
 
-        const labelText = subLabelMap.get(id) || `エージェント #${id}`;
+        // Use displayName from character, with fallback
+        const labelText = subLabelMap.get(id) || ch.displayName || `Agent #${id}`;
 
         return (
           <div
@@ -93,7 +100,7 @@ export function AgentLabels({
               flexDirection: 'column',
               alignItems: 'center',
               pointerEvents: 'none',
-              zIndex: 40,
+              zIndex: 45,
             }}
           >
             {dotColor !== 'transparent' && (

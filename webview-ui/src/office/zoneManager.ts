@@ -18,6 +18,11 @@ export function createDefaultZones(layout: OfficeLayout): ZoneConfig {
   const workTiles: Array<{ col: number; row: number }> = [];
   const restTiles: Array<{ col: number; row: number }> = [];
   const alertTiles: Array<{ col: number; row: number }> = [];
+  const bossTiles: Array<{ col: number; row: number }> = [];
+
+  // Boss zone: small area in the top-right corner
+  const bossStartCol = Math.max(0, cols - Math.floor(cols * 0.2));
+  const bossEndRow = Math.floor(rows * 0.3);
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
@@ -25,7 +30,9 @@ export function createDefaultZones(layout: OfficeLayout): ZoneConfig {
       const tile = layout.tiles[idx];
       if (tile === TileType.WALL || tile === TileType.VOID) continue;
 
-      if (c < workCols) {
+      if (c >= bossStartCol && r < bossEndRow) {
+        bossTiles.push({ col: c, row: r });
+      } else if (c < workCols) {
         workTiles.push({ col: c, row: r });
       } else if (r < restRows) {
         restTiles.push({ col: c, row: r });
@@ -56,6 +63,13 @@ export function createDefaultZones(layout: OfficeLayout): ZoneConfig {
         label: '警告エリア',
         color: ZONE_ALERT_COLOR,
         tiles: alertTiles,
+        seats: [],
+      },
+      {
+        type: ZoneType.BOSS,
+        label: '社長エリア',
+        color: ZONE_BOSS_COLOR,
+        tiles: bossTiles,
         seats: [],
       },
     ],
@@ -186,6 +200,66 @@ export function updateAgentZoneState(
   }
 
   return null;
+}
+
+/** Determine which zone a seat belongs to by matching seat coordinates against zone tiles */
+export function getSeatZone(
+  seat: { seatCol: number; seatRow: number },
+  zones: ZoneConfig | undefined,
+): ZoneTypeVal | null {
+  if (!zones) return null;
+  for (const zone of zones.zones) {
+    if (zone.tiles.some((t) => t.col === seat.seatCol && t.row === seat.seatRow)) {
+      return zone.type;
+    }
+  }
+  return null;
+}
+
+/** Get all seats that belong to a specific zone */
+export function getZoneSeats(
+  zoneType: ZoneTypeVal,
+  seats: Map<string, { seatCol: number; seatRow: number; assigned: boolean }>,
+  zones: ZoneConfig | undefined,
+): Array<{ uid: string; seatCol: number; seatRow: number; assigned: boolean }> {
+  if (!zones) return [];
+  const zone = zones.zones.find((z) => z.type === zoneType);
+  if (!zone) return [];
+  const tileSet = new Set(zone.tiles.map((t) => `${t.col},${t.row}`));
+  const result: Array<{ uid: string; seatCol: number; seatRow: number; assigned: boolean }> = [];
+  for (const [uid, seat] of seats) {
+    if (tileSet.has(`${seat.seatCol},${seat.seatRow}`)) {
+      result.push({ uid, ...seat });
+    }
+  }
+  return result;
+}
+
+/** Find a free seat in a specific zone, optionally closest to a given position */
+export function findFreeSeatInZone(
+  zoneType: ZoneTypeVal,
+  seats: Map<string, { seatCol: number; seatRow: number; assigned: boolean }>,
+  zones: ZoneConfig | undefined,
+  fromCol?: number,
+  fromRow?: number,
+): string | null {
+  const zoneSeats = getZoneSeats(zoneType, seats, zones);
+  const freeSeats = zoneSeats.filter((s) => !s.assigned);
+  if (freeSeats.length === 0) return null;
+  if (fromCol !== undefined && fromRow !== undefined) {
+    // Return closest free seat by Manhattan distance
+    let best = freeSeats[0];
+    let bestDist = Math.abs(best.seatCol - fromCol) + Math.abs(best.seatRow - fromRow);
+    for (let i = 1; i < freeSeats.length; i++) {
+      const d = Math.abs(freeSeats[i].seatCol - fromCol) + Math.abs(freeSeats[i].seatRow - fromRow);
+      if (d < bestDist) {
+        best = freeSeats[i];
+        bestDist = d;
+      }
+    }
+    return best.uid;
+  }
+  return freeSeats[0].uid;
 }
 
 /** Set zone for a tile (used by editor) */

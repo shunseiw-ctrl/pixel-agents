@@ -354,14 +354,20 @@ export function useExtensionMessages(
         if (hasError) playErrorSound();
       } else if (msg.type === 'agentMeta') {
         const id = msg.id as number;
+        const taskName = msg.taskName as string | undefined;
         setAgentMetas((prev) => ({
           ...prev,
           [id]: {
             issueNumber: msg.issueNumber as number | undefined,
-            taskName: msg.taskName as string | undefined,
+            taskName,
             createdAt: (msg.createdAt as number) || Date.now(),
           },
         }));
+        // Update character displayName
+        if (taskName) {
+          const ch = os.characters.get(id);
+          if (ch) ch.displayName = taskName;
+        }
       } else if (msg.type === 'agentTokenUsage') {
         const id = msg.id as number;
         const costUsd = msg.costUsd as number;

@@ -97,6 +97,7 @@ export function updateCharacter(
   seats: Map<string, Seat>,
   tileMap: TileTypeVal[][],
   blockedTiles: Set<string>,
+  zoneWalkableTiles?: Array<{ col: number; row: number }>,
 ): void {
   ch.frameTimer += dt;
 
@@ -187,8 +188,11 @@ export function updateCharacter(
             }
           }
         }
-        if (walkableTiles.length > 0) {
-          const target = walkableTiles[Math.floor(Math.random() * walkableTiles.length)];
+        // Use zone-restricted tiles when available (3+ tiles), fallback to full map
+        const wanderTiles =
+          zoneWalkableTiles && zoneWalkableTiles.length >= 3 ? zoneWalkableTiles : walkableTiles;
+        if (wanderTiles.length > 0) {
+          const target = wanderTiles[Math.floor(Math.random() * wanderTiles.length)];
           const path = findPath(
             ch.tileCol,
             ch.tileRow,

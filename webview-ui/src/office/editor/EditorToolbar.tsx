@@ -568,6 +568,13 @@ export function EditorToolbar({
           >
             <span style={{ fontSize: '20px' }}>🔴 警告</span>
           </button>
+          <button
+            style={selectedZoneType === ZoneType.BOSS ? activeBtnStyle : btnStyle}
+            onClick={() => onZoneTypeChange(ZoneType.BOSS)}
+            title="社長エリア"
+          >
+            <span style={{ fontSize: '20px' }}>🟡 社長</span>
+          </button>
         </div>
       )}
 

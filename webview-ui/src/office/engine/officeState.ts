@@ -35,6 +35,7 @@ import type { AgentZoneState } from '../zoneManager.js';
 import {
   createAgentZoneState,
   createDefaultZones,
+  findFreeSeatInZone,
   getZoneTiles,
   updateAgentZoneState,
 } from '../zoneManager.js';
@@ -64,6 +65,8 @@ export class OfficeState {
   agentIdleTimers: Map<number, number> = new Map();
   /** Per-agent error flag */
   agentErrors: Map<number, boolean> = new Map();
+  /** Cached zone walkable tiles (invalidated on layout rebuild) */
+  private zoneWalkableCache: Map<string, Array<{ col: number; row: number }>> = new Map();
 
   constructor(layout?: OfficeLayout) {
     this.layout = layout || createDefaultLayout();
@@ -74,6 +77,18 @@ export class OfficeState {
     this.walkableTiles = getWalkableTiles(this.tileMap, this.blockedTiles);
   }
 
+  /** Get walkable tiles for a zone (cached) */
+  private getZoneWalkable(zoneType: ZoneTypeVal): Array<{ col: number; row: number }> {
+    const cached = this.zoneWalkableCache.get(zoneType);
+    if (cached) return cached;
+    const zoneTiles = getZoneTiles(zoneType, this.layout.zones);
+    const walkable = zoneTiles.filter((t) =>
+      isWalkable(t.col, t.row, this.tileMap, this.blockedTiles),
+    );
+    this.zoneWalkableCache.set(zoneType, walkable);
+    return walkable;
+  }
+
   /** Ensure layout has zone configuration; create defaults if missing */
   ensureZones(): void {
     if (!this.layout.zones) {
@@ -81,24 +96,69 @@ export class OfficeState {
     }
   }
 
-  /** Move an agent toward a random walkable tile in the target zone */
+  /** Move an agent toward a seat (or random walkable tile) in the target zone */
   moveAgentToZone(agentId: number, zoneType: ZoneTypeVal): void {
     const ch = this.characters.get(agentId);
     if (!ch || ch.matrixEffect) return;
 
+    // Try to find a free seat in the target zone
+    const freeSeatId = findFreeSeatInZone(
+      zoneType,
+      this.seats,
+      this.layout.zones,
+      ch.tileCol,
+      ch.tileRow,
+    );
+
+    if (freeSeatId) {
+      // Release current seat
+      if (ch.seatId) {
+        const oldSeat = this.seats.get(ch.seatId);
+        if (oldSeat) oldSeat.assigned = false;
+      }
+      // Assign new seat
+      const newSeat = this.seats.get(freeSeatId)!;
+      newSeat.assigned = true;
+      ch.seatId = freeSeatId;
+
+      // Pathfind to the new seat
+      const path = this.withOwnSeatUnblocked(ch, () =>
+        findPath(
+          ch.tileCol,
+          ch.tileRow,
+          newSeat.seatCol,
+          newSeat.seatRow,
+          this.tileMap,
+          this.blockedTiles,
+        ),
+      );
+      if (path.length > 0) {
+        ch.path = path;
+        ch.moveProgress = 0;
+        ch.state = CharacterState.WALK;
+        ch.frame = 0;
+        ch.frameTimer = 0;
+      } else {
+        // Already at seat — sit down
+        ch.state = CharacterState.TYPE;
+        ch.dir = newSeat.facingDir;
+        ch.frame = 0;
+        ch.frameTimer = 0;
+      }
+      this.rebuildFurnitureInstances();
+      return;
+    }
+
+    // No free seat in zone — fall back to random walkable tile
     const zoneTiles = getZoneTiles(zoneType, this.layout.zones);
     if (zoneTiles.length === 0) return;
 
-    // Filter to walkable tiles in the zone
     const walkable = zoneTiles.filter((t) =>
       isWalkable(t.col, t.row, this.tileMap, this.blockedTiles),
     );
     if (walkable.length === 0) return;
 
-    // Pick a random walkable tile in the zone
     const target = walkable[Math.floor(Math.random() * walkable.length)];
-
-    // Already in this zone tile?
     if (ch.tileCol === target.col && ch.tileRow === target.row) return;
 
     const path = this.withOwnSeatUnblocked(ch, () =>
@@ -122,6 +182,7 @@ export class OfficeState {
     this.blockedTiles = getBlockedTiles(layout.furniture);
     this.rebuildFurnitureInstances();
     this.walkableTiles = getWalkableTiles(this.tileMap, this.blockedTiles);
+    this.zoneWalkableCache.clear();
 
     // Shift character positions when grid expands left/up
     if (shift && (shift.col !== 0 || shift.row !== 0)) {
@@ -280,13 +341,16 @@ export class OfficeState {
       hueShift = pick.hueShift;
     }
 
-    // Try preferred seat first, then any free seat
+    // Try preferred seat → WORK zone seat → any free seat
     let seatId: string | null = null;
     if (preferredSeatId && this.seats.has(preferredSeatId)) {
       const seat = this.seats.get(preferredSeatId)!;
       if (!seat.assigned) {
         seatId = preferredSeatId;
       }
+    }
+    if (!seatId) {
+      seatId = findFreeSeatInZone('work', this.seats, this.layout.zones);
     }
     if (!seatId) {
       seatId = this.findFreeSeat();
@@ -739,9 +803,26 @@ export class OfficeState {
         continue; // skip normal FSM while effect is active
       }
 
+      // Compute zone walkable tiles for wander restriction
+      let zoneWalkable: Array<{ col: number; row: number }> | undefined;
+      if (!ch.isSubagent && this.layout.zones) {
+        const zoneState = this.agentZoneStates.get(ch.id);
+        if (zoneState?.currentZone) {
+          zoneWalkable = this.getZoneWalkable(zoneState.currentZone);
+        }
+      }
+
       // Temporarily unblock own seat so character can pathfind to it
       this.withOwnSeatUnblocked(ch, () =>
-        updateCharacter(ch, dt, this.walkableTiles, this.seats, this.tileMap, this.blockedTiles),
+        updateCharacter(
+          ch,
+          dt,
+          this.walkableTiles,
+          this.seats,
+          this.tileMap,
+          this.blockedTiles,
+          zoneWalkable,
+        ),
       );
 
       // If pending despawn and pose just finished (transitioned to IDLE), start despawn

@@ -100,7 +100,7 @@ export function createAgentForTerminal(
   console.log(
     `[Pixel Agents] Agent ${id}: created for terminal "${terminal.name}" → ${path.basename(jsonlFile)}`,
   );
-  webview?.postMessage({ type: 'agentCreated', id, folderName });
+  webview?.postMessage({ type: 'agentCreated', id, folderName, displayName: agent.displayName });
 
   startFileWatching(
     id,
@@ -313,11 +313,15 @@ export function sendExistingAgents(
     Record<string, { palette?: number; seatId?: string }>
   >(WORKSPACE_KEY_AGENT_SEATS, {});
 
-  // Include folderName per agent
+  // Include folderName and displayName per agent
   const folderNames: Record<number, string> = {};
+  const displayNames: Record<number, string> = {};
   for (const [id, agent] of agents) {
     if (agent.folderName) {
       folderNames[id] = agent.folderName;
+    }
+    if (agent.displayName) {
+      displayNames[id] = agent.displayName;
     }
   }
   console.log(
@@ -329,6 +333,7 @@ export function sendExistingAgents(
     agents: agentIds,
     agentMeta,
     folderNames,
+    displayNames,
   });
 
   sendCurrentAgentStatuses(agents, webview);
