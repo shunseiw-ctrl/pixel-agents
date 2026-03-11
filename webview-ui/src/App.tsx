@@ -162,6 +162,22 @@ function App() {
     vscode.postMessage({ type: 'focusAgent', id });
   }, []);
 
+  const handleChangeAppearance = useCallback((id: number, palette: number, hueShift: number) => {
+    const os = getOfficeState();
+    const ch = os.characters.get(id);
+    if (ch) {
+      ch.palette = palette;
+      ch.hueShift = hueShift;
+    }
+    vscode.postMessage({ type: 'saveAgentAppearance', agentId: id, palette, hueShift });
+  }, []);
+
+  const agentAppearances = agents.map((id) => {
+    const os = getOfficeState();
+    const ch = os.characters.get(id);
+    return { id, palette: ch?.palette ?? 0, hueShift: ch?.hueShift ?? 0 };
+  });
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [editorTickForKeyboard, setEditorTickForKeyboard] = useState(0);
@@ -280,6 +296,9 @@ function App() {
         onToggleDebugMode={handleToggleDebugMode}
         showThoughts={showThoughts}
         onToggleThoughts={handleToggleThoughts}
+        agents={agents}
+        agentAppearances={agentAppearances}
+        onChangeAppearance={handleChangeAppearance}
       />
 
       {editor.isEditMode && editor.isDirty && (

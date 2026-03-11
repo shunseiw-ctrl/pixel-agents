@@ -98,6 +98,24 @@ export const NOTIFICATION_NOTE_2_START_SEC = 0.1;
 export const NOTIFICATION_NOTE_DURATION_SEC = 0.18;
 export const NOTIFICATION_VOLUME = 0.14;
 
+// Error sound: descending two-note
+export const ERROR_NOTE_1_HZ = 523.25; // C5
+export const ERROR_NOTE_2_HZ = 349.23; // F4 (descending)
+export const ERROR_NOTE_DURATION_SEC = 0.22;
+export const ERROR_VOLUME = 0.12;
+
+// Success sound: ascending three-note
+export const SUCCESS_NOTE_1_HZ = 523.25; // C5
+export const SUCCESS_NOTE_2_HZ = 659.25; // E5
+export const SUCCESS_NOTE_3_HZ = 783.99; // G5
+export const SUCCESS_NOTE_DURATION_SEC = 0.15;
+export const SUCCESS_VOLUME = 0.1;
+
+// Typing sound: short click
+export const TYPING_NOTE_HZ = 800;
+export const TYPING_NOTE_DURATION_SEC = 0.03;
+export const TYPING_VOLUME = 0.04;
+
 // ── Game Logic ───────────────────────────────────────────────
 export const MAX_DELTA_TIME_SEC = 0.1;
 export const WAITING_BUBBLE_DURATION_SEC = 2.0;

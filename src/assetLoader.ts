@@ -190,6 +190,65 @@ export function loadDefaultLayout(assetsRoot: string): Record<string, unknown> |
   }
 }
 
+// ── Layout Presets ──────────────────────────────────────────
+
+export interface LayoutPreset {
+  name: string;
+  description: string;
+  cols: number;
+  rows: number;
+  seats: number;
+  layout: Record<string, unknown>;
+}
+
+/**
+ * Load layout presets from assets/presets/*.json.
+ * Each file should contain a valid OfficeLayout with 'name' and 'description' meta fields.
+ */
+export function loadLayoutPresets(assetsRoot: string): LayoutPreset[] {
+  const presets: LayoutPreset[] = [];
+  try {
+    const presetsDir = path.join(assetsRoot, 'assets', 'presets');
+    if (!fs.existsSync(presetsDir)) {
+      console.log('[AssetLoader] No presets directory found at:', presetsDir);
+      return presets;
+    }
+
+    const files = fs
+      .readdirSync(presetsDir)
+      .filter((f) => f.endsWith('.json'))
+      .sort();
+    for (const file of files) {
+      try {
+        const content = fs.readFileSync(path.join(presetsDir, file), 'utf-8');
+        const data = JSON.parse(content) as Record<string, unknown>;
+        if (data.version !== 1 || !Array.isArray(data.tiles)) continue;
+
+        // Count seats (chairs in furniture array)
+        const furniture = (data.furniture as Array<{ type: string }>) || [];
+        const seatCount = furniture.filter((f) => f.type === 'chair').length;
+
+        presets.push({
+          name: (data.name as string) || file.replace('.json', ''),
+          description: (data.description as string) || '',
+          cols: (data.cols as number) || 0,
+          rows: (data.rows as number) || 0,
+          seats: seatCount,
+          layout: data,
+        });
+        console.log(
+          `[AssetLoader] Loaded preset: ${data.name} (${data.cols}×${data.rows}, ${seatCount} seats)`,
+        );
+      } catch {
+        console.warn(`[AssetLoader] Failed to load preset: ${file}`);
+      }
+    }
+  } catch {
+    // ignore
+  }
+  return presets;
+}
+
 // ── Wall tile loading ────────────────────────────────────────
 
 export interface LoadedWallTiles {

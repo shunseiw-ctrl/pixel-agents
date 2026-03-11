@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import type { AgentAppearance } from './SettingsModal.js';
 import { SettingsModal } from './SettingsModal.js';
 
 interface BottomToolbarProps {
@@ -9,6 +10,9 @@ interface BottomToolbarProps {
   onToggleDebugMode: () => void;
   showThoughts: boolean;
   onToggleThoughts: () => void;
+  agents?: number[];
+  agentAppearances?: AgentAppearance[];
+  onChangeAppearance?: (id: number, palette: number, hueShift: number) => void;
 }
 
 const panelStyle: React.CSSProperties = {
@@ -49,6 +53,9 @@ export function BottomToolbar({
   onToggleDebugMode,
   showThoughts,
   onToggleThoughts,
+  agents,
+  agentAppearances,
+  onChangeAppearance,
 }: BottomToolbarProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -96,6 +103,9 @@ export function BottomToolbar({
           onToggleDebugMode={onToggleDebugMode}
           showThoughts={showThoughts}
           onToggleThoughts={onToggleThoughts}
+          agents={agents}
+          agentAppearances={agentAppearances}
+          onChangeAppearance={onChangeAppearance}
         />
       </div>
     </div>

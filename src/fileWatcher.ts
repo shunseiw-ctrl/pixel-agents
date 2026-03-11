@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { FILE_WATCHER_POLL_INTERVAL_MS, PROJECT_SCAN_INTERVAL_MS } from './constants.js';
+import { FILE_WATCHER_POLL_INTERVAL_MS } from './constants.js';
 import { cancelPermissionTimer, cancelWaitingTimer, clearAgentActivity } from './timerManager.js';
 import { processTranscriptLine } from './transcriptParser.js';
 import type { AgentState } from './types.js';
@@ -95,194 +95,6 @@ export function readNewLines(
   }
 }
 
-export function ensureProjectScan(
-  projectDir: string,
-  knownJsonlFiles: Set<string>,
-  projectScanTimerRef: { current: ReturnType<typeof setInterval> | null },
-  activeAgentIdRef: { current: number | null },
-  nextAgentIdRef: { current: number },
-  agents: Map<number, AgentState>,
-  fileWatchers: Map<number, fs.FSWatcher>,
-  pollingTimers: Map<number, ReturnType<typeof setInterval>>,
-  waitingTimers: Map<number, ReturnType<typeof setTimeout>>,
-  permissionTimers: Map<number, ReturnType<typeof setTimeout>>,
-  webview: vscode.Webview | undefined,
-  persistAgents: () => void,
-): void {
-  if (projectScanTimerRef.current) return;
-  // Seed with all existing JSONL files so we only react to truly new ones
-  try {
-    const files = fs
-      .readdirSync(projectDir)
-      .filter((f) => f.endsWith('.jsonl'))
-      .map((f) => path.join(projectDir, f));
-    for (const f of files) {
-      knownJsonlFiles.add(f);
-    }
-  } catch {
-    /* dir may not exist yet */
-  }
-
-  projectScanTimerRef.current = setInterval(() => {
-    scanForNewJsonlFiles(
-      projectDir,
-      knownJsonlFiles,
-      activeAgentIdRef,
-      nextAgentIdRef,
-      agents,
-      fileWatchers,
-      pollingTimers,
-      waitingTimers,
-      permissionTimers,
-      webview,
-      persistAgents,
-    );
-  }, PROJECT_SCAN_INTERVAL_MS);
-}
-
-function scanForNewJsonlFiles(
-  projectDir: string,
-  knownJsonlFiles: Set<string>,
-  activeAgentIdRef: { current: number | null },
-  nextAgentIdRef: { current: number },
-  agents: Map<number, AgentState>,
-  fileWatchers: Map<number, fs.FSWatcher>,
-  pollingTimers: Map<number, ReturnType<typeof setInterval>>,
-  waitingTimers: Map<number, ReturnType<typeof setTimeout>>,
-  permissionTimers: Map<number, ReturnType<typeof setTimeout>>,
-  webview: vscode.Webview | undefined,
-  persistAgents: () => void,
-): void {
-  let files: string[];
-  try {
-    files = fs
-      .readdirSync(projectDir)
-      .filter((f) => f.endsWith('.jsonl'))
-      .map((f) => path.join(projectDir, f));
-  } catch {
-    return;
-  }
-
-  // Build set of files already tracked by agents
-  const agentFiles = new Set<string>();
-  for (const agent of agents.values()) {
-    agentFiles.add(agent.jsonlFile);
-  }
-
-  for (const file of files) {
-    if (knownJsonlFiles.has(file) || agentFiles.has(file)) continue;
-
-    if (activeAgentIdRef.current !== null) {
-      // Active agent focused → /clear reassignment
-      knownJsonlFiles.add(file);
-      console.log(
-        `[Pixel Agents] New JSONL detected: ${path.basename(file)}, reassigning to agent ${activeAgentIdRef.current}`,
-      );
-      reassignAgentToFile(
-        activeAgentIdRef.current,
-        file,
-        agents,
-        fileWatchers,
-        pollingTimers,
-        waitingTimers,
-        permissionTimers,
-        webview,
-        persistAgents,
-      );
-    } else {
-      // No active agent → try to adopt the focused terminal
-      const activeTerminal = vscode.window.activeTerminal;
-      if (activeTerminal) {
-        let owned = false;
-        for (const agent of agents.values()) {
-          if (agent.terminalRef === activeTerminal) {
-            owned = true;
-            break;
-          }
-        }
-        if (!owned) {
-          knownJsonlFiles.add(file);
-          adoptTerminalForFile(
-            activeTerminal,
-            file,
-            projectDir,
-            nextAgentIdRef,
-            agents,
-            activeAgentIdRef,
-            fileWatchers,
-            pollingTimers,
-            waitingTimers,
-            permissionTimers,
-            webview,
-            persistAgents,
-          );
-        }
-      }
-      // If no active terminal, DON'T mark as known — retry on next scan
-    }
-  }
-}
-
-function adoptTerminalForFile(
-  terminal: vscode.Terminal,
-  jsonlFile: string,
-  projectDir: string,
-  nextAgentIdRef: { current: number },
-  agents: Map<number, AgentState>,
-  activeAgentIdRef: { current: number | null },
-  fileWatchers: Map<number, fs.FSWatcher>,
-  pollingTimers: Map<number, ReturnType<typeof setInterval>>,
-  waitingTimers: Map<number, ReturnType<typeof setTimeout>>,
-  permissionTimers: Map<number, ReturnType<typeof setTimeout>>,
-  webview: vscode.Webview | undefined,
-  persistAgents: () => void,
-): void {
-  const id = nextAgentIdRef.current++;
-  const agent: AgentState = {
-    id,
-    terminalRef: terminal,
-    projectDir,
-    jsonlFile,
-    fileOffset: 0,
-    lineBuffer: '',
-    activeToolIds: new Set(),
-    activeToolStatuses: new Map(),
-    activeToolNames: new Map(),
-    activeSubagentToolIds: new Map(),
-    activeSubagentToolNames: new Map(),
-    isWaiting: false,
-    permissionSent: false,
-    hadToolsInTurn: false,
-    lastThoughtText: '',
-    thoughtRepeatCount: 0,
-    metaSent: false,
-    lastTurnHadError: false,
-    createdAt: Date.now(),
-    tokenUsage: { inputTokens: 0, outputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0 },
-  };
-
-  agents.set(id, agent);
-  activeAgentIdRef.current = id;
-  persistAgents();
-
-  console.log(
-    `[Pixel Agents] Agent ${id}: adopted terminal "${terminal.name}" for ${path.basename(jsonlFile)}`,
-  );
-  webview?.postMessage({ type: 'agentCreated', id });
-
-  startFileWatching(
-    id,
-    jsonlFile,
-    agents,
-    fileWatchers,
-    pollingTimers,
-    waitingTimers,
-    permissionTimers,
-    webview,
-  );
-  readNewLines(id, agents, waitingTimers, permissionTimers, webview);
-}
-
 export function reassignAgentToFile(
   agentId: number,
   newFilePath: string,
@@ -334,4 +146,131 @@ export function reassignAgentToFile(
     webview,
   );
   readNewLines(agentId, agents, waitingTimers, permissionTimers, webview);
+}
+
+/**
+ * Per-agent project directory watcher for /clear detection.
+ * Watches for new .jsonl files appearing in the agent's projectDir.
+ * When a new file is detected, reassigns the agent to it.
+ *
+ * Returns a cleanup function to stop watching.
+ */
+export function startProjectDirWatch(
+  agentId: number,
+  projectDir: string,
+  agents: Map<number, AgentState>,
+  fileWatchers: Map<number, fs.FSWatcher>,
+  pollingTimers: Map<number, ReturnType<typeof setInterval>>,
+  waitingTimers: Map<number, ReturnType<typeof setTimeout>>,
+  permissionTimers: Map<number, ReturnType<typeof setTimeout>>,
+  webview: vscode.Webview | undefined,
+  persistAgents: () => void,
+): () => void {
+  // Snapshot current JSONL files in projectDir
+  let knownFiles: Set<string>;
+  try {
+    knownFiles = new Set(
+      fs
+        .readdirSync(projectDir)
+        .filter((f) => f.endsWith('.jsonl'))
+        .map((f) => path.join(projectDir, f)),
+    );
+  } catch {
+    knownFiles = new Set();
+  }
+
+  // Also include any JSONL files currently tracked by agents
+  for (const agent of agents.values()) {
+    knownFiles.add(agent.jsonlFile);
+  }
+
+  let dirWatcher: fs.FSWatcher | null = null;
+  let pollTimer: ReturnType<typeof setInterval> | null = null;
+
+  const checkForNew = (): string | null => {
+    const agent = agents.get(agentId);
+    if (!agent) return null;
+
+    try {
+      const files = fs
+        .readdirSync(projectDir)
+        .filter((f) => f.endsWith('.jsonl'))
+        .map((f) => path.join(projectDir, f));
+      for (const file of files) {
+        if (!knownFiles.has(file)) {
+          return file;
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+    return null;
+  };
+
+  const handleNewFile = (file: string) => {
+    const agent = agents.get(agentId);
+    if (!agent) return;
+
+    // Skip if another agent is already using this JSONL file
+    for (const other of agents.values()) {
+      if (other.id !== agentId && other.jsonlFile === file) {
+        knownFiles.add(file);
+        return;
+      }
+    }
+
+    knownFiles.add(file);
+    console.log(
+      `[Pixel Agents] /clear detected: new JSONL ${path.basename(file)}, reassigning agent ${agentId}`,
+    );
+    reassignAgentToFile(
+      agentId,
+      file,
+      agents,
+      fileWatchers,
+      pollingTimers,
+      waitingTimers,
+      permissionTimers,
+      webview,
+      persistAgents,
+    );
+  };
+
+  // Primary: fs.watch on directory
+  try {
+    dirWatcher = fs.watch(projectDir, (_eventType, filename) => {
+      if (!filename || !filename.endsWith('.jsonl')) return;
+      const fullPath = path.join(projectDir, filename);
+      if (!knownFiles.has(fullPath)) {
+        handleNewFile(fullPath);
+      }
+    });
+  } catch {
+    /* dir may not exist */
+  }
+
+  // Backup: polling (macOS fs.watch unreliable)
+  pollTimer = setInterval(() => {
+    if (!agents.has(agentId)) {
+      cleanup();
+      return;
+    }
+    const newFile = checkForNew();
+    if (newFile) {
+      handleNewFile(newFile);
+    }
+  }, 2000);
+
+  const cleanup = () => {
+    if (dirWatcher) {
+      dirWatcher.close();
+      dirWatcher = null;
+    }
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  };
+
+  return cleanup;
 }

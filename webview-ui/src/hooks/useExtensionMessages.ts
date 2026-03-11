@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
 import type { AgentHistoryEntry, AgentMeta } from '../components/StatusSummaryPanel.js';
-import { playDoneSound, setSoundEnabled } from '../notificationSound.js';
+import {
+  playDoneSound,
+  playErrorSound,
+  playSuccessSound,
+  playTypingSound,
+  setMasterVolume,
+  setNotificationSoundEnabled,
+  setSoundEnabled,
+  setTypingSoundEnabled,
+} from '../notificationSound.js';
 import type { OfficeState } from '../office/engine/officeState.js';
 import { setFloorSprites } from '../office/floorTiles.js';
 import { buildDynamicCatalog } from '../office/layout/furnitureCatalog.js';
@@ -44,6 +53,10 @@ export interface AgentThought {
 
 export interface AgentCost {
   costUsd: number;
+  inputTokens: number;
+  outputTokens: number;
+  cacheWriteTokens: number;
+  cacheReadTokens: number;
 }
 
 export interface AgentPipeline {
@@ -154,23 +167,36 @@ export function useExtensionMessages(
       } else if (msg.type === 'agentClosed') {
         const id = msg.id as number;
         const success = (msg.success as boolean | undefined) ?? true;
-        // Record in history before removing
-        setAgentMetas((prevMetas) => {
-          const meta = prevMetas[id];
-          if (meta) {
-            const entry: AgentHistoryEntry = {
-              id,
-              issueNumber: meta.issueNumber,
-              taskName: meta.taskName,
-              completedAt: Date.now(),
-              elapsedMs: Date.now() - meta.createdAt,
-              success,
-            };
-            setAgentHistory((prev) => [...prev, entry]);
-          }
-          const next = { ...prevMetas };
-          delete next[id];
-          return next;
+        if (success) playSuccessSound();
+        else playErrorSound();
+        // Record in history before removing (capture cost snapshot)
+        setAgentCosts((prevCosts) => {
+          const cost = prevCosts[id];
+          setAgentMetas((prevMetas) => {
+            const meta = prevMetas[id];
+            if (meta) {
+              const entry: AgentHistoryEntry = {
+                id,
+                issueNumber: meta.issueNumber,
+                taskName: meta.taskName,
+                completedAt: Date.now(),
+                elapsedMs: Date.now() - meta.createdAt,
+                success,
+                costUsd: cost?.costUsd,
+                inputTokens: cost?.inputTokens,
+                outputTokens: cost?.outputTokens,
+                cacheWriteTokens: cost?.cacheWriteTokens,
+                cacheReadTokens: cost?.cacheReadTokens,
+              };
+              setAgentHistory((prev) => [...prev, entry]);
+            }
+            const next = { ...prevMetas };
+            delete next[id];
+            return next;
+          });
+          const nextCosts = { ...prevCosts };
+          delete nextCosts[id];
+          return nextCosts;
         });
         setAgents((prev) => prev.filter((a) => a !== id));
         setSelectedAgent((prev) => (prev === id ? null : prev));
@@ -245,6 +271,7 @@ export function useExtensionMessages(
         os.setAgentTool(id, toolName);
         os.setAgentActive(id, true);
         os.clearPermissionBubble(id);
+        playTypingSound();
         // Create sub-agent character for Task/Agent tool subtasks
         if (status.startsWith('Subagent:') || status.startsWith('Subtask:')) {
           let label: string;
@@ -324,6 +351,7 @@ export function useExtensionMessages(
         const id = msg.id as number;
         const hasError = msg.hasError as boolean;
         os.setAgentError(id, hasError);
+        if (hasError) playErrorSound();
       } else if (msg.type === 'agentMeta') {
         const id = msg.id as number;
         setAgentMetas((prev) => ({
@@ -337,7 +365,22 @@ export function useExtensionMessages(
       } else if (msg.type === 'agentTokenUsage') {
         const id = msg.id as number;
         const costUsd = msg.costUsd as number;
-        setAgentCosts((prev) => ({ ...prev, [id]: { costUsd } }));
+        const usage = msg.usage as {
+          inputTokens: number;
+          outputTokens: number;
+          cacheWriteTokens: number;
+          cacheReadTokens: number;
+        };
+        setAgentCosts((prev) => ({
+          ...prev,
+          [id]: {
+            costUsd,
+            inputTokens: usage.inputTokens,
+            outputTokens: usage.outputTokens,
+            cacheWriteTokens: usage.cacheWriteTokens,
+            cacheReadTokens: usage.cacheReadTokens,
+          },
+        }));
       } else if (msg.type === 'agentPipelineStep') {
         const id = msg.id as number;
         const step = msg.step as string;
@@ -471,6 +514,11 @@ export function useExtensionMessages(
       } else if (msg.type === 'settingsLoaded') {
         const soundOn = msg.soundEnabled as boolean;
         setSoundEnabled(soundOn);
+        if (msg.typingSoundEnabled !== undefined)
+          setTypingSoundEnabled(msg.typingSoundEnabled as boolean);
+        if (msg.notificationSoundEnabled !== undefined)
+          setNotificationSoundEnabled(msg.notificationSoundEnabled as boolean);
+        if (msg.masterVolume !== undefined) setMasterVolume(msg.masterVolume as number);
         if (msg.thoughtEnabled !== undefined) {
           onThoughtEnabledLoaded?.(msg.thoughtEnabled as boolean);
         }

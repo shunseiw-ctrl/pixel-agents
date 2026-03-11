@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import type { AgentCost, AgentPipeline } from '../hooks/useExtensionMessages.js';
 import type { ToolActivity } from '../office/types.js';
 
+function formatTokenCount(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
+  return String(n);
+}
+
 export interface AgentMeta {
   issueNumber?: number;
   taskName?: string;
@@ -16,6 +22,11 @@ export interface AgentHistoryEntry {
   completedAt: number;
   elapsedMs: number;
   success: boolean;
+  costUsd?: number;
+  inputTokens?: number;
+  outputTokens?: number;
+  cacheWriteTokens?: number;
+  cacheReadTokens?: number;
 }
 
 interface StatusSummaryPanelProps {
@@ -124,6 +135,11 @@ export function StatusSummaryPanel({
     return tools?.some((t) => t.permissionWait && !t.done);
   }).length;
 
+  // Total cost across active agents + history
+  const activeTotalCost = agents.reduce((sum, id) => sum + (agentCosts[id]?.costUsd ?? 0), 0);
+  const historyTotalCost = agentHistory.reduce((sum, e) => sum + (e.costUsd ?? 0), 0);
+  const totalCost = activeTotalCost + historyTotalCost;
+
   const timeStr = new Date(now).toLocaleTimeString('ja-JP', { hour12: false });
 
   if (agents.length === 0 && agentHistory.length === 0) return null;
@@ -165,6 +181,11 @@ export function StatusSummaryPanel({
         <span style={{ color: errorCount > 0 ? '#F44336' : 'var(--pixel-text-dim)' }}>
           警告: {errorCount}
         </span>
+        {totalCost > 0 && (
+          <span style={{ color: '#81C784', fontWeight: 'bold' }}>
+            合計: ${totalCost.toFixed(2)}
+          </span>
+        )}
         <span style={{ marginLeft: 'auto' }}>{timeStr}</span>
       </div>
 
@@ -245,6 +266,34 @@ export function StatusSummaryPanel({
                 {formatElapsed(elapsed)}
               </span>
             </div>
+            {/* Token details row */}
+            {cost && cost.inputTokens > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 6,
+                  padding: '1px 8px 2px 24px',
+                  borderBottom: pipeline ? 'none' : '1px solid rgba(255,255,255,0.05)',
+                  fontSize: '13px',
+                  color: 'var(--pixel-text-dim)',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <span>IN:{formatTokenCount(cost.inputTokens)}</span>
+                <span>OUT:{formatTokenCount(cost.outputTokens)}</span>
+                {cost.cacheReadTokens > 0 &&
+                  (() => {
+                    const rate = Math.round(
+                      (cost.cacheReadTokens / (cost.inputTokens + cost.cacheReadTokens)) * 100,
+                    );
+                    return (
+                      <span style={{ color: rate > 50 ? '#81C784' : 'var(--pixel-text-dim)' }}>
+                        Cache:{rate}%
+                      </span>
+                    );
+                  })()}
+              </div>
+            )}
             {/* Pipeline steps */}
             {pipeline && Object.keys(pipeline.steps).length > 0 && (
               <div
@@ -320,6 +369,9 @@ export function StatusSummaryPanel({
                       createdAt: 0,
                     })}
                   </span>
+                  {entry.costUsd != null && entry.costUsd > 0 && (
+                    <span style={{ fontSize: '14px' }}>${entry.costUsd.toFixed(2)}</span>
+                  )}
                   <span>{formatElapsed(entry.elapsedMs)}</span>
                 </div>
               ))}

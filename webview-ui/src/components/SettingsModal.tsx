@@ -1,7 +1,22 @@
 import { useEffect, useState } from 'react';
 
-import { isSoundEnabled, setSoundEnabled } from '../notificationSound.js';
+import {
+  getMasterVolume,
+  isNotificationSoundEnabled,
+  isSoundEnabled,
+  isTypingSoundEnabled,
+  setMasterVolume,
+  setNotificationSoundEnabled,
+  setSoundEnabled,
+  setTypingSoundEnabled,
+} from '../notificationSound.js';
 import { vscode } from '../vscodeApi.js';
+
+export interface AgentAppearance {
+  id: number;
+  palette: number;
+  hueShift: number;
+}
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -10,6 +25,9 @@ interface SettingsModalProps {
   onToggleDebugMode: () => void;
   showThoughts: boolean;
   onToggleThoughts: () => void;
+  agents?: number[];
+  agentAppearances?: AgentAppearance[];
+  onChangeAppearance?: (id: number, palette: number, hueShift: number) => void;
 }
 
 const menuItemBase: React.CSSProperties = {
@@ -56,9 +74,25 @@ export function SettingsModal({
   onToggleDebugMode,
   showThoughts,
   onToggleThoughts,
+  agents,
+  agentAppearances,
+  onChangeAppearance,
 }: SettingsModalProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [soundLocal, setSoundLocal] = useState(isSoundEnabled);
+  const [typingSoundLocal, setTypingSoundLocal] = useState(isTypingSoundEnabled);
+  const [notifSoundLocal, setNotifSoundLocal] = useState(isNotificationSoundEnabled);
+  const [volumeLocal, setVolumeLocal] = useState(getMasterVolume);
+  const [presets, setPresets] = useState<
+    Array<{
+      name: string;
+      description: string;
+      cols: number;
+      rows: number;
+      seats: number;
+    }>
+  >([]);
+  const [showPresets, setShowPresets] = useState(false);
   const [notifyError, setNotifyError] = useState(true);
   const [notifyLoop, setNotifyLoop] = useState(true);
   const [notifyComplete, setNotifyComplete] = useState(true);
@@ -73,6 +107,8 @@ export function SettingsModal({
         if (msg.notifyLoop !== undefined) setNotifyLoop(msg.notifyLoop as boolean);
         if (msg.notifyComplete !== undefined) setNotifyComplete(msg.notifyComplete as boolean);
         if (msg.notifyInputWait !== undefined) setNotifyInputWait(msg.notifyInputWait as boolean);
+      } else if (msg.type === 'layoutPresetsLoaded') {
+        setPresets(msg.presets as typeof presets);
       }
     };
     window.addEventListener('message', handler);
@@ -193,6 +229,65 @@ export function SettingsModal({
         >
           レイアウトをインポート
         </button>
+        <button
+          onClick={() => {
+            if (!showPresets) {
+              vscode.postMessage({ type: 'getLayoutPresets' });
+            }
+            setShowPresets((v) => !v);
+          }}
+          onMouseEnter={() => setHovered('presets')}
+          onMouseLeave={() => setHovered(null)}
+          style={{
+            ...menuItemBase,
+            background: hovered === 'presets' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+          }}
+        >
+          <span>テンプレートを選ぶ</span>
+          <span style={{ fontSize: '16px' }}>{showPresets ? '▲' : '▼'}</span>
+        </button>
+        {showPresets && presets.length > 0 && (
+          <div style={{ padding: '2px 8px 4px' }}>
+            {presets.map((p) => (
+              <button
+                key={p.name}
+                onClick={() => {
+                  if (
+                    confirm(
+                      `テンプレート「${p.name}」を読み込みますか？\n現在のレイアウトは上書きされます。`,
+                    )
+                  ) {
+                    vscode.postMessage({ type: 'loadLayoutPreset', name: p.name });
+                    onClose();
+                  }
+                }}
+                onMouseEnter={() => setHovered(`preset-${p.name}`)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '4px 8px',
+                  margin: '2px 0',
+                  fontSize: '20px',
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  background:
+                    hovered === `preset-${p.name}`
+                      ? 'rgba(255, 255, 255, 0.08)'
+                      : 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: 0,
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                }}
+              >
+                <div style={{ fontWeight: 'bold' }}>{p.name}</div>
+                <div style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.5)' }}>
+                  {p.description} ({p.cols}×{p.rows}, {p.seats}席)
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Divider */}
         <div style={{ borderTop: '1px solid var(--pixel-border)', margin: '4px 0' }} />
@@ -211,9 +306,87 @@ export function SettingsModal({
             background: hovered === 'sound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
           }}
         >
-          <span>サウンド通知</span>
+          <span>サウンド (マスター)</span>
           <span style={checkboxStyle(soundLocal)}>{soundLocal ? 'X' : ''}</span>
         </button>
+        {soundLocal && (
+          <>
+            <button
+              onClick={() => {
+                const newVal = !isTypingSoundEnabled();
+                setTypingSoundEnabled(newVal);
+                setTypingSoundLocal(newVal);
+                vscode.postMessage({
+                  type: 'setSoundSetting',
+                  key: 'typingSound',
+                  enabled: newVal,
+                });
+              }}
+              onMouseEnter={() => setHovered('typingSound')}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                ...menuItemBase,
+                fontSize: '22px',
+                paddingLeft: 24,
+                background: hovered === 'typingSound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+              }}
+            >
+              <span>タイピング音</span>
+              <span style={checkboxStyle(typingSoundLocal)}>{typingSoundLocal ? 'X' : ''}</span>
+            </button>
+            <button
+              onClick={() => {
+                const newVal = !isNotificationSoundEnabled();
+                setNotificationSoundEnabled(newVal);
+                setNotifSoundLocal(newVal);
+                vscode.postMessage({
+                  type: 'setSoundSetting',
+                  key: 'notificationSound',
+                  enabled: newVal,
+                });
+              }}
+              onMouseEnter={() => setHovered('notifSound')}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                ...menuItemBase,
+                fontSize: '22px',
+                paddingLeft: 24,
+                background: hovered === 'notifSound' ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+              }}
+            >
+              <span>通知音</span>
+              <span style={checkboxStyle(notifSoundLocal)}>{notifSoundLocal ? 'X' : ''}</span>
+            </button>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '4px 10px 4px 24px',
+                fontSize: '22px',
+                color: 'rgba(255, 255, 255, 0.8)',
+              }}
+            >
+              <span>音量</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={Math.round(volumeLocal * 100)}
+                onChange={(e) => {
+                  const v = parseInt(e.target.value, 10) / 100;
+                  setMasterVolume(v);
+                  setVolumeLocal(v);
+                  vscode.postMessage({ type: 'setSoundSetting', key: 'masterVolume', value: v });
+                }}
+                style={{ flex: 1, cursor: 'pointer' }}
+              />
+              <span style={{ fontSize: '18px', minWidth: 32, textAlign: 'right' }}>
+                {Math.round(volumeLocal * 100)}%
+              </span>
+            </div>
+          </>
+        )}
         <button
           onClick={onToggleThoughts}
           onMouseEnter={() => setHovered('thoughts')}
@@ -290,6 +463,93 @@ export function SettingsModal({
           <span>入力待ち通知</span>
           <span style={checkboxStyle(notifyInputWait)}>{notifyInputWait ? 'X' : ''}</span>
         </button>
+
+        {/* Character customization */}
+        {agents && agents.length > 0 && onChangeAppearance && (
+          <>
+            <div style={{ borderTop: '1px solid var(--pixel-border)', margin: '4px 0' }} />
+            <div
+              style={{
+                padding: '2px 10px',
+                fontSize: '20px',
+                color: 'rgba(255, 255, 255, 0.5)',
+              }}
+            >
+              キャラクターカスタマイズ
+            </div>
+            {agents.map((agentId) => {
+              const appearance = agentAppearances?.find((a) => a.id === agentId);
+              if (!appearance) return null;
+              return (
+                <div key={agentId} style={{ padding: '4px 10px' }}>
+                  <div
+                    style={{ fontSize: '20px', color: 'rgba(255, 255, 255, 0.7)', marginBottom: 4 }}
+                  >
+                    Agent #{agentId}
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      fontSize: '18px',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    }}
+                  >
+                    <span>パレット:</span>
+                    {[0, 1, 2, 3, 4, 5].map((p) => (
+                      <button
+                        key={p}
+                        onClick={() => onChangeAppearance(agentId, p, appearance.hueShift)}
+                        style={{
+                          width: 20,
+                          height: 20,
+                          border:
+                            appearance.palette === p
+                              ? '2px solid #5a8cff'
+                              : '1px solid rgba(255,255,255,0.3)',
+                          borderRadius: 0,
+                          background: `hsl(${[30, 200, 350, 50, 150, 280][p]}, 50%, 40%)`,
+                          cursor: 'pointer',
+                          padding: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      marginTop: 4,
+                      fontSize: '18px',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    }}
+                  >
+                    <span>色相:</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="360"
+                      value={appearance.hueShift}
+                      onChange={(e) => {
+                        onChangeAppearance(
+                          agentId,
+                          appearance.palette,
+                          parseInt(e.target.value, 10),
+                        );
+                      }}
+                      style={{ flex: 1, cursor: 'pointer' }}
+                    />
+                    <span style={{ fontSize: '16px', minWidth: 32, textAlign: 'right' }}>
+                      {appearance.hueShift}°
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
 
         {/* Divider */}
         <div style={{ borderTop: '1px solid var(--pixel-border)', margin: '4px 0' }} />

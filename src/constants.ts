@@ -1,7 +1,7 @@
 // ── Timing (ms) ──────────────────────────────────────────────
 export const JSONL_POLL_INTERVAL_MS = 1000;
 export const FILE_WATCHER_POLL_INTERVAL_MS = 1000;
-export const PROJECT_SCAN_INTERVAL_MS = 1000;
+export const JSONL_DISCOVERY_TIMEOUT_MS = 30000;
 export const TOOL_DONE_DELAY_MS = 300;
 export const PERMISSION_TIMER_DELAY_MS = 7000;
 export const TEXT_IDLE_DELAY_MS = 5000;
@@ -46,6 +46,9 @@ export const COST_CACHE_READ_PER_1K = 0.0003;
 
 // ── Settings Persistence ────────────────────────────────────
 export const GLOBAL_KEY_SOUND_ENABLED = 'pixel-agents.soundEnabled';
+export const GLOBAL_KEY_TYPING_SOUND_ENABLED = 'pixel-agents.typingSoundEnabled';
+export const GLOBAL_KEY_NOTIFICATION_SOUND_ENABLED = 'pixel-agents.notificationSoundEnabled';
+export const GLOBAL_KEY_MASTER_VOLUME = 'pixel-agents.masterVolume';
 export const GLOBAL_KEY_THOUGHT_ENABLED = 'pixel-agents.thoughtBubblesEnabled';
 export const GLOBAL_KEY_NOTIFY_ERROR = 'pixel-agents.notifyError';
 export const GLOBAL_KEY_NOTIFY_LOOP = 'pixel-agents.notifyLoop';

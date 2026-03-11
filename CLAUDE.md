@@ -10,9 +10,10 @@ src/                          — Extension backend (Node.js, VS Code API)
   extension.ts                — Entry: activate(), deactivate()
   PixelAgentsViewProvider.ts   — WebviewViewProvider, message dispatch, asset loading
   assetLoader.ts              — PNG parsing, sprite conversion, catalog building, default layout loading
-  agentManager.ts             — Terminal lifecycle: launch, remove, restore, persist
+  agentManager.ts             — Terminal lifecycle: launch, remove, restore, persist, createAgentForTerminal
+  terminalDetector.ts         — Shell Integration API: detect claude commands in any terminal, JSONL discovery
   layoutPersistence.ts        — User-level layout file I/O (~/.pixel-agents/layout.json), migration, cross-window watching
-  fileWatcher.ts              — fs.watch + polling, readNewLines, /clear detection, terminal adoption
+  fileWatcher.ts              — fs.watch + polling, readNewLines, /clear detection (per-agent projectDir watch)
   transcriptParser.ts         — JSONL parsing: tool_use/tool_result → webview messages
   timerManager.ts             — Waiting/permission timer logic
   types.ts                    — Shared interfaces (AgentState, PersistedAgent)
@@ -73,11 +74,13 @@ scripts/                      — 7-stage asset extraction pipeline
 
 **Vocabulary**: Terminal = VS Code terminal running Claude. Session = JSONL conversation file. Agent = webview character bound 1:1 to a terminal.
 
-**Extension ↔ Webview**: `postMessage` protocol. Key messages: `openClaude`, `agentCreated/Closed`, `focusAgent`, `agentToolStart/Done/Clear`, `agentStatus`, `existingAgents`, `layoutLoaded`, `furnitureAssetsLoaded`, `floorTilesLoaded`, `wallTilesLoaded`, `saveLayout`, `saveAgentSeats`, `exportLayout`, `importLayout`, `settingsLoaded`, `setSoundEnabled`.
+**Extension ↔ Webview**: `postMessage` protocol. Key messages: `agentCreated/Closed`, `focusAgent`, `agentToolStart/Done/Clear`, `agentStatus`, `existingAgents`, `layoutLoaded`, `furnitureAssetsLoaded`, `floorTilesLoaded`, `wallTilesLoaded`, `saveLayout`, `saveAgentSeats`, `exportLayout`, `importLayout`, `settingsLoaded`, `setSoundEnabled`, `setSoundSetting`, `getLayoutPresets`, `loadLayoutPreset`, `layoutPresetsLoaded`, `saveAgentAppearance`, `agentTokenUsage`.
 
-**One-agent-per-terminal**: Each "+ Agent" click → new terminal (`claude --session-id <uuid>`) → immediate agent creation → 1s poll for `<uuid>.jsonl` → file watching starts.
+**One-agent-per-terminal**: Shell Integration auto-detects `claude` commands → JSONL discovery → agent creation.
 
-**Terminal adoption**: Project-level 1s scan detects unknown JSONL files. If active terminal has no agent → adopt. If focused agent exists → reassign (`/clear` handling).
+**Terminal-Event-Driven detection**: Shell Integration API (`onDidStartTerminalShellExecution`) detects `claude` commands in any terminal → JSONL discovery (session-id poll or projectDir watch for new .jsonl) → `createAgentForTerminal()`. Two detection paths: (1) Shell Integration auto-detection (any terminal), (2) `restoreAgents()` (persisted data + live terminals).
+
+**/clear detection**: Per-agent `fs.watch` on projectDir (`startProjectDirWatch`). When new .jsonl appears → `reassignAgentToFile()`. Cleanup on agent removal.
 
 ## Agent Status Tracking
 
