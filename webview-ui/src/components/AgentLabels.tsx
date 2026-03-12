@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-import { CHARACTER_SITTING_OFFSET_PX, TOOL_OVERLAY_VERTICAL_OFFSET } from '../constants.js';
+import {
+  CHARACTER_SITTING_OFFSET_PX,
+  LABEL_ESTIMATED_HEIGHT_PX,
+  LABEL_ESTIMATED_WIDTH_PX,
+  LABEL_OVERLAP_NUDGE_PX,
+  TOOL_OVERLAY_VERTICAL_OFFSET,
+} from '../constants.js';
 import type { SubagentCharacter } from '../hooks/useExtensionMessages.js';
 import type { OfficeState } from '../office/engine/officeState.js';
 import { CharacterState, TILE_SIZE } from '../office/types.js';
@@ -40,6 +46,8 @@ export function AgentLabels({
         const deviceOffsetX = Math.floor((canvasW - mapW) / 2) + Math.round(panRef.current.x);
         const deviceOffsetY = Math.floor((canvasH - mapH) / 2) + Math.round(panRef.current.y);
 
+        const positions: { x: number; y: number }[] = [];
+
         for (const [id, div] of labelRefs.current) {
           const ch = officeState.characters.get(id);
           if (
@@ -54,10 +62,23 @@ export function AgentLabels({
           div.style.display = 'flex';
           const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
           const screenX = (deviceOffsetX + ch.x * zoom) / dpr;
-          const screenY =
-            (deviceOffsetY + (ch.y + sittingOffset - TOOL_OVERLAY_VERTICAL_OFFSET) * zoom) / dpr;
+          let screenY =
+            (deviceOffsetY + (ch.y + sittingOffset - TOOL_OVERLAY_VERTICAL_OFFSET) * zoom) / dpr -
+            16;
+
+          // Nudge overlapping labels upward
+          for (const prev of positions) {
+            if (
+              Math.abs(screenX - prev.x) < LABEL_ESTIMATED_WIDTH_PX &&
+              Math.abs(screenY - prev.y) < LABEL_ESTIMATED_HEIGHT_PX
+            ) {
+              screenY = prev.y - LABEL_OVERLAP_NUDGE_PX;
+            }
+          }
+          positions.push({ x: screenX, y: screenY });
+
           div.style.left = `${screenX}px`;
-          div.style.top = `${screenY - 16}px`;
+          div.style.top = `${screenY}px`;
         }
       }
       rafId = requestAnimationFrame(tick);

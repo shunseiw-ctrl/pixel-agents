@@ -278,15 +278,15 @@ export const LAMP_SPRITE: SpriteData = (() => {
 export const BUBBLE_PERMISSION_SPRITE: SpriteData = (() => {
   const B = '#555566' // border
   const F = '#EEEEFF' // fill
-  const A = '#CCA700' // amber dots
+  const A = '#CCA700' // amber exclamation
   return [
     [B, B, B, B, B, B, B, B, B, B, B],
     [B, F, F, F, F, F, F, F, F, F, B],
+    [B, F, F, F, F, A, F, F, F, F, B],
+    [B, F, F, F, F, A, F, F, F, F, B],
+    [B, F, F, F, F, A, F, F, F, F, B],
     [B, F, F, F, F, F, F, F, F, F, B],
-    [B, F, F, F, F, F, F, F, F, F, B],
-    [B, F, F, F, F, F, F, F, F, F, B],
-    [B, F, F, A, F, A, F, A, F, F, B],
-    [B, F, F, F, F, F, F, F, F, F, B],
+    [B, F, F, F, F, A, F, F, F, F, B],
     [B, F, F, F, F, F, F, F, F, F, B],
     [B, F, F, F, F, F, F, F, F, F, B],
     [B, B, B, B, B, B, B, B, B, B, B],

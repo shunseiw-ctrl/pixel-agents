@@ -78,6 +78,7 @@ export interface ExtensionMessageState {
   subagentCharacters: SubagentCharacter[];
   layoutReady: boolean;
   loadedAssets?: { catalog: FurnitureAsset[]; sprites: Record<string, string[][]> };
+  onboardingDone: boolean;
 }
 
 function saveAgentSeats(os: OfficeState): void {
@@ -112,6 +113,7 @@ export function useExtensionMessages(
   const [loadedAssets, setLoadedAssets] = useState<
     { catalog: FurnitureAsset[]; sprites: Record<string, string[][]> } | undefined
   >();
+  const [onboardingDone, setOnboardingDone] = useState(false);
   // Track whether initial layout has been loaded (ref to avoid re-render)
   const layoutReadyRef = useRef(false);
 
@@ -134,7 +136,6 @@ export function useExtensionMessages(
       if (msg.type === 'layoutLoaded') {
         // Skip external layout updates while editor has unsaved changes
         if (layoutReadyRef.current && isEditDirty?.()) {
-          console.log('[Webview] Skipping external layout update — editor has unsaved changes');
           return;
         }
         const rawLayout = msg.layout as OfficeLayout | null;
@@ -546,15 +547,12 @@ export function useExtensionMessages(
           up: string[][][];
           right: string[][][];
         }>;
-        console.log(`[Webview] Received ${characters.length} pre-colored character sprites`);
         setCharacterTemplates(characters);
       } else if (msg.type === 'floorTilesLoaded') {
         const sprites = msg.sprites as string[][][];
-        console.log(`[Webview] Received ${sprites.length} floor tile patterns`);
         setFloorSprites(sprites);
       } else if (msg.type === 'wallTilesLoaded') {
         const sprites = msg.sprites as string[][][];
-        console.log(`[Webview] Received ${sprites.length} wall tile sprites`);
         setWallSprites(sprites);
       } else if (msg.type === 'settingsLoaded') {
         const soundOn = msg.soundEnabled as boolean;
@@ -567,18 +565,16 @@ export function useExtensionMessages(
         if (msg.thoughtEnabled !== undefined) {
           onThoughtEnabledLoaded?.(msg.thoughtEnabled as boolean);
         }
+        if (msg.onboardingDone !== undefined) {
+          setOnboardingDone(msg.onboardingDone as boolean);
+        }
         // Notification settings are handled by SettingsModal directly via vscode.postMessage
       } else if (msg.type === 'furnitureAssetsLoaded') {
         try {
           const catalog = msg.catalog as FurnitureAsset[];
           const sprites = msg.sprites as Record<string, string[][]>;
-          const spriteCount = sprites ? Object.keys(sprites).length : 0;
-          console.log(
-            `📦 Webview: Received furnitureAssetsLoaded — ${catalog?.length ?? 0} catalog entries, ${spriteCount} sprites`,
-          );
           // Build dynamic catalog immediately so getCatalogEntry() works when layoutLoaded arrives next
-          const success = buildDynamicCatalog({ catalog, sprites });
-          console.log(`📦 Webview: buildDynamicCatalog result: ${success}`);
+          buildDynamicCatalog({ catalog, sprites });
           setLoadedAssets({ catalog, sprites });
         } catch (err) {
           console.error(`❌ Webview: Error processing furnitureAssetsLoaded:`, err);
@@ -604,5 +600,6 @@ export function useExtensionMessages(
     subagentCharacters,
     layoutReady,
     loadedAssets,
+    onboardingDone,
   };
 }

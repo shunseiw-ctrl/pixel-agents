@@ -94,9 +94,9 @@ const statusIcons: Record<AgentStatusType, string> = {
 };
 
 const statusColors: Record<AgentStatusType, string> = {
-  active: '#4CAF50',
-  waiting: '#FFC107',
-  error: '#F44336',
+  active: 'var(--pixel-summary-active)',
+  waiting: 'var(--pixel-summary-waiting)',
+  error: 'var(--pixel-summary-error)',
 };
 
 const PIPELINE_LABELS: Record<string, string> = {
@@ -118,6 +118,7 @@ export function StatusSummaryPanel({
 }: StatusSummaryPanelProps) {
   const [now, setNow] = useState(Date.now());
   const [historyExpanded, setHistoryExpanded] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   // Update elapsed times every second
   useEffect(() => {
@@ -164,162 +165,175 @@ export function StatusSummaryPanel({
     >
       {/* Summary bar */}
       <div
+        onClick={() => setCollapsed((v) => !v)}
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: 8,
           padding: '4px 8px',
-          borderBottom: '1px solid var(--pixel-border)',
+          borderBottom: collapsed ? 'none' : '1px solid var(--pixel-border)',
           color: 'var(--pixel-text-dim)',
           fontSize: '16px',
           flexWrap: 'wrap',
+          cursor: 'pointer',
         }}
       >
+        <span style={{ fontSize: '12px' }}>{collapsed ? '▶' : '▼'}</span>
         <span style={{ fontWeight: 'bold', color: 'var(--vscode-foreground)' }}>ステータス</span>
-        <span style={{ color: '#4CAF50' }}>稼働: {activeCount}</span>
-        <span style={{ color: '#FFC107' }}>待機: {waitingCount}</span>
-        <span style={{ color: errorCount > 0 ? '#F44336' : 'var(--pixel-text-dim)' }}>
+        <span style={{ color: 'var(--pixel-summary-active)' }}>稼働: {activeCount}</span>
+        <span style={{ color: 'var(--pixel-summary-waiting)' }}>待機: {waitingCount}</span>
+        <span
+          style={{ color: errorCount > 0 ? 'var(--pixel-summary-error)' : 'var(--pixel-text-dim)' }}
+        >
           警告: {errorCount}
         </span>
         {totalCost > 0 && (
-          <span style={{ color: '#81C784', fontWeight: 'bold' }}>
+          <span style={{ color: 'var(--pixel-summary-cost)', fontWeight: 'bold' }}>
             合計: ${totalCost.toFixed(2)}
           </span>
         )}
         <span style={{ marginLeft: 'auto' }}>{timeStr}</span>
       </div>
 
-      {/* Agent rows */}
-      {agents.map((id) => {
-        const meta = agentMetas[id];
-        const cost = agentCosts[id];
-        const pipeline = agentPipelines[id];
-        const { status, text } = getAgentStatus(id, agentStatuses, agentTools);
-        const elapsed = meta ? now - meta.createdAt : 0;
+      {/* Agent rows + History — hidden when collapsed */}
+      {!collapsed &&
+        agents.map((id) => {
+          const meta = agentMetas[id];
+          const cost = agentCosts[id];
+          const pipeline = agentPipelines[id];
+          const { status, text } = getAgentStatus(id, agentStatuses, agentTools);
+          const elapsed = meta ? now - meta.createdAt : 0;
 
-        return (
-          <div key={id}>
-            <div
-              onClick={() => onSelectAgent(id)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '3px 8px',
-                cursor: 'pointer',
-                borderBottom: pipeline ? 'none' : '1px solid rgba(255,255,255,0.05)',
-                background: status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background =
-                  status === 'error' ? 'rgba(244, 67, 54, 0.15)' : 'rgba(255,255,255,0.05)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background =
-                  status === 'error' ? 'rgba(244, 67, 54, 0.1)' : 'transparent';
-              }}
-            >
-              <span style={{ color: statusColors[status], fontSize: '10px' }}>
-                {statusIcons[status]}
-              </span>
-              <span
+          return (
+            <div key={id}>
+              <div
+                onClick={() => onSelectAgent(id)}
                 style={{
-                  fontWeight: 'bold',
-                  color: 'var(--vscode-foreground)',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  maxWidth: 120,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '3px 8px',
+                  cursor: 'pointer',
+                  borderBottom: pipeline ? 'none' : '1px solid var(--pixel-row-border)',
+                  background: status === 'error' ? 'var(--pixel-summary-error-bg)' : 'transparent',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background =
+                    status === 'error'
+                      ? 'var(--pixel-summary-error-bg-hover)'
+                      : 'rgba(255,255,255,0.05)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background =
+                    status === 'error' ? 'var(--pixel-summary-error-bg)' : 'transparent';
                 }}
               >
-                {getAgentDisplayName(id, meta)}
-              </span>
-              <span
-                style={{
-                  color: 'var(--pixel-text-dim)',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  flex: 1,
-                }}
-              >
-                {text}
-              </span>
-              {cost && cost.costUsd > 0 && (
+                <span style={{ color: statusColors[status], fontSize: '10px' }}>
+                  {statusIcons[status]}
+                </span>
+                <span
+                  style={{
+                    fontWeight: 'bold',
+                    color: 'var(--vscode-foreground)',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    maxWidth: 120,
+                  }}
+                >
+                  {getAgentDisplayName(id, meta)}
+                </span>
+                <span
+                  style={{
+                    color: 'var(--pixel-text-dim)',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    flex: 1,
+                  }}
+                >
+                  {text}
+                </span>
+                {cost && cost.costUsd > 0 && (
+                  <span
+                    style={{
+                      color: 'var(--pixel-text-dim)',
+                      whiteSpace: 'nowrap',
+                      fontSize: '14px',
+                    }}
+                  >
+                    ${cost.costUsd.toFixed(2)}
+                  </span>
+                )}
                 <span
                   style={{
                     color: 'var(--pixel-text-dim)',
                     whiteSpace: 'nowrap',
-                    fontSize: '14px',
+                    fontSize: '16px',
                   }}
                 >
-                  ${cost.costUsd.toFixed(2)}
+                  {formatElapsed(elapsed)}
                 </span>
+              </div>
+              {/* Token details row */}
+              {cost && cost.inputTokens > 0 && (
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: 6,
+                    padding: '1px 8px 2px 24px',
+                    borderBottom: pipeline ? 'none' : '1px solid var(--pixel-row-border)',
+                    fontSize: '13px',
+                    color: 'var(--pixel-text-dim)',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <span>IN:{formatTokenCount(cost.inputTokens)}</span>
+                  <span>OUT:{formatTokenCount(cost.outputTokens)}</span>
+                  {cost.cacheReadTokens > 0 &&
+                    (() => {
+                      const rate = Math.round(
+                        (cost.cacheReadTokens / (cost.inputTokens + cost.cacheReadTokens)) * 100,
+                      );
+                      return (
+                        <span
+                          style={{
+                            color:
+                              rate > 50 ? 'var(--pixel-summary-cost)' : 'var(--pixel-text-dim)',
+                          }}
+                        >
+                          Cache:{rate}%
+                        </span>
+                      );
+                    })()}
+                </div>
               )}
-              <span
-                style={{
-                  color: 'var(--pixel-text-dim)',
-                  whiteSpace: 'nowrap',
-                  fontSize: '16px',
-                }}
-              >
-                {formatElapsed(elapsed)}
-              </span>
+              {/* Pipeline steps */}
+              {pipeline && Object.keys(pipeline.steps).length > 0 && (
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: 4,
+                    padding: '1px 8px 3px 24px',
+                    borderBottom: '1px solid var(--pixel-row-border)',
+                    fontSize: '14px',
+                    color: 'var(--pixel-text-dim)',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {Object.entries(pipeline.steps).map(([step, stepStatus]) => (
+                    <span key={step}>
+                      {stepStatus === 'done' ? '✅' : '🔄'} {PIPELINE_LABELS[step] || step}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-            {/* Token details row */}
-            {cost && cost.inputTokens > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 6,
-                  padding: '1px 8px 2px 24px',
-                  borderBottom: pipeline ? 'none' : '1px solid rgba(255,255,255,0.05)',
-                  fontSize: '13px',
-                  color: 'var(--pixel-text-dim)',
-                  flexWrap: 'wrap',
-                }}
-              >
-                <span>IN:{formatTokenCount(cost.inputTokens)}</span>
-                <span>OUT:{formatTokenCount(cost.outputTokens)}</span>
-                {cost.cacheReadTokens > 0 &&
-                  (() => {
-                    const rate = Math.round(
-                      (cost.cacheReadTokens / (cost.inputTokens + cost.cacheReadTokens)) * 100,
-                    );
-                    return (
-                      <span style={{ color: rate > 50 ? '#81C784' : 'var(--pixel-text-dim)' }}>
-                        Cache:{rate}%
-                      </span>
-                    );
-                  })()}
-              </div>
-            )}
-            {/* Pipeline steps */}
-            {pipeline && Object.keys(pipeline.steps).length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 4,
-                  padding: '1px 8px 3px 24px',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
-                  fontSize: '14px',
-                  color: 'var(--pixel-text-dim)',
-                  flexWrap: 'wrap',
-                }}
-              >
-                {Object.entries(pipeline.steps).map(([step, stepStatus]) => (
-                  <span key={step}>
-                    {stepStatus === 'done' ? '✅' : '🔄'} {PIPELINE_LABELS[step] || step}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      })}
+          );
+        })}
 
       {/* History section */}
-      {agentHistory.length > 0 && (
+      {!collapsed && agentHistory.length > 0 && (
         <>
           <div
             onClick={() => setHistoryExpanded((v) => !v)}

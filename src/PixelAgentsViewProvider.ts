@@ -35,6 +35,7 @@ import {
   GLOBAL_KEY_NOTIFY_ERROR,
   GLOBAL_KEY_NOTIFY_INPUT_WAIT,
   GLOBAL_KEY_NOTIFY_LOOP,
+  GLOBAL_KEY_ONBOARDING_DONE,
   GLOBAL_KEY_SOUND_ENABLED,
   GLOBAL_KEY_THOUGHT_ENABLED,
   GLOBAL_KEY_TYPING_SOUND_ENABLED,
@@ -142,7 +143,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
     // Re-send cached assets when webview becomes visible (messages may have been dropped while hidden)
     webviewView.onDidChangeVisibility(() => {
       if (webviewView.visible && this.assetsLoaded && this.webview) {
-        console.log('[Extension] Webview became visible — re-sending cached assets');
         this.sendCachedAssets();
       }
     });
@@ -192,7 +192,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         }
       } else if (message.type === 'saveAgentSeats') {
         // Store seat assignments in a separate key (never touched by persistAgents)
-        console.log(`[Pixel Agents] saveAgentSeats:`, JSON.stringify(message.seats));
         this.context.workspaceState.update(WORKSPACE_KEY_AGENT_SEATS, message.seats);
       } else if (message.type === 'saveLayout') {
         this.layoutWatcher?.markOwnWrite();
@@ -210,6 +209,8 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         }
       } else if (message.type === 'setThoughtEnabled') {
         this.context.globalState.update(GLOBAL_KEY_THOUGHT_ENABLED, message.enabled);
+      } else if (message.type === 'setOnboardingDone') {
+        this.context.globalState.update(GLOBAL_KEY_ONBOARDING_DONE, true);
       } else if (message.type === 'setNotifySetting') {
         const key = message.key as string;
         const enabled = message.enabled as boolean;
@@ -268,6 +269,10 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           GLOBAL_KEY_NOTIFY_INPUT_WAIT,
           true,
         );
+        const onboardingDone = this.context.globalState.get<boolean>(
+          GLOBAL_KEY_ONBOARDING_DONE,
+          false,
+        );
         this.webview?.postMessage({
           type: 'settingsLoaded',
           soundEnabled,
@@ -279,30 +284,26 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           notifyLoop,
           notifyComplete,
           notifyInputWait,
+          onboardingDone,
         });
 
         // Load assets
         const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        console.log('[Extension] workspaceRoot:', workspaceRoot);
 
         (async () => {
           try {
-            console.log('[Extension] Loading assets...');
             const extensionPath = this.extensionUri.fsPath;
 
             // Check bundled location first: extensionPath/dist/assets/
             const bundledAssetsDir = path.join(extensionPath, 'dist', 'assets');
             let assetsRoot: string | null = null;
             if (fs.existsSync(bundledAssetsDir)) {
-              console.log('[Extension] Found bundled assets at dist/');
               assetsRoot = path.join(extensionPath, 'dist');
             } else if (workspaceRoot) {
-              console.log('[Extension] Trying workspace for assets...');
               assetsRoot = workspaceRoot;
             }
 
             if (!assetsRoot) {
-              console.log('[Extension] No assets directory found');
               if (this.webview) {
                 sendLayout(this.context, this.webview, this.defaultLayout);
                 this.startLayoutWatcher();
@@ -310,7 +311,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
               return;
             }
 
-            console.log('[Extension] Using assetsRoot:', assetsRoot);
             this.assetsRoot = assetsRoot;
 
             // Load bundled default layout
@@ -474,13 +474,8 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   ): void {
     const projectDir = getProjectDirPath(cwd);
     if (!projectDir) {
-      console.log('[Pixel Agents] Shell Integration: no project dir for detected claude');
       return;
     }
-
-    console.log(
-      `[Pixel Agents] Shell Integration: starting JSONL discovery for "${terminal.name}" (sessionId: ${sessionId ?? 'unknown'})`,
-    );
 
     // Cancel any previous discovery for this terminal
     const existing = this.discoveryAbortControllers.get(terminal);
@@ -494,9 +489,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
       // Double-check terminal isn't already tracked (race condition guard)
       for (const agent of this.agents.values()) {
         if (agent.terminalRef === terminal) {
-          console.log(
-            `[Pixel Agents] Shell Integration: terminal already tracked, skipping agent creation`,
-          );
           return;
         }
       }
@@ -504,7 +496,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
       // Double-check JSONL file not already used by another agent
       for (const agent of this.agents.values()) {
         if (agent.jsonlFile === jsonlFile) {
-          console.log('[Pixel Agents] Shell Integration: JSONL file already in use, skipping');
           return;
         }
       }
@@ -567,23 +558,18 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   private async sendCachedAssets(): Promise<void> {
     if (!this.webview) return;
     if (this.cachedCharSprites) {
-      console.log('[Extension] Sending cached character sprites');
       sendCharacterSpritesToWebview(this.webview, this.cachedCharSprites);
     }
     if (this.cachedFloorTiles) {
-      console.log('[Extension] Sending cached floor tiles');
       sendFloorTilesToWebview(this.webview, this.cachedFloorTiles);
     }
     if (this.cachedWallTiles) {
-      console.log('[Extension] Sending cached wall tiles');
       sendWallTilesToWebview(this.webview, this.cachedWallTiles);
     }
     if (this.cachedFurnitureAssets) {
-      console.log('[Extension] Sending cached furniture assets');
       await sendAssetsToWebview(this.webview, this.cachedFurnitureAssets);
     }
     // Re-send layout after assets so dynamic catalog is built first
-    console.log('[Extension] Sending layout');
     sendLayout(this.context, this.webview, this.defaultLayout);
   }
 
@@ -640,9 +626,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
           if (age > EXTERNAL_SESSION_ACTIVE_THRESHOLD_MS) continue;
 
           // Active JSONL not tracked — create an agent for it
-          console.log(
-            `[Pixel Agents] External session detected: ${path.basename(file)} (${Math.round(age / 1000)}s old)`,
-          );
           const agentId = createAgentForFile(
             file,
             projectDir,
@@ -688,7 +671,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
         };
       });
 
-      console.log(`[Pixel Agents] Found ${agents.length} configured agents in ${agentsDir}`);
       this.webview?.postMessage({ type: 'configuredAgents', agents });
     } catch {
       /* ignore errors reading agents directory */
@@ -708,7 +690,6 @@ export class PixelAgentsViewProvider implements vscode.WebviewViewProvider {
   private startLayoutWatcher(): void {
     if (this.layoutWatcher) return;
     this.layoutWatcher = watchLayoutFile((layout) => {
-      console.log('[Pixel Agents] External layout change — pushing to webview');
       this.webview?.postMessage({ type: 'layoutLoaded', layout });
     });
   }

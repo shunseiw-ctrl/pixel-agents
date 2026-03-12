@@ -66,6 +66,12 @@ export const GLOBAL_KEY_NOTIFY_LOOP = 'pixel-agents.notifyLoop';
 export const GLOBAL_KEY_NOTIFY_COMPLETE = 'pixel-agents.notifyComplete';
 export const GLOBAL_KEY_NOTIFY_INPUT_WAIT = 'pixel-agents.notifyInputWait';
 
+// ── Onboarding ─────────────────────────────────────────────
+export const GLOBAL_KEY_ONBOARDING_DONE = 'pixel-agents.onboardingDone';
+
+// ── Agent Limits ────────────────────────────────────────────
+export const MAX_AGENTS = 20;
+
 // ── Mock Mode ────────────────────────────────────────────────
 export const MOCK_EVENT_INTERVAL_MS = 2000;
 export const MOCK_TOOL_DURATION_MS = 4000;

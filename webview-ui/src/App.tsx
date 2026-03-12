@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { AgentLabels } from './components/AgentLabels.js';
 import { BottomToolbar } from './components/BottomToolbar.js';
 import { DebugView } from './components/DebugView.js';
+import { OnboardingOverlay } from './components/OnboardingOverlay.js';
 import { StatusSummaryPanel } from './components/StatusSummaryPanel.js';
 import { ZoomControls } from './components/ZoomControls.js';
 import { PULSE_ANIMATION_DURATION_SEC } from './constants.js';
@@ -148,6 +149,7 @@ function App() {
     subagentCharacters,
     layoutReady,
     loadedAssets,
+    onboardingDone,
   } = useExtensionMessages(getOfficeState, editor.setLastSavedLayout, isEditDirty, setShowThoughts);
 
   const handleToggleDebugMode = useCallback(() => setIsDebugMode((prev) => !prev), []);
@@ -399,6 +401,14 @@ function App() {
           agentStatuses={agentStatuses}
           subagentTools={subagentTools}
           onSelectAgent={handleSelectAgent}
+        />
+      )}
+
+      {!onboardingDone && agents.length === 0 && (
+        <OnboardingOverlay
+          onComplete={() => {
+            vscode.postMessage({ type: 'setOnboardingDone' });
+          }}
         />
       )}
     </div>

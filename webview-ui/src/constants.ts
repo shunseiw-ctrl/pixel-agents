@@ -77,9 +77,6 @@ export const CAMERA_FOLLOW_SNAP_THRESHOLD = 0.5;
 export const ZOOM_MIN = 1;
 export const ZOOM_MAX = 10;
 export const ZOOM_DEFAULT_DPR_FACTOR = 2;
-export const ZOOM_LEVEL_FADE_DELAY_MS = 1500;
-export const ZOOM_LEVEL_HIDE_DELAY_MS = 2000;
-export const ZOOM_LEVEL_FADE_DURATION_SEC = 0.5;
 export const ZOOM_SCROLL_THRESHOLD = 50;
 export const PAN_MARGIN_FRACTION = 0.25;
 
@@ -127,9 +124,12 @@ export const HUE_SHIFT_MIN_DEG = 45;
 export const HUE_SHIFT_RANGE_DEG = 271;
 export const AUTO_ON_FACING_DEPTH = 3;
 export const AUTO_ON_SIDE_DEPTH = 2;
-export const CHARACTER_HIT_HALF_WIDTH = 8;
-export const CHARACTER_HIT_HEIGHT = 24;
+export const CHARACTER_HIT_HALF_WIDTH = 12;
+export const CHARACTER_HIT_HEIGHT = 28;
 export const TOOL_OVERLAY_VERTICAL_OFFSET = 32;
+export const LABEL_OVERLAP_NUDGE_PX = 18;
+export const LABEL_ESTIMATED_WIDTH_PX = 80;
+export const LABEL_ESTIMATED_HEIGHT_PX = 22;
 export const PULSE_ANIMATION_DURATION_SEC = 1.5;
 
 // ── Zone System ─────────────────────────────────────────────
